@@ -5,6 +5,14 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulbert", "Fulbert\Fulbert.csproj", "{BAF0F03A-215D-4E88-BE02-A86E06CDF746}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4050B4C5-FAAC-48E2-84CA-37093D1BF972}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{3EE89B08-F109-4C7B-9765-5FF83D60D14A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{F670ACA2-7BF1-4C0A-9234-320775508095}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulbert.DAL.PatientDAL", "DAL\Fulbert.DAL.PatientDAL\Fulbert.DAL.PatientDAL.csproj", "{0B6C3ED5-7D80-42A2-A80A-D9EBB486555C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +23,16 @@ Global
 		{BAF0F03A-215D-4E88-BE02-A86E06CDF746}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAF0F03A-215D-4E88-BE02-A86E06CDF746}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAF0F03A-215D-4E88-BE02-A86E06CDF746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B6C3ED5-7D80-42A2-A80A-D9EBB486555C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6C3ED5-7D80-42A2-A80A-D9EBB486555C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6C3ED5-7D80-42A2-A80A-D9EBB486555C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6C3ED5-7D80-42A2-A80A-D9EBB486555C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3EE89B08-F109-4C7B-9765-5FF83D60D14A} = {4050B4C5-FAAC-48E2-84CA-37093D1BF972}
+		{0B6C3ED5-7D80-42A2-A80A-D9EBB486555C} = {F670ACA2-7BF1-4C0A-9234-320775508095}
 	EndGlobalSection
 EndGlobal
