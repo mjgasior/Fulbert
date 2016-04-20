@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IPatientDal.cs" />
     <Compile Include="Mappings\PatientMap.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="NHibernateConfig.cs" />

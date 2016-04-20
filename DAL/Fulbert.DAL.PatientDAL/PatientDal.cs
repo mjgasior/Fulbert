@@ -1,9 +1,12 @@
-﻿using Fulbert.DAL.PatientDAL.Models;
+﻿using System;
+using System.Collections.Generic;
+using Fulbert.DAL.PatientDAL.Models;
 using NHibernate;
+using Fulbert.DAL.PatientDAL.Abstract;
 
 namespace Fulbert.DAL.PatientDAL
 {
-    public class PatientDal
+    public class PatientDal : IPatientDal
     {
         // readme:
         // http://www.codeproject.com/Articles/13390/NHibernate-Best-Practices-with-ASP-NET-nd-Ed
@@ -25,6 +28,11 @@ namespace Fulbert.DAL.PatientDAL
                     transaction.Commit();
                 }
             }
+        }
+
+        public IEnumerable<Patient> GetAllPatients()
+        {
+            throw new NotImplementedException();
         }
     }
 }
