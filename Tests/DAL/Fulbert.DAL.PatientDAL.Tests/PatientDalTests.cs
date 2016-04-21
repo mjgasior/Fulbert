@@ -7,14 +7,24 @@ namespace Fulbert.DAL.PatientDAL.Tests
 {
     public class PatientDalTests : BaseTest
     {
+        private PatientDal _patientDal;
+
+        public override void Initialize()
+        {
+            _patientDal = new PatientDal("AAV");
+        }
+
         [Test]
         public void Add_patient_to_database()
         {
             // Arrange
-            IPatientDal patientDal = new PatientDal();
 
             // Act
-            patientDal.AddPatient(new Patient { FirstName = "test" });
+            _patientDal.AddPatient(new Patient
+            {
+                FirstName = "Peter",
+                LastName = "Steele"
+            });
 
             // Assert
         }
@@ -23,13 +33,18 @@ namespace Fulbert.DAL.PatientDAL.Tests
         public void Get_all_patients_from_database()
         {
             // Arrange
-            IPatientDal patientDal = new PatientDal();
 
             // Act
-            IEnumerable<Patient> patients = patientDal.GetAllPatients();
+            IEnumerable<Patient> patients = _patientDal.GetAllPatients();
 
             // Assert
             Assert.IsNotEmpty(patients);
+        }
+
+        [Test]
+        public void Delete_patient_from_database()
+        {
+
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Fulbert.DAL.PatientDAL.Mappings
         {
             Id(x => x.Id).Column("Id").GeneratedBy.Guid();
             Map(x => x.FirstName);
+            Map(x => x.LastName);
         }
     }
 }

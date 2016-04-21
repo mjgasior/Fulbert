@@ -20,6 +20,11 @@ namespace Fulbert.DAL.PatientDAL
             _sessionFactory = NHibernateConfig.CreateSessionFactory();
         }
 
+        internal PatientDal(string databaseName)
+        {
+            _sessionFactory = NHibernateConfig.CreateSessionFactoryWithDBReset(databaseName);
+        }
+
         public void AddPatient(Patient patient)
         {
             using (ISession session = _sessionFactory.OpenSession())
