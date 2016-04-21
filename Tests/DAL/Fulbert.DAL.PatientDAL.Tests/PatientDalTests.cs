@@ -29,6 +29,7 @@ namespace Fulbert.DAL.PatientDAL.Tests
             IEnumerable<Patient> patients = patientDal.GetAllPatients();
 
             // Assert
+            Assert.IsNotEmpty(patients);
         }
     }
 }

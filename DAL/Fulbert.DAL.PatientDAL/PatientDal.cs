@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Fulbert.DAL.PatientDAL.Models;
 using NHibernate;
 using Fulbert.DAL.PatientDAL.Abstract;
+using NHibernate.Linq;
+using System.Linq;
 
 namespace Fulbert.DAL.PatientDAL
 {
@@ -31,8 +33,15 @@ namespace Fulbert.DAL.PatientDAL
         }
 
         public IEnumerable<Patient> GetAllPatients()
-        {
-            throw new NotImplementedException();
+        {          
+            using (ISession session = _sessionFactory.OpenSession())
+            {
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    var a = session.Query<Patient>();
+                    return a.ToList();
+                }
+            }
         }
     }
 }
