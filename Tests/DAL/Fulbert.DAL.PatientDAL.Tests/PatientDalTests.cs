@@ -2,6 +2,7 @@
 using Fulbert.DAL.PatientDAL.Models;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Fulbert.DAL.PatientDAL.Tests
 {
@@ -44,7 +45,19 @@ namespace Fulbert.DAL.PatientDAL.Tests
         [Test]
         public void Delete_patient_from_database()
         {
+            // Arrange
 
+            // Act
+            _patientDal.AddPatient(new Patient
+            {
+                FirstName = "Johnny",
+                LastName = "Kelly"
+            });
+            IEnumerable<Patient> patients = _patientDal.GetAllPatients();
+            _patientDal.DeletePatient(patients.First());
+
+            IEnumerable<Patient> patientsAfterDelete = _patientDal.GetAllPatients();
+            // Assert
         }
     }
 }

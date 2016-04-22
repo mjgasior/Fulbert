@@ -41,10 +41,18 @@ namespace Fulbert.DAL.PatientDAL
         {          
             using (ISession session = _sessionFactory.OpenSession())
             {
+                return session.Query<Patient>().ToList();
+            }
+        }
+
+        internal void DeletePatient(Patient patient)
+        {
+            using (ISession session = _sessionFactory.OpenSession())
+            {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
-                    var a = session.Query<Patient>();
-                    return a.ToList();
+                    session.Delete(patient);
+                    transaction.Commit();
                 }
             }
         }
