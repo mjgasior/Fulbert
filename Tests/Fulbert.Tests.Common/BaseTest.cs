@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Fulbert.DAL.PatientDAL.Tests
+namespace Fulbert.Tests.Common
 {
     [TestFixture]
     public class BaseTest

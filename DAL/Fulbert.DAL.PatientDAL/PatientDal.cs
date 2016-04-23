@@ -14,7 +14,7 @@ namespace Fulbert.DAL.PatientDAL
 
         public PatientDal()
         {
-            _sessionFactory = NHibernateConfig.CreateSessionFactory("AAV");
+            _sessionFactory = NHibernateConfig.CreateSessionFactory("fulbertOrigin");
         }
 
         internal PatientDal(string databaseName)

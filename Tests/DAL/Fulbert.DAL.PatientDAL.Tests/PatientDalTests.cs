@@ -1,4 +1,6 @@
-﻿using Fulbert.DAL.PatientDAL.Models;
+﻿using Fulbert.DAL.PatientDAL.Abstract;
+using Fulbert.DAL.PatientDAL.Models;
+using Fulbert.Tests.Common;
 using NHibernate;
 using NUnit.Framework;
 using System;
@@ -10,8 +12,8 @@ namespace Fulbert.DAL.PatientDAL.Tests
     public class PatientDalTests : BaseTest
     {
         #region Fields and Properties
-        private const string TEST_DB_NAME = "AAV";
-        private PatientDal _patientDal;
+        private const string TEST_DB_NAME = "fulbertTests";
+        private IPatientDal _patientDal;
         #endregion Fields and Properties
 
         public override void Initialize()
