@@ -5,19 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace Fulbert.DAL.PatientDAL.Tests
 {
     public class PatientDalTests : BaseTest
     {
+        #region Fields and Properties
         private const string TEST_DB_NAME = "AAV";
         private PatientDal _patientDal;
+        #endregion Fields and Properties
 
         public override void Initialize()
         {
             _patientDal = new PatientDal(TEST_DB_NAME);
         }
 
+        #region Tests
         [Test]
         public void Add_patient_to_database()
         {
@@ -28,12 +30,12 @@ namespace Fulbert.DAL.PatientDAL.Tests
 
             // Act
             var patient = new Patient
-                            {
-                                FirstName = firstName,
-                                LastName = lastName,
-                            };
+                          {
+                            FirstName = firstName,
+                            LastName = lastName,
+                          };
             patient.AddAppointment(new Appointment { Date = appointmentDate });
-            _patientDal.AddPatient(patient);
+            _patientDal.SaveOrUpdatePatient(patient);
 
             IList<Patient> query = GetPatientFromDatabase(firstName, lastName);
 
@@ -49,6 +51,30 @@ namespace Fulbert.DAL.PatientDAL.Tests
             ICollection<Appointment> appointments = result.Appointments;
             Assert.IsNotEmpty(appointments);
             Assert.IsTrue(appointments.Count == 1);
+        }
+
+        [Test]
+        public void Delete_patient_from_database()
+        {
+            // Arrange
+            string firstName = "Josh";
+            string lastName = "Silver";
+            DateTime appointmentDate = DateTime.Now;
+
+            AddPatientToDatabase(firstName, lastName, appointmentDate);
+            IList<Patient> patients = GetPatientFromDatabase(firstName, lastName);
+
+            // Act
+            _patientDal.DeletePatient(patients.First());
+
+            // Assert
+            IList<Patient> patientsAfterDelete = GetPatientFromDatabase(firstName, lastName);
+            Assert.IsNotNull(patientsAfterDelete);
+            Assert.IsEmpty(patientsAfterDelete);
+
+            IList<Appointment> appointments = GetAllAppointments();
+            Assert.IsNotNull(appointments);
+            Assert.IsEmpty(appointments);
         }
 
         [Test]
@@ -76,30 +102,72 @@ namespace Fulbert.DAL.PatientDAL.Tests
             ICollection<Appointment> appointments = result.Appointments;
             Assert.IsNotEmpty(appointments);
             Assert.IsTrue(appointments.Count == 1);
-            //Assert.AreEqual(appointments.First().Date, appointmentDate);
+            Assert.AreEqual(appointments.First().Date.Date, appointmentDate.Date);
         }
-
+        
         [Test]
-        public void Delete_patient_from_database()
+        public void Get_all_appointments_from_database()
         {
             // Arrange
-            string firstName = "Josh";
-            string lastName = "Silver";
+            string firstName = "Kenny";
+            string lastName = "Hickey";
             DateTime appointmentDate = DateTime.Now;
 
             AddPatientToDatabase(firstName, lastName, appointmentDate);
-            IList<Patient> patients = GetPatientFromDatabase(firstName, lastName);
 
             // Act
-            _patientDal.DeletePatient(patients.First());
+            IList<Appointment> appointments = _patientDal.GetAllAppointments();
 
             // Assert
-            IList<Patient> patientsAfterDelete = GetPatientFromDatabase(firstName, lastName);
-            Assert.IsNotNull(patientsAfterDelete);
-            Assert.IsEmpty(patientsAfterDelete);
+            Assert.IsNotNull(appointments);
+            Assert.IsNotEmpty(appointments);
+            Assert.IsTrue(appointments.Count() == 1);
+            Appointment appointment = appointments.First();
+            Assert.AreEqual(appointment.Date.Date, appointmentDate.Date);
+
+            Assert.AreEqual(appointment.Patient.FirstName, firstName);
+            Assert.AreEqual(appointment.Patient.LastName, lastName);
         }
 
+        [Test]
+        public void Add_additional_appointment_to_a_patient()
+        {
+            // Arrange
+            string firstName = "Type O Negative";
+            string lastName = "Carnivore";
+            DateTime newerAppointmentDate = DateTime.Now;
+            DateTime olderAppointmentDate = DateTime.Now - TimeSpan.FromDays(7);
+
+            AddPatientToDatabase(firstName, lastName, newerAppointmentDate);
+
+            IEnumerable<Patient> patients = _patientDal.GetAllPatients();
+            Patient patient = patients.First(x => x.FirstName == firstName);
+
+            // Act
+            patient.AddAppointment(new Appointment { Date = olderAppointmentDate });
+            _patientDal.SaveOrUpdatePatient(patient);
+
+            // Assert
+            IList<Appointment> appointments = GetAllAppointments();
+            appointments.OrderBy(x => x.Date);
+            Assert.AreEqual(appointments.Count, 2);
+            Assert.AreEqual(appointments.First().Date.Date, olderAppointmentDate.Date);
+            Assert.AreEqual(appointments.Last().Date.Date, newerAppointmentDate.Date);
+
+            Assert.AreEqual(appointments.First().Patient.Id, appointments.Last().Patient.Id);
+        }
+        #endregion Tests
+
         #region Methods
+        private IList<Appointment> GetAllAppointments()
+        {
+            ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(TEST_DB_NAME);
+            using (ISession session = sessionForTests.OpenSession())
+            {
+                return session.QueryOver<Appointment>().List();
+            }
+        }
+
         private IList<Patient> GetPatientFromDatabase(string firstName, string lastName)
         {
             ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(TEST_DB_NAME);

@@ -22,7 +22,7 @@ namespace Fulbert.DAL.PatientDAL
             _sessionFactory = NHibernateConfig.CreateSessionFactoryWithDBReset(databaseName);
         }
 
-        public void AddPatient(Patient patient)
+        public void SaveOrUpdatePatient(Patient patient)
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
@@ -42,7 +42,7 @@ namespace Fulbert.DAL.PatientDAL
             }
         }
 
-        internal void DeletePatient(Patient patient)
+        public void DeletePatient(Patient patient)
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
@@ -51,6 +51,14 @@ namespace Fulbert.DAL.PatientDAL
                     session.Delete(patient);
                     transaction.Commit();
                 }
+            }
+        }
+
+        public IList<Appointment> GetAllAppointments()
+        {
+            using (ISession session = _sessionFactory.OpenSession())
+            {
+                return session.QueryOver<Appointment>().Fetch(x => x.Patient).Eager.List();
             }
         }
     }
