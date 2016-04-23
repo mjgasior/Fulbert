@@ -1,5 +1,6 @@
 ﻿using Fulbert.Commons.Models.Entities;
 using System.Collections.Generic;
+using System;
 
 namespace Fulbert.Commons.Abstract.DAL
 {
@@ -16,6 +17,7 @@ namespace Fulbert.Commons.Abstract.DAL
         /// </summary>
         /// <returns>List of available patients in database.</returns>
         IList<Patient> GetAllPatients();
+        Patient GetPatientById(Guid patientId);
 
         /// <summary>
         /// Get all appointments from the database.

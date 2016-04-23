@@ -78,6 +78,28 @@ namespace Fulbert.DAL.PatientDAL.Tests
         }
 
         [Test]
+        public void Get_patient_by_id()
+        {
+            // Arrange
+            string firstName = "Sal";
+            string lastName = "Abruscato";
+            DateTime appointmentDate = DateTime.Now;
+
+            AddPatientToDatabase(firstName, lastName, appointmentDate);
+            Guid patientId = GetPatientFromDatabase(firstName, lastName).First().Id;
+
+            // Act
+            Patient patient = _patientDal.GetPatientById(patientId);
+
+            // Assert
+            StringAssert.Contains(patient.FirstName, firstName);
+            StringAssert.Contains(patient.LastName, lastName);
+
+            Assert.IsNotEmpty(patient.Appointments);
+            Assert.AreEqual(patient.Appointments.First().Date.Date, appointmentDate.Date);
+        }
+
+        [Test]
         public void Get_all_patients_from_database()
         {
             // Arrange

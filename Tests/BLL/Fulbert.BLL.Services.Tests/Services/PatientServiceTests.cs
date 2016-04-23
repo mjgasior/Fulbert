@@ -5,6 +5,7 @@ using Fulbert.Commons.Abstract.BLL;
 using Fulbert.Commons.Abstract.DAL;
 using Entity = Fulbert.Commons.Models.Entities;
 using Fulbert.Commons.Models.Business;
+using System;
 
 namespace Fulbert.BLL.Services.Tests.Services
 {
@@ -36,6 +37,23 @@ namespace Fulbert.BLL.Services.Tests.Services
 
             // Assert
             _patientDalMock.VerifyAllExpectations();
+        }
+
+        [Test]
+        public void Add_appointment_to_patient()
+        {
+            // Arrange
+            Guid patientId = Guid.NewGuid();
+
+            var appointment = new Appointment
+            {
+                Date = DateTime.Now
+            };
+
+            // Act
+            _patientService.AddAppointmentToPatient(patientId, appointment);
+
+            // Assert
         }
     }
 }
