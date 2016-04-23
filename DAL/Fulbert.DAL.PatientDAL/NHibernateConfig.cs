@@ -5,6 +5,7 @@ using NHibernate.Tool.hbm2ddl;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Fulbert.DAL.PatientDAL.Tests")]
+[assembly: InternalsVisibleTo("Fulbert.BLL.Services.Tests")]
 namespace Fulbert.DAL.PatientDAL
 {
     internal class NHibernateConfig

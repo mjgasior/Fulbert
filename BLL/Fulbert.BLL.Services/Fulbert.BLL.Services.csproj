@@ -43,6 +43,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PatientService.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Fulbert.Commons\Fulbert.Commons.csproj">
+      <Project>{1d4e2a9d-f484-445d-8d5a-5110e6dadbe9}</Project>
+      <Name>Fulbert.Commons</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

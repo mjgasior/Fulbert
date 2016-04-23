@@ -9,16 +9,14 @@ using System.Linq;
 
 namespace Fulbert.DAL.PatientDAL.Tests
 {
+    [Category(TestCategories.DAL)]
     public class PatientDalTests : BaseTest
     {
-        #region Fields and Properties
-        private const string TEST_DB_NAME = "fulbertTests";
         private IPatientDal _patientDal;
-        #endregion Fields and Properties
 
         public override void Initialize()
         {
-            _patientDal = new PatientDal(TEST_DB_NAME);
+            _patientDal = new PatientDal(Database.TEST_DB_NAME);
         }
 
         #region Tests
@@ -163,7 +161,7 @@ namespace Fulbert.DAL.PatientDAL.Tests
         #region Methods
         private IList<Appointment> GetAllAppointments()
         {
-            ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(TEST_DB_NAME);
+            ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(Database.TEST_DB_NAME);
             using (ISession session = sessionForTests.OpenSession())
             {
                 return session.QueryOver<Appointment>().List();
@@ -172,7 +170,7 @@ namespace Fulbert.DAL.PatientDAL.Tests
 
         private IList<Patient> GetPatientFromDatabase(string firstName, string lastName)
         {
-            ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(TEST_DB_NAME);
+            ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(Database.TEST_DB_NAME);
             using (ISession session = sessionForTests.OpenSession())
             {
                 return session.QueryOver<Patient>().Fetch(x => x.Appointments).Eager
@@ -194,7 +192,7 @@ namespace Fulbert.DAL.PatientDAL.Tests
             };
             patient.AddAppointment(appointment);
 
-            ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(TEST_DB_NAME);
+            ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(Database.TEST_DB_NAME);
             using (ISession session = sessionForTests.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
