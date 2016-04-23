@@ -48,10 +48,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BLL\Fulbert.BLL.PatientService\Fulbert.BLL.PatientService.csproj">
-      <Project>{ec8cb157-35ce-4555-b02e-edcbdfbc7d5c}</Project>
-      <Name>Fulbert.BLL.PatientService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Fulbert.Tests.Common\Fulbert.Tests.Common.csproj">
       <Project>{e0ce9eaa-481d-4cf3-868d-a25973c1888d}</Project>
       <Name>Fulbert.Tests.Common</Name>

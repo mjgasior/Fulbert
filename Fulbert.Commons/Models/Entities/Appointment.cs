@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Fulbert.DAL.PatientDAL.Models
+namespace Fulbert.Commons.Models.Entities
 {
     public class Appointment
     {

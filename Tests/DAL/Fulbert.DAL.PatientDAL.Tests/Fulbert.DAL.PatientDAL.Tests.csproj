@@ -71,6 +71,10 @@
       <Project>{0b6c3ed5-7d80-42a2-a80a-d9ebb486555c}</Project>
       <Name>Fulbert.DAL.PatientDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Fulbert.Commons\Fulbert.Commons.csproj">
+      <Project>{1d4e2a9d-f484-445d-8d5a-5110e6dadbe9}</Project>
+      <Name>Fulbert.Commons</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Fulbert.Tests.Common\Fulbert.Tests.Common.csproj">
       <Project>{e0ce9eaa-481d-4cf3-868d-a25973c1888d}</Project>
       <Name>Fulbert.Tests.Common</Name>

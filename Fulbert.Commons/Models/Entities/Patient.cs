@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Fulbert.DAL.PatientDAL.Models
+namespace Fulbert.Commons.Models.Entities
 {
     public class Patient
     {

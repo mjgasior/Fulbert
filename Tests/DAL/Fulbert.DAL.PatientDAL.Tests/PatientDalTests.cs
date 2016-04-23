@@ -1,5 +1,5 @@
-﻿using Fulbert.DAL.PatientDAL.Abstract;
-using Fulbert.DAL.PatientDAL.Models;
+﻿using Fulbert.Commons.Abstract.DAL;
+using Fulbert.Commons.Models.Entities;
 using Fulbert.Tests.Common;
 using NHibernate;
 using NUnit.Framework;

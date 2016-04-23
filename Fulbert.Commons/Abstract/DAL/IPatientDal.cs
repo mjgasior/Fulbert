@@ -1,7 +1,7 @@
-﻿using Fulbert.DAL.PatientDAL.Models;
+﻿using Fulbert.Commons.Models.Entities;
 using System.Collections.Generic;
 
-namespace Fulbert.DAL.PatientDAL.Abstract
+namespace Fulbert.Commons.Abstract.DAL
 {
     public interface IPatientDal
     {

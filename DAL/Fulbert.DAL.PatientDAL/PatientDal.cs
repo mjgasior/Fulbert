@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Fulbert.DAL.PatientDAL.Models;
 using NHibernate;
-using Fulbert.DAL.PatientDAL.Abstract;
+using Fulbert.Commons.Abstract.DAL;
+using Fulbert.Commons.Models.Entities;
 
 namespace Fulbert.DAL.PatientDAL
 {
