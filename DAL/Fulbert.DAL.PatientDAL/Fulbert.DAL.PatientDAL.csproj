@@ -53,7 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IPatientDal.cs" />
+    <Compile Include="Mappings\AppointmentMap.cs" />
     <Compile Include="Mappings\PatientMap.cs" />
+    <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="NHibernateConfig.cs" />
     <Compile Include="PatientDal.cs" />

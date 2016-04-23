@@ -1,6 +1,7 @@
 ﻿using Fulbert.DAL.PatientDAL.Models;
 using NHibernate;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,13 +24,16 @@ namespace Fulbert.DAL.PatientDAL.Tests
             // Arrange
             string firstName = "Peter";
             string lastName = "Steele";
+            DateTime appointmentDate = DateTime.Now;
 
             // Act
-            _patientDal.AddPatient(new Patient
-            {
-                FirstName = firstName,
-                LastName = lastName
-            });
+            var patient = new Patient
+                            {
+                                FirstName = firstName,
+                                LastName = lastName,
+                            };
+            patient.AddAppointment(new Appointment { Date = appointmentDate });
+            _patientDal.AddPatient(patient);
 
             IList<Patient> query = GetPatientFromDatabase(firstName, lastName);
 
@@ -41,6 +45,10 @@ namespace Fulbert.DAL.PatientDAL.Tests
             Patient result = query.First();
             StringAssert.Contains(result.FirstName, firstName);
             StringAssert.Contains(result.LastName, lastName);
+
+            ICollection<Appointment> appointments = result.Appointments;
+            Assert.IsNotEmpty(appointments);
+            Assert.IsTrue(appointments.Count == 1);
         }
 
         [Test]
@@ -49,8 +57,9 @@ namespace Fulbert.DAL.PatientDAL.Tests
             // Arrange
             string firstName = "Johnny";
             string lastName = "Kelly";
+            DateTime appointmentDate = DateTime.Now;
 
-            AddPatientToDatabase(firstName, lastName);
+            AddPatientToDatabase(firstName, lastName, appointmentDate);
             
             // Act
             IEnumerable<Patient> patients = _patientDal.GetAllPatients();
@@ -63,6 +72,11 @@ namespace Fulbert.DAL.PatientDAL.Tests
             Patient result = patients.First();
             StringAssert.Contains(result.FirstName, firstName);
             StringAssert.Contains(result.LastName, lastName);
+
+            ICollection<Appointment> appointments = result.Appointments;
+            Assert.IsNotEmpty(appointments);
+            Assert.IsTrue(appointments.Count == 1);
+            //Assert.AreEqual(appointments.First().Date, appointmentDate);
         }
 
         [Test]
@@ -71,8 +85,9 @@ namespace Fulbert.DAL.PatientDAL.Tests
             // Arrange
             string firstName = "Josh";
             string lastName = "Silver";
+            DateTime appointmentDate = DateTime.Now;
 
-            AddPatientToDatabase(firstName, lastName);
+            AddPatientToDatabase(firstName, lastName, appointmentDate);
             IList<Patient> patients = GetPatientFromDatabase(firstName, lastName);
 
             // Act
@@ -90,18 +105,24 @@ namespace Fulbert.DAL.PatientDAL.Tests
             ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(TEST_DB_NAME);
             using (ISession session = sessionForTests.OpenSession())
             {
-                return session.QueryOver<Patient>()
+                return session.QueryOver<Patient>().Fetch(x => x.Appointments).Eager
                     .Where(k => k.FirstName == firstName && k.LastName == lastName).List();
             }
         }
 
-        private void AddPatientToDatabase(string firstName, string lastName)
+        private void AddPatientToDatabase(string firstName, string lastName, DateTime appointmentDate)
         {
+            var appointment = new Appointment
+            {
+                Date = appointmentDate
+            };
+
             Patient patient = new Patient
             {
                 FirstName = firstName,
                 LastName = lastName
             };
+            patient.AddAppointment(appointment);
 
             ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(TEST_DB_NAME);
             using (ISession session = sessionForTests.OpenSession())

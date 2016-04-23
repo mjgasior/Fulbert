@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Fulbert.DAL.PatientDAL.Models;
 using NHibernate;
 using Fulbert.DAL.PatientDAL.Abstract;
-using NHibernate.Linq;
-using System.Linq;
 
 namespace Fulbert.DAL.PatientDAL
 {
@@ -37,11 +34,11 @@ namespace Fulbert.DAL.PatientDAL
             }
         }
 
-        public IEnumerable<Patient> GetAllPatients()
+        public IList<Patient> GetAllPatients()
         {          
             using (ISession session = _sessionFactory.OpenSession())
             {
-                return session.Query<Patient>().ToList();
+                return session.QueryOver<Patient>().Fetch(x => x.Appointments).Eager.List();
             }
         }
 

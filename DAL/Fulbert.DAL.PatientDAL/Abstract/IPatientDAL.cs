@@ -15,6 +15,6 @@ namespace Fulbert.DAL.PatientDAL.Abstract
         /// Get all patients from database.
         /// </summary>
         /// <returns>List of available patients in database.</returns>
-        IEnumerable<Patient> GetAllPatients();
+        IList<Patient> GetAllPatients();
     }
 }
