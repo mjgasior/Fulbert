@@ -24,7 +24,7 @@ namespace Fulbert.DAL.PatientDAL
             _sessionFactory = NHibernateConfig.CreateSessionFactoryWithDBReset(databaseName);
         }
 
-        public void SaveOrUpdatePatient(Patient patient)
+        public void SaveOrUpdatePatient(PatientEntity patient)
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
@@ -36,15 +36,15 @@ namespace Fulbert.DAL.PatientDAL
             }
         }
 
-        public IList<Patient> GetAllPatients()
+        public IList<PatientEntity> GetAllPatients()
         {          
             using (ISession session = _sessionFactory.OpenSession())
             {
-                return session.QueryOver<Patient>().Fetch(x => x.Appointments).Eager.List();
+                return session.QueryOver<PatientEntity>().Fetch(x => x.Appointments).Eager.List();
             }
         }
 
-        public void DeletePatient(Patient patient)
+        public void DeletePatient(PatientEntity patient)
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
@@ -56,21 +56,21 @@ namespace Fulbert.DAL.PatientDAL
             }
         }
 
-        public IList<Appointment> GetAllAppointments()
+        public IList<AppointmentEntity> GetAllAppointments()
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
-                return session.QueryOver<Appointment>().Fetch(x => x.Patient).Eager.List();
+                return session.QueryOver<AppointmentEntity>().Fetch(x => x.Patient).Eager.List();
             }
         }
 
-        public Patient GetPatientById(Guid patientId)
+        public PatientEntity GetPatientById(Guid patientId)
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
                 //return session.QueryOver<Patient>().Fetch(x => x.Appointments).Eager
                 //    .Where(k => k.Id == patientId).List().FirstOrDefault();
-                var entity = session.Get<Patient>(patientId);
+                var entity = session.Get<PatientEntity>(patientId);
                 NHibernateUtil.Initialize(entity.Appointments);
                 return entity;
             }

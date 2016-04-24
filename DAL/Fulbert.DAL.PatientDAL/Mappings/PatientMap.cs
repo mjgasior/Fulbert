@@ -3,7 +3,7 @@ using Fulbert.Commons.Models.Entities;
 
 namespace Fulbert.DAL.PatientDAL.Mappings
 {
-    public class PatientMap : ClassMap<Patient>
+    public class PatientMap : ClassMap<PatientEntity>
     {
         public PatientMap()
         {

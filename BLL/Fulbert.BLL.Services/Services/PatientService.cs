@@ -2,7 +2,7 @@
 using Fulbert.Commons.Abstract.BLL;
 using Fulbert.Commons.Abstract.DAL;
 using Fulbert.Commons.Models.Business;
-using Entity = Fulbert.Commons.Models.Entities;
+using Fulbert.Commons.Models.Entities;
 
 namespace Fulbert.BLL.Services.Services
 {
@@ -17,8 +17,8 @@ namespace Fulbert.BLL.Services.Services
 
         public void AddAppointmentToPatient(Guid patientId, Appointment appointment)
         {
-            Entity.Patient patientEntity = _patientDal.GetPatientById(patientId);
-            Entity.Appointment appointmentEntity = CreateEntity(appointment);
+            PatientEntity patientEntity = _patientDal.GetPatientById(patientId);
+            AppointmentEntity appointmentEntity = CreateEntity(appointment);
 
             patientEntity.AddAppointment(appointmentEntity);
 
@@ -27,22 +27,22 @@ namespace Fulbert.BLL.Services.Services
 
         public void AddNewPatient(Patient patient)
         {
-            Entity.Patient patientEntity = CreateEntity(patient);
+            PatientEntity patientEntity = CreateEntity(patient);
             _patientDal.SaveOrUpdatePatient(patientEntity);
         }
 
-        private Entity.Patient CreateEntity(Patient patient)
+        private PatientEntity CreateEntity(Patient patient)
         {
-            return new Entity.Patient
+            return new PatientEntity
             {
                 FirstName = patient.FirstName,
                 LastName = patient.LastName
             };
         }
 
-        private Entity.Appointment CreateEntity(Appointment appointment)
+        private AppointmentEntity CreateEntity(Appointment appointment)
         {
-            return new Entity.Appointment
+            return new AppointmentEntity
             {
                 Date = appointment.Date
             };

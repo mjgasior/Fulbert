@@ -44,8 +44,8 @@
     <Compile Include="Abstract\DAL\IPatientDal.cs" />
     <Compile Include="Models\Business\Appointment.cs" />
     <Compile Include="Models\Business\Patient.cs" />
-    <Compile Include="Models\Entities\Appointment.cs" />
-    <Compile Include="Models\Entities\Patient.cs" />
+    <Compile Include="Models\Entities\AppointmentEntity.cs" />
+    <Compile Include="Models\Entities\PatientEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

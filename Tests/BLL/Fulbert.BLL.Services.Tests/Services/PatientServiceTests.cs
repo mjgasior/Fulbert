@@ -3,9 +3,9 @@ using Rhino.Mocks;
 using Fulbert.BLL.Services.Services;
 using Fulbert.Commons.Abstract.BLL;
 using Fulbert.Commons.Abstract.DAL;
-using Entity = Fulbert.Commons.Models.Entities;
 using Fulbert.Commons.Models.Business;
 using System;
+using Fulbert.Commons.Models.Entities;
 
 namespace Fulbert.BLL.Services.Tests.Services
 {
@@ -24,7 +24,7 @@ namespace Fulbert.BLL.Services.Tests.Services
         public void Add_new_patient()
         {
             // Arrange
-            _patientDalMock.Stub(x => x.SaveOrUpdatePatient(Arg<Entity.Patient>.Is.Anything)).Repeat.Once();
+            _patientDalMock.Stub(x => x.SaveOrUpdatePatient(Arg<PatientEntity>.Is.Anything)).Repeat.Once();
 
             Patient patient = new Patient
             {
@@ -44,16 +44,22 @@ namespace Fulbert.BLL.Services.Tests.Services
         {
             // Arrange
             Guid patientId = Guid.NewGuid();
+            DateTime appointmentDate = DateTime.Now;
 
             var appointment = new Appointment
             {
-                Date = DateTime.Now
+                Date = appointmentDate
             };
 
+            var patient = new PatientEntity();
+            _patientDalMock.Stub(x => x.GetPatientById(patientId)).Return(patient).Repeat.Once();
+            _patientDalMock.Stub(x => x.SaveOrUpdatePatient(patient)).Repeat.Once();
+            
             // Act
             _patientService.AddAppointmentToPatient(patientId, appointment);
 
             // Assert
+            _patientDalMock.VerifyAllExpectations();
         }
     }
 }

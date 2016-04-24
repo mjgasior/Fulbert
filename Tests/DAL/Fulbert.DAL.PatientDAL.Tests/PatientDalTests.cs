@@ -29,26 +29,26 @@ namespace Fulbert.DAL.PatientDAL.Tests
             DateTime appointmentDate = DateTime.Now;
 
             // Act
-            var patient = new Patient
+            var patient = new PatientEntity
                           {
                             FirstName = firstName,
                             LastName = lastName,
                           };
-            patient.AddAppointment(new Appointment { Date = appointmentDate });
+            patient.AddAppointment(new AppointmentEntity { Date = appointmentDate });
             _patientDal.SaveOrUpdatePatient(patient);
 
-            IList<Patient> query = GetPatientFromDatabase(firstName, lastName);
+            IList<PatientEntity> query = DatabaseTools.GetPatientFromDatabase(firstName, lastName);
 
             // Assert
             Assert.IsNotNull(query);
             Assert.IsNotEmpty(query);
             Assert.IsTrue(query.Count == 1);
 
-            Patient result = query.First();
+            PatientEntity result = query.First();
             StringAssert.Contains(result.FirstName, firstName);
             StringAssert.Contains(result.LastName, lastName);
 
-            ICollection<Appointment> appointments = result.Appointments;
+            ICollection<AppointmentEntity> appointments = result.Appointments;
             Assert.IsNotEmpty(appointments);
             Assert.IsTrue(appointments.Count == 1);
         }
@@ -61,18 +61,18 @@ namespace Fulbert.DAL.PatientDAL.Tests
             string lastName = "Silver";
             DateTime appointmentDate = DateTime.Now;
 
-            AddPatientToDatabase(firstName, lastName, appointmentDate);
-            IList<Patient> patients = GetPatientFromDatabase(firstName, lastName);
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate);
+            IList<PatientEntity> patients = DatabaseTools.GetPatientFromDatabase(firstName, lastName);
 
             // Act
             _patientDal.DeletePatient(patients.First());
 
             // Assert
-            IList<Patient> patientsAfterDelete = GetPatientFromDatabase(firstName, lastName);
+            IList<PatientEntity> patientsAfterDelete = DatabaseTools.GetPatientFromDatabase(firstName, lastName);
             Assert.IsNotNull(patientsAfterDelete);
             Assert.IsEmpty(patientsAfterDelete);
 
-            IList<Appointment> appointments = GetAllAppointments();
+            IList<AppointmentEntity> appointments = DatabaseTools.GetAllAppointments();
             Assert.IsNotNull(appointments);
             Assert.IsEmpty(appointments);
         }
@@ -85,11 +85,11 @@ namespace Fulbert.DAL.PatientDAL.Tests
             string lastName = "Abruscato";
             DateTime appointmentDate = DateTime.Now;
 
-            AddPatientToDatabase(firstName, lastName, appointmentDate);
-            Guid patientId = GetPatientFromDatabase(firstName, lastName).First().Id;
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate);
+            Guid patientId = DatabaseTools.GetPatientFromDatabase(firstName, lastName).First().Id;
 
             // Act
-            Patient patient = _patientDal.GetPatientById(patientId);
+            PatientEntity patient = _patientDal.GetPatientById(patientId);
 
             // Assert
             StringAssert.Contains(patient.FirstName, firstName);
@@ -107,21 +107,21 @@ namespace Fulbert.DAL.PatientDAL.Tests
             string lastName = "Kelly";
             DateTime appointmentDate = DateTime.Now;
 
-            AddPatientToDatabase(firstName, lastName, appointmentDate);
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate);
             
             // Act
-            IEnumerable<Patient> patients = _patientDal.GetAllPatients();
+            IEnumerable<PatientEntity> patients = _patientDal.GetAllPatients();
 
             // Assert
             Assert.IsNotNull(patients);
             Assert.IsNotEmpty(patients);
             Assert.IsTrue(patients.Count() == 1);
 
-            Patient result = patients.First();
+            PatientEntity result = patients.First();
             StringAssert.Contains(result.FirstName, firstName);
             StringAssert.Contains(result.LastName, lastName);
 
-            ICollection<Appointment> appointments = result.Appointments;
+            ICollection<AppointmentEntity> appointments = result.Appointments;
             Assert.IsNotEmpty(appointments);
             Assert.IsTrue(appointments.Count == 1);
             Assert.AreEqual(appointments.First().Date.Date, appointmentDate.Date);
@@ -135,16 +135,16 @@ namespace Fulbert.DAL.PatientDAL.Tests
             string lastName = "Hickey";
             DateTime appointmentDate = DateTime.Now;
 
-            AddPatientToDatabase(firstName, lastName, appointmentDate);
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate);
 
             // Act
-            IList<Appointment> appointments = _patientDal.GetAllAppointments();
+            IList<AppointmentEntity> appointments = _patientDal.GetAllAppointments();
 
             // Assert
             Assert.IsNotNull(appointments);
             Assert.IsNotEmpty(appointments);
             Assert.IsTrue(appointments.Count() == 1);
-            Appointment appointment = appointments.First();
+            AppointmentEntity appointment = appointments.First();
             Assert.AreEqual(appointment.Date.Date, appointmentDate.Date);
 
             Assert.AreEqual(appointment.Patient.FirstName, firstName);
@@ -160,17 +160,17 @@ namespace Fulbert.DAL.PatientDAL.Tests
             DateTime newerAppointmentDate = DateTime.Now;
             DateTime olderAppointmentDate = DateTime.Now - TimeSpan.FromDays(7);
 
-            AddPatientToDatabase(firstName, lastName, newerAppointmentDate);
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, newerAppointmentDate);
 
-            IEnumerable<Patient> patients = _patientDal.GetAllPatients();
-            Patient patient = patients.First(x => x.FirstName == firstName);
+            IEnumerable<PatientEntity> patients = _patientDal.GetAllPatients();
+            PatientEntity patient = patients.First(x => x.FirstName == firstName);
 
             // Act
-            patient.AddAppointment(new Appointment { Date = olderAppointmentDate });
+            patient.AddAppointment(new AppointmentEntity { Date = olderAppointmentDate });
             _patientDal.SaveOrUpdatePatient(patient);
 
             // Assert
-            IList<Appointment> appointments = GetAllAppointments();
+            IList<AppointmentEntity> appointments = DatabaseTools.GetAllAppointments();
             appointments.OrderBy(x => x.Date);
             Assert.AreEqual(appointments.Count, 2);
             Assert.AreEqual(appointments.First().Date.Date, olderAppointmentDate.Date);
@@ -179,51 +179,5 @@ namespace Fulbert.DAL.PatientDAL.Tests
             Assert.AreEqual(appointments.First().Patient.Id, appointments.Last().Patient.Id);
         }
         #endregion Tests
-
-        #region Methods
-        private IList<Appointment> GetAllAppointments()
-        {
-            ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(Database.TEST_DB_NAME);
-            using (ISession session = sessionForTests.OpenSession())
-            {
-                return session.QueryOver<Appointment>().List();
-            }
-        }
-
-        private IList<Patient> GetPatientFromDatabase(string firstName, string lastName)
-        {
-            ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(Database.TEST_DB_NAME);
-            using (ISession session = sessionForTests.OpenSession())
-            {
-                return session.QueryOver<Patient>().Fetch(x => x.Appointments).Eager
-                    .Where(k => k.FirstName == firstName && k.LastName == lastName).List();
-            }
-        }
-
-        private void AddPatientToDatabase(string firstName, string lastName, DateTime appointmentDate)
-        {
-            var appointment = new Appointment
-            {
-                Date = appointmentDate
-            };
-
-            Patient patient = new Patient
-            {
-                FirstName = firstName,
-                LastName = lastName
-            };
-            patient.AddAppointment(appointment);
-
-            ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(Database.TEST_DB_NAME);
-            using (ISession session = sessionForTests.OpenSession())
-            {
-                using (ITransaction transaction = session.BeginTransaction())
-                {
-                    session.SaveOrUpdate(patient);
-                    transaction.Commit();
-                }
-            }
-        }
-        #endregion Methods
     }
 }
