@@ -3,6 +3,7 @@ using Fulbert.Commons.Abstract.BLL;
 using Fulbert.Commons.Abstract.DAL;
 using Fulbert.Commons.Models.Business;
 using Fulbert.Commons.Models.Entities;
+using AutoMapper;
 
 namespace Fulbert.BLL.Services.Services
 {
@@ -13,6 +14,14 @@ namespace Fulbert.BLL.Services.Services
         public PatientService(IPatientDal patientDal)
         {
             _patientDal = patientDal;
+            //Mapper.CreateMap<Patient, PatientEntity>();
+            Mapper.Initialize(cfg => {
+                string userName = null;
+                cfg.CreateMap<Source, Dest>()
+                    .ForMember(d => d.UserName,
+                        opt => opt.MapFrom(src => userName)
+                    );
+            });
         }
 
         public void AddAppointmentToPatient(Guid patientId, Appointment appointment)
@@ -28,6 +37,8 @@ namespace Fulbert.BLL.Services.Services
         public void AddNewPatient(Patient patient)
         {
             PatientEntity patientEntity = CreateEntity(patient);
+            PatientEntity foo_copy = Mapper.Map<PatientEntity>(patient);
+
             _patientDal.SaveOrUpdatePatient(patientEntity);
         }
 
