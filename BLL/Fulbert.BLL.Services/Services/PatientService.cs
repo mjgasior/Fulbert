@@ -15,8 +15,8 @@ namespace Fulbert.BLL.Services.Services
         {
             _patientDal = patientDal;
             Mapper.Initialize(cfg => {
-                cfg.CreateMap<Patient, PatientEntity>();
-                cfg.CreateMap<Appointment, AppointmentEntity>();
+                cfg.CreateMap<Patient, PatientEntity>().ForMember(x => x.Id, opt => opt.Ignore());
+                cfg.CreateMap<Appointment, AppointmentEntity>().ForMember(x => x.Id, opt => opt.Ignore());
             });
         }
 
@@ -34,5 +34,11 @@ namespace Fulbert.BLL.Services.Services
             _patientDal.SaveOrUpdatePatient(patientEntity);
         }
 
+        public void UpdatePatient(Patient patient)
+        {
+            PatientEntity patientEntity = _patientDal.GetPatientById(patient.Id);
+            Mapper.Map(patient, patientEntity);
+            _patientDal.SaveOrUpdatePatient(patientEntity);
+        }
     }
 }

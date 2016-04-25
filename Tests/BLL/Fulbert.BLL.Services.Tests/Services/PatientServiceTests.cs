@@ -6,6 +6,8 @@ using Fulbert.Commons.Abstract.DAL;
 using Fulbert.Commons.Models.Business;
 using System;
 using Fulbert.Commons.Models.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Fulbert.BLL.Services.Tests.Services
 {
@@ -45,11 +47,7 @@ namespace Fulbert.BLL.Services.Tests.Services
             // Arrange
             Guid patientId = Guid.NewGuid();
             DateTime appointmentDate = DateTime.Now;
-
-            var appointment = new Appointment
-            {
-                Date = appointmentDate
-            };
+            Appointment appointment = MakeAppointment(appointmentDate);
 
             var patient = new PatientEntity();
             _patientDalMock.Stub(x => x.GetPatientById(patientId)).Return(patient).Repeat.Once();
@@ -60,6 +58,51 @@ namespace Fulbert.BLL.Services.Tests.Services
 
             // Assert
             _patientDalMock.VerifyAllExpectations();
+        }
+
+        [Test]
+        public void Verify_if_AutoMapper_works_properly()
+        {
+            // Arrange
+            DateTime appointmentDate1 = DateTime.Now - TimeSpan.FromDays(5);
+            DateTime appointmentDate2 = DateTime.Now;
+
+            Guid patientId = Guid.NewGuid();
+            Patient patient = new Patient(patientId)
+            {
+                FirstName = "Dave",
+                LastName = "Grohl",
+                Appointments = new List<Appointment>
+                {
+                    MakeAppointment(appointmentDate1),
+                    MakeAppointment(appointmentDate2)
+                }
+            };
+
+            var patientEntity = new PatientEntity();
+            _patientDalMock.Stub(x => x.GetPatientById(patientId)).Repeat.Once().Return(patientEntity);
+            _patientDalMock.Stub(x => x.SaveOrUpdatePatient(patientEntity)).Repeat.Once();
+
+            // Act
+            _patientService.UpdatePatient(patient);
+
+            // Assert
+            _patientDalMock.VerifyAllExpectations();
+            StringAssert.Contains(patientEntity.FirstName, patient.FirstName);
+            StringAssert.Contains(patientEntity.LastName, patient.LastName);
+            Assert.AreEqual(patientEntity.Appointments.Count, patient.Appointments.Count);
+            Assert.AreEqual(patientEntity.Appointments.First().Date.Date, patient.Appointments.First().Date.Date);
+            Assert.AreEqual(patientEntity.Appointments.Last().Date.Date, patient.Appointments.Last().Date.Date);
+
+            Assert.AreNotEqual(patientEntity.Id, patient.Id);
+        }
+
+        private Appointment MakeAppointment(DateTime appointmentDate)
+        {
+            return new Appointment
+            {
+                Date = appointmentDate
+            };
         }
     }
 }

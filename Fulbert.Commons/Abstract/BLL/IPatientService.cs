@@ -7,5 +7,6 @@ namespace Fulbert.Commons.Abstract.BLL
     {
         void AddNewPatient(Patient patient);
         void AddAppointmentToPatient(Guid patientId, Appointment appointment);
+        void UpdatePatient(Patient patient);
     }
 }
