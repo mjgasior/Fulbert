@@ -81,6 +81,13 @@ namespace Fulbert.BLL.Services.Tests.Services
             Assert.AreEqual(updatedPatientEntity.Appointments.First().Date.Date, appointmentDate.Date);
             Assert.AreEqual(updatedPatientEntity.Appointments.Last().Date.Date, appointmentDate.Date);
         }
+
+        [Test]
+        public void Integrated_verify_if_AutoMapper_works_properly()
+        {
+            // Arrange
+            Assert.Fail("This one will fail because the appointment entities do not have patient property filled");
+        }
         #endregion Tests
     }
 }
