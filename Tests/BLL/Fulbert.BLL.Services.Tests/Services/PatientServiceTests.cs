@@ -22,6 +22,7 @@ namespace Fulbert.BLL.Services.Tests.Services
             _patientService = new PatientService(_patientDalMock);
         }
 
+        #region Tests
         [Test]
         public void Add_new_patient()
         {
@@ -52,12 +53,51 @@ namespace Fulbert.BLL.Services.Tests.Services
             var patient = new PatientEntity();
             _patientDalMock.Stub(x => x.GetPatientById(patientId)).Return(patient).Repeat.Once();
             _patientDalMock.Stub(x => x.SaveOrUpdatePatient(patient)).Repeat.Once();
-            
+
             // Act
             _patientService.AddAppointmentToPatient(patientId, appointment);
 
             // Assert
             _patientDalMock.VerifyAllExpectations();
+        }
+
+        [Test]
+        public void Get_patient_by_id()
+        {
+            // Arrange
+            var patientId = Guid.NewGuid();
+            var appointmentId = Guid.NewGuid();
+
+            DateTime date = DateTime.Now;
+            var appointment = new AppointmentEntity(appointmentId)
+            {
+                Date = date
+            };                
+
+            string firstName = "David";
+            string lastName = "Bowie";
+            var patientEntity = new PatientEntity(patientId)
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Appointments = new List<AppointmentEntity>
+                {
+                    appointment
+                }
+            };
+
+            _patientDalMock.Stub(x => x.GetPatientById(patientId)).Return(patientEntity).Repeat.Once();
+
+            // Act
+            Patient patient = _patientService.GetPatientById(patientId);
+
+            // Assert
+            _patientDalMock.VerifyAllExpectations();
+            Assert.AreEqual(patientId, patient.Id);
+            StringAssert.Contains(firstName, patient.FirstName);
+            StringAssert.Contains(lastName, patient.LastName);
+            Assert.AreEqual(date.Date, patient.Appointments.First().Date.Date);
+            Assert.AreEqual(appointmentId, patient.Appointments.First().Id);
         }
 
         [Test]
@@ -96,7 +136,9 @@ namespace Fulbert.BLL.Services.Tests.Services
 
             Assert.AreNotEqual(patientEntity.Id, patient.Id);
         }
+        #endregion Tests
 
+        #region Methods
         private Appointment MakeAppointment(DateTime appointmentDate)
         {
             return new Appointment
@@ -104,5 +146,6 @@ namespace Fulbert.BLL.Services.Tests.Services
                 Date = appointmentDate
             };
         }
+        #endregion Methods
     }
 }

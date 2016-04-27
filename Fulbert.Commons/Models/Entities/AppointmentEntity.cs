@@ -7,5 +7,15 @@ namespace Fulbert.Commons.Models.Entities
         public virtual Guid Id { get; protected set; }
         public virtual DateTime Date { get; set; }
         public virtual PatientEntity Patient { get; set; }
+
+        internal AppointmentEntity(Guid id)
+        {
+            Id = id;
+        }
+
+        public AppointmentEntity()
+        {
+
+        }
     }
 }

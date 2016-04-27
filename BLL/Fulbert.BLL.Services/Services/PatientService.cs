@@ -4,6 +4,7 @@ using Fulbert.Commons.Abstract.DAL;
 using Fulbert.Commons.Models.Business;
 using Fulbert.Commons.Models.Entities;
 using AutoMapper;
+using System.Runtime.CompilerServices;
 
 namespace Fulbert.BLL.Services.Services
 {
@@ -16,7 +17,9 @@ namespace Fulbert.BLL.Services.Services
             _patientDal = patientDal;
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<Patient, PatientEntity>().ForMember(x => x.Id, opt => opt.Ignore());
+                cfg.CreateMap<PatientEntity, Patient>();
                 cfg.CreateMap<Appointment, AppointmentEntity>().ForMember(x => x.Id, opt => opt.Ignore());
+                cfg.CreateMap<AppointmentEntity, Appointment>();
             });
         }
 
@@ -32,6 +35,13 @@ namespace Fulbert.BLL.Services.Services
         {
             var patientEntity = Mapper.Map<PatientEntity>(patient);
             _patientDal.SaveOrUpdatePatient(patientEntity);
+        }
+
+        public Patient GetPatientById(Guid id)
+        {
+            PatientEntity patientEntity = _patientDal.GetPatientById(id);
+            var patient = Mapper.Map<Patient>(patientEntity);
+            return patient;
         }
 
         public void UpdatePatient(Patient patient)

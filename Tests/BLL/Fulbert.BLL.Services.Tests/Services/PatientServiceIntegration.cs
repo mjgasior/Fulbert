@@ -86,7 +86,24 @@ namespace Fulbert.BLL.Services.Tests.Services
         public void Integrated_verify_if_AutoMapper_works_properly()
         {
             // Arrange
-            Assert.Fail("This one will fail because the appointment entities do not have patient property filled");
+            DateTime appointmentDate = DateTime.Now;
+            var appointment = new Appointment
+            {
+                Date = appointmentDate
+            };
+
+            string firstName = "Fernando";
+            string lastName = "Ribeiro";
+
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate);
+
+            // Act
+            Patient patient = _patientService.GetPatientById();
+
+            //_patientService.UpdatePatient(patientEntity);
+
+            // Assert
+            Assert.Fail();
         }
         #endregion Tests
     }
