@@ -96,13 +96,21 @@ namespace Fulbert.BLL.Services.Tests.Services
             string lastName = "Ribeiro";
 
             DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate);
+            Guid patientId = DatabaseTools.GetPatientFromDatabase(firstName, lastName).First().Id;
+
+            DateTime appointmentDate2 = DateTime.Now - TimeSpan.FromDays(5);
+            var appointment2 = new Appointment
+            {
+                Date = appointmentDate2
+            };
 
             // Act
-            Patient patient = _patientService.GetPatientById();
-
-            //_patientService.UpdatePatient(patientEntity);
+            Patient patient = _patientService.GetPatientById(patientId);
+            patient.Appointments.Add(appointment2);
+            _patientService.UpdatePatient(patient);
 
             // Assert
+            IList<PatientEntity> patientEntities = DatabaseTools.GetPatientFromDatabase(firstName, lastName);
             Assert.Fail();
         }
         #endregion Tests

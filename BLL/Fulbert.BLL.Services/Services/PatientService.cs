@@ -48,6 +48,7 @@ namespace Fulbert.BLL.Services.Services
         {
             PatientEntity patientEntity = _patientDal.GetPatientById(patient.Id);
             Mapper.Map(patient, patientEntity);
+            //patientEntity.Appointments.ForEach(x => x.Patient = patientEntity);
             _patientDal.SaveOrUpdatePatient(patientEntity);
         }
     }

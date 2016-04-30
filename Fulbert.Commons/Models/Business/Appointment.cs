@@ -6,6 +6,7 @@ namespace Fulbert.Commons.Models.Business
     {
         public Guid Id { get; private set; }
         public DateTime Date { get; set; }
+        public Patient Patient { get; set; }
 
         public Appointment(Guid id)
         {
