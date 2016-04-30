@@ -4,7 +4,8 @@ using Fulbert.Commons.Abstract.DAL;
 using Fulbert.Commons.Models.Business;
 using Fulbert.Commons.Models.Entities;
 using AutoMapper;
-using System.Runtime.CompilerServices;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Fulbert.BLL.Services.Services
 {
@@ -48,7 +49,11 @@ namespace Fulbert.BLL.Services.Services
         {
             PatientEntity patientEntity = _patientDal.GetPatientById(patient.Id);
             Mapper.Map(patient, patientEntity);
-            //patientEntity.Appointments.ForEach(x => x.Patient = patientEntity);
+            IEnumerable<AppointmentEntity> elements = patientEntity.Appointments.Where(x => x.Patient == null);
+            foreach (AppointmentEntity item in elements)
+            {
+                item.Patient = patientEntity;
+            }
             _patientDal.SaveOrUpdatePatient(patientEntity);
         }
     }

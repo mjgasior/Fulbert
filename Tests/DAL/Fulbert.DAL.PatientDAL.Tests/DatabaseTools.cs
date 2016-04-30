@@ -23,24 +23,26 @@ namespace Fulbert.DAL.PatientDAL.Tests
             ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(Database.TEST_DB_NAME);
             using (ISession session = sessionForTests.OpenSession())
             {
-                return session.QueryOver<PatientEntity>().Fetch(x => x.Appointments).Eager
-                    .Where(k => k.FirstName == firstName && k.LastName == lastName).List();
+                return session.QueryOver<PatientEntity>().Where(k => k.FirstName == firstName && k.LastName == lastName).Fetch(x => x.Appointments).Eager.List();
             }
         }
 
-        public static void AddPatientToDatabase(string firstName, string lastName, DateTime appointmentDate)
+        public static void AddPatientToDatabase(string firstName, string lastName, params DateTime[] appointmentDate)
         {
-            var appointment = new AppointmentEntity
-            {
-                Date = appointmentDate
-            };
-
             PatientEntity patient = new PatientEntity
             {
                 FirstName = firstName,
                 LastName = lastName
             };
-            patient.AddAppointment(appointment);
+
+            foreach (DateTime item in appointmentDate)
+            {
+                var appointment = new AppointmentEntity
+                {
+                    Date = item
+                };
+                patient.AddAppointment(appointment);
+            }
 
             ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(Database.TEST_DB_NAME);
             using (ISession session = sessionForTests.OpenSession())

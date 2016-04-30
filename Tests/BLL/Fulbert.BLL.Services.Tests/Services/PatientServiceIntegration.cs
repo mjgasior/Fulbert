@@ -104,14 +104,51 @@ namespace Fulbert.BLL.Services.Tests.Services
                 Date = appointmentDate2
             };
 
+            DateTime appointmentDate3 = DateTime.Now - TimeSpan.FromDays(10);
+            var appointment3 = new Appointment
+            {
+                Date = appointmentDate3
+            };
+
             // Act
             Patient patient = _patientService.GetPatientById(patientId);
             patient.Appointments.Add(appointment2);
+            patient.Appointments.Add(appointment3);
             _patientService.UpdatePatient(patient);
 
             // Assert
             IList<PatientEntity> patientEntities = DatabaseTools.GetPatientFromDatabase(firstName, lastName);
-            Assert.Fail();
+            Assert.AreEqual(patientEntities.Count, 1);
+            Assert.AreEqual(patientEntities.First().Appointments.Count, 3);
+        }
+
+        [Test]
+        public void Test_tools()
+        {
+            // Arrange
+            DateTime appointmentDate = DateTime.Now;
+            var appointment = new AppointmentEntity
+            {
+                Date = appointmentDate
+            };
+
+            DateTime appointmentDate2 = DateTime.Now - TimeSpan.FromDays(5);
+            var appointment2 = new AppointmentEntity
+            {
+                Date = appointmentDate2
+            };
+
+            DateTime appointmentDate3 = DateTime.Now - TimeSpan.FromDays(10);
+            var appointment3 = new AppointmentEntity
+            {
+                Date = appointmentDate3
+            };
+
+            string firstName = "Fernando";
+            string lastName = "Ribeiro";
+
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate, appointmentDate2, appointmentDate3);
+            var patients = DatabaseTools.GetPatientFromDatabase(firstName, lastName);
         }
         #endregion Tests
     }
