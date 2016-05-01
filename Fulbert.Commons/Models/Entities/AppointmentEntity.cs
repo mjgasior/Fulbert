@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fulbert.Commons.Utils;
+using System;
 
 namespace Fulbert.Commons.Models.Entities
 {
@@ -15,6 +16,11 @@ namespace Fulbert.Commons.Models.Entities
         public AppointmentEntity()
         {
 
+        }
+
+        public override string ToString()
+        {
+            return string.Format(Formatting.S0_1, Id, Date);
         }
     }
 }

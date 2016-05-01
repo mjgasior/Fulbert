@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fulbert.Commons.Utils;
+using System;
 using System.Collections.Generic;
 
 namespace Fulbert.Commons.Models.Entities
@@ -23,6 +24,11 @@ namespace Fulbert.Commons.Models.Entities
         {
             appointment.Patient = this;
             Appointments.Add(appointment);
+        }
+
+        public override string ToString()
+        {
+            return string.Format(Formatting.S0_1_2, Id, FirstName, LastName);
         }
     }
 }

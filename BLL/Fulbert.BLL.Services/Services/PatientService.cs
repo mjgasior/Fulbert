@@ -38,6 +38,12 @@ namespace Fulbert.BLL.Services.Services
             _patientDal.SaveOrUpdatePatient(patientEntity);
         }
 
+        public ICollection<Patient> GetAllPatients()
+        {
+            IList<PatientEntity> patientEntities = _patientDal.GetAllPatients();
+            return Mapper.Map<IList<PatientEntity>, List<Patient>>(patientEntities);
+        }
+
         public Patient GetPatientById(Guid id)
         {
             PatientEntity patientEntity = _patientDal.GetPatientById(id);

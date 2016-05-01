@@ -1,7 +1,6 @@
 ﻿using Fulbert.Commons.Abstract.DAL;
 using Fulbert.Commons.Models.Entities;
 using Fulbert.Tests.Common;
-using NHibernate;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

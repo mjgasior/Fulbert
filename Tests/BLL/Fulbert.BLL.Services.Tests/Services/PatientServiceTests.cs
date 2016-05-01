@@ -136,6 +136,45 @@ namespace Fulbert.BLL.Services.Tests.Services
 
             Assert.AreNotEqual(patientEntity.Id, patient.Id);
         }
+
+        [Test]
+        public void Get_all_patients()
+        {
+            // Arrange
+            Guid patientId = Guid.NewGuid();
+            Guid appointmentId = Guid.NewGuid();
+            DateTime date = DateTime.Now;
+            PatientEntity patient = new PatientEntity(patientId)
+            {
+                FirstName = "Serj",
+                LastName = "Tankian",
+                Appointments = MakeAppointmentEntities(appointmentId, date, date, date).ToList()
+            };
+
+            List<PatientEntity> patientList = new List<PatientEntity>
+            {
+                patient, patient, patient
+            };
+
+            _patientDalMock.Stub(x => x.GetAllPatients()).Return(patientList).Repeat.Once();
+
+            // Act
+            ICollection<Patient> patients = _patientService.GetAllPatients();
+
+            // Assert
+            _patientDalMock.VerifyAllExpectations();
+            Assert.That(patients.Count, Is.EqualTo(3));
+
+            patients.ToList().ForEach(resultPatient =>
+            {
+                Assert.That(resultPatient.Id, Is.EqualTo(patientId));
+                Assert.That(resultPatient.FirstName, Is.EqualTo(patient.FirstName));
+                Assert.That(resultPatient.LastName, Is.EqualTo(patient.LastName));
+
+                Assert.That(resultPatient.Appointments.First().Date.Date, Is.EqualTo(date.Date));
+                Assert.That(resultPatient.Appointments.First().Id, Is.EqualTo(appointmentId));
+            });
+        }
         #endregion Tests
 
         #region Methods
@@ -145,6 +184,17 @@ namespace Fulbert.BLL.Services.Tests.Services
             {
                 Date = appointmentDate
             };
+        }
+
+        private IEnumerable<AppointmentEntity> MakeAppointmentEntities(Guid id, params DateTime[] appointmentDates)
+        {
+            foreach (DateTime date in appointmentDates)
+            {
+                yield return new AppointmentEntity(id)
+                {
+                    Date = date
+                };
+            }
         }
         #endregion Methods
     }

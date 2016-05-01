@@ -3,6 +3,7 @@ using NHibernate;
 using Fulbert.Commons.Abstract.DAL;
 using Fulbert.Commons.Models.Entities;
 using System;
+using NHibernate.Transform;
 
 namespace Fulbert.DAL.PatientDAL
 {
@@ -40,7 +41,7 @@ namespace Fulbert.DAL.PatientDAL
         {          
             using (ISession session = _sessionFactory.OpenSession())
             {
-                return session.QueryOver<PatientEntity>().Fetch(x => x.Appointments).Eager.List();
+                return session.QueryOver<PatientEntity>().Fetch(x => x.Appointments).Eager.TransformUsing(Transformers.DistinctRootEntity).List();
             }
         }
 
@@ -68,8 +69,6 @@ namespace Fulbert.DAL.PatientDAL
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
-                //return session.QueryOver<Patient>().Fetch(x => x.Appointments).Eager
-                //    .Where(k => k.Id == patientId).List().FirstOrDefault();
                 var entity = session.Get<PatientEntity>(patientId);
                 NHibernateUtil.Initialize(entity.Appointments);
                 return entity;

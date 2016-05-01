@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fulbert.Commons.Utils;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
@@ -20,6 +21,11 @@ namespace Fulbert.Commons.Models.Business
         public Patient()
         {
 
+        }
+
+        public override string ToString()
+        {
+            return string.Format(Formatting.S0_1_2, Id, FirstName, LastName);
         }
     }
 }

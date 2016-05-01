@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fulbert.Commons.Utils;
+using System;
 
 namespace Fulbert.Commons.Models.Business
 {
@@ -16,6 +17,11 @@ namespace Fulbert.Commons.Models.Business
         public Appointment()
         {
 
+        }
+
+        public override string ToString()
+        {
+            return string.Format(Formatting.S0_1, Id, Date);
         }
     }
 }

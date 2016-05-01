@@ -17,6 +17,12 @@ namespace Fulbert.Commons.Abstract.DAL
         /// </summary>
         /// <returns>List of available patients in database.</returns>
         IList<PatientEntity> GetAllPatients();
+
+        /// <summary>
+        /// Returns the selected patient database model instance by his database id.
+        /// </summary>
+        /// <param name="patientId">Selected patient's database key (id).</param>
+        /// <returns>Full database patient entity.</returns>
         PatientEntity GetPatientById(Guid patientId);
 
         /// <summary>
