@@ -117,6 +117,7 @@ namespace Fulbert.BLL.Services.Tests.Services
             _patientService.UpdatePatient(patient);
 
             // Assert
+            Patient patient2 = _patientService.GetPatientById(patientId);
             IList<PatientEntity> patientEntities = DatabaseTools.GetPatientFromDatabase(firstName, lastName);
             Assert.AreEqual(patientEntities.Count, 1);
             Assert.AreEqual(patientEntities.First().Appointments.Count, 3);
@@ -133,16 +134,7 @@ namespace Fulbert.BLL.Services.Tests.Services
             };
 
             DateTime appointmentDate2 = DateTime.Now - TimeSpan.FromDays(5);
-            var appointment2 = new AppointmentEntity
-            {
-                Date = appointmentDate2
-            };
-
             DateTime appointmentDate3 = DateTime.Now - TimeSpan.FromDays(10);
-            var appointment3 = new AppointmentEntity
-            {
-                Date = appointmentDate3
-            };
 
             string firstName = "Fernando";
             string lastName = "Ribeiro";
