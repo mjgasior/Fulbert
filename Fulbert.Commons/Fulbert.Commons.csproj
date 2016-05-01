@@ -45,6 +45,7 @@
     <Compile Include="Models\Business\Appointment.cs" />
     <Compile Include="Models\Business\Patient.cs" />
     <Compile Include="Models\Entities\AppointmentEntity.cs" />
+    <Compile Include="Models\Entities\BaseEntity.cs" />
     <Compile Include="Models\Entities\PatientEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
