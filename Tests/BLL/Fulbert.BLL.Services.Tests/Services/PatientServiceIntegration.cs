@@ -85,6 +85,7 @@ namespace Fulbert.BLL.Services.Tests.Services
         [Test]
         public void Integrated_verify_if_AutoMapper_works_properly()
         {
+
             // Arrange
             DateTime appointmentDate = DateTime.Now;
             var appointment = new Appointment
@@ -92,8 +93,8 @@ namespace Fulbert.BLL.Services.Tests.Services
                 Date = appointmentDate
             };
 
-            string firstName = "Fernando";
-            string lastName = "Ribeiro";
+            string firstName = "Josh";
+            string lastName = "Homme";
 
             DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate);
             Guid patientId = DatabaseTools.GetPatientFromDatabase(firstName, lastName).First().Id;
@@ -118,29 +119,59 @@ namespace Fulbert.BLL.Services.Tests.Services
 
             // Assert
             Patient patient2 = _patientService.GetPatientById(patientId);
+            Assert.That(patient2.Appointments.Count, Is.EqualTo(3));
+            Assert.That(patient2.FirstName, Is.EqualTo(firstName));
+            Assert.That(patient2.LastName, Is.EqualTo(lastName));
+
             IList<PatientEntity> patientEntities = DatabaseTools.GetPatientFromDatabase(firstName, lastName);
             Assert.AreEqual(patientEntities.Count, 1);
             Assert.AreEqual(patientEntities.First().Appointments.Count, 3);
         }
 
         [Test]
-        public void Test_tools()
+        public void Integrated_verify_if_AutoMapper_works_properly_with_two_patients()
         {
             // Arrange
-            DateTime appointmentDate = DateTime.Now;
-            var appointment = new AppointmentEntity
-            {
-                Date = appointmentDate
-            };
-
-            DateTime appointmentDate2 = DateTime.Now - TimeSpan.FromDays(5);
-            DateTime appointmentDate3 = DateTime.Now - TimeSpan.FromDays(10);
-
             string firstName = "Fernando";
             string lastName = "Ribeiro";
+            DateTime appointmentDate = DateTime.Now;
 
-            DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate, appointmentDate2, appointmentDate3);
-            var patients = DatabaseTools.GetPatientFromDatabase(firstName, lastName);
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate);
+            Guid patientId = DatabaseTools.GetPatientFromDatabase(firstName, lastName).First().Id;
+
+            DateTime appointmentDate2 = DateTime.Now - TimeSpan.FromDays(5);
+            var appointment2 = new Appointment
+            {
+                Date = appointmentDate2
+            };
+
+            DateTime appointmentDate3 = DateTime.Now - TimeSpan.FromDays(10);
+            var appointment3 = new Appointment
+            {
+                Date = appointmentDate3
+            };
+
+            string firstName2 = "Wayne";
+            string lastName2 = "Static";
+            DatabaseTools.AddPatientToDatabase(firstName2, lastName2, appointmentDate, appointmentDate2);
+            Guid patientId2 = DatabaseTools.GetPatientFromDatabase(firstName2, lastName2).First().Id;
+
+            // Act
+            Patient patient = _patientService.GetPatientById(patientId);
+            patient.Appointments.Add(appointment2);
+            patient.Appointments.Add(appointment3);
+            _patientService.UpdatePatient(patient);
+
+            // Assert
+            Patient patientCheck = _patientService.GetPatientById(patientId);
+            Assert.That(patientCheck.Appointments.Count, Is.EqualTo(3));
+            Assert.That(patientCheck.FirstName, Is.EqualTo(firstName));
+            Assert.That(patientCheck.LastName, Is.EqualTo(lastName));
+
+            Patient patient2Check = _patientService.GetPatientById(patientId2);
+            Assert.That(patient2Check.Appointments.Count, Is.EqualTo(2));
+            Assert.That(patient2Check.FirstName, Is.EqualTo(firstName2));
+            Assert.That(patient2Check.LastName, Is.EqualTo(lastName2));
         }
         #endregion Tests
     }

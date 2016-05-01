@@ -1,9 +1,6 @@
-﻿using Fulbert.Commons.Models.Business;
-using Fulbert.Commons.Models.Entities;
+﻿using Fulbert.Commons.Models.Entities;
 using Fulbert.Tests.Common;
 using NHibernate;
-using NHibernate.Criterion;
-using NHibernate.Linq;
 using NHibernate.Transform;
 using System;
 using System.Collections.Generic;
@@ -28,10 +25,6 @@ namespace Fulbert.DAL.PatientDAL.Tests
 
             using (ISession session = sessionForTests.OpenSession())
             {
-                //var searchedPatient = from patients in session.Query<Patient>()
-                //                    where patients.FirstName = firstName && patients.LastName == lastName
-                //                  select patients;
-
                 return session.QueryOver<PatientEntity>().Where(k => k.FirstName == firstName && k.LastName == lastName)
                     .Fetch(x => x.Appointments).Eager.TransformUsing(Transformers.DistinctRootEntity).List();
             }
