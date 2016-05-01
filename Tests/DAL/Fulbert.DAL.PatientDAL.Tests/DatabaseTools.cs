@@ -1,7 +1,10 @@
-﻿using Fulbert.Commons.Models.Entities;
+﻿using Fulbert.Commons.Models.Business;
+using Fulbert.Commons.Models.Entities;
 using Fulbert.Tests.Common;
 using NHibernate;
 using NHibernate.Criterion;
+using NHibernate.Linq;
+using NHibernate.Transform;
 using System;
 using System.Collections.Generic;
 
@@ -22,17 +25,15 @@ namespace Fulbert.DAL.PatientDAL.Tests
         public static IList<PatientEntity> GetPatientFromDatabase(string firstName, string lastName)
         {
             ISessionFactory sessionForTests = NHibernateConfig.CreateSessionFactory(Database.TEST_DB_NAME);
+
             using (ISession session = sessionForTests.OpenSession())
             {
-                //return session.QueryOver<PatientEntity>().Where(k => k.FirstName == firstName && k.LastName == lastName).Fetch(x => x.Appointments).Eager.List();
-                //return session.QueryOver<PatientEntity>()
-                //  .WhereRestrictionOn(x => x.FirstName).IsLike(firstName)
-                // .Fetch(x => x.Appointments).Eager.List();
-                return session.CreateCriteria<PatientEntity>()
-                    .Add(Expression.Eq("FirstName", firstName))
-                    .Add(Expression.Eq("LastName", lastName))
-                    .SetFetchMode("Appointments", FetchMode.Eager)
-                    .List<PatientEntity>();
+                //var searchedPatient = from patients in session.Query<Patient>()
+                //                    where patients.FirstName = firstName && patients.LastName == lastName
+                //                  select patients;
+
+                return session.QueryOver<PatientEntity>().Where(k => k.FirstName == firstName && k.LastName == lastName)
+                    .Fetch(x => x.Appointments).Eager.TransformUsing(Transformers.DistinctRootEntity).List();
             }
         }
 
