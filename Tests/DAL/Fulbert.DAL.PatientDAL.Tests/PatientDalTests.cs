@@ -172,7 +172,7 @@ namespace Fulbert.DAL.PatientDAL.Tests
             // Assert
             IList<AppointmentEntity> appointments = DatabaseTools.GetAllAppointments();
             appointments.OrderBy(x => x.Date);
-            Assert.AreEqual(appointments.Count, 2);
+            Assert.That(appointments.Count, Is.EqualTo(2));
             Assert.AreEqual(appointments.First().Date.Date, olderAppointmentDate.Date);
             Assert.AreEqual(appointments.Last().Date.Date, newerAppointmentDate.Date);
 
