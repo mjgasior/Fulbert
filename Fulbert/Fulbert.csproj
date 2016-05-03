@@ -133,6 +133,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\Fulbert.Modules.PatientModule\Fulbert.Modules.PatientModule.csproj">
+      <Project>{3a2cf97c-6b94-461a-9d59-a7d4c7bad8d7}</Project>
+      <Name>Fulbert.Modules.PatientModule</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
