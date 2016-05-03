@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Fulber.Modules.PatientModule")]
+[assembly: AssemblyTitle("Fulbert.Modules.PatientModule")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Fulber.Modules.PatientModule")]
+[assembly: AssemblyProduct("Fulbert.Modules.PatientModule")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0649de5d-b812-4098-979e-2062fcd262be")]
+[assembly: Guid("3a2cf97c-6b94-461a-9d59-a7d4c7bad8d7")]
 
 // Version information for an assembly consists of the following four values:
 //
