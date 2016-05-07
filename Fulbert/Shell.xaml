@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Shell" Height="300" Width="300">
     <Grid>
-        <Label>
-            Welcome to Fulbert app!
-        </Label>
+        <Grid>
+            <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.MAINCONTENT}"/>
+        </Grid>
     </Grid>
 </Window>

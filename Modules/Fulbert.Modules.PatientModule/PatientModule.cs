@@ -1,10 +1,15 @@
-﻿using Prism.Modularity;
+﻿using Fulbert.Infrastructure.Concrete.Mvvm;
 
 namespace Fulbert.Modules.PatientModule
 {
-    public class PatientModule : IModule
+    public class PatientModule : BaseModule
     {
-        public void Initialize()
+        public override void Initialization()
+        {
+                        
+        }
+
+        public override void TypeRegistration()
         {
             
         }
