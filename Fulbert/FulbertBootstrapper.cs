@@ -5,6 +5,7 @@ using Prism.Modularity;
 using System;
 using Fulbert.ViewModels;
 using Fulbert.Modules.PatientModule;
+using Fulbert.Presentation.ActionsModule;
 
 namespace Fulbert
 {
@@ -26,6 +27,7 @@ namespace Fulbert
 
         protected override void ConfigureModuleCatalog()
         {
+            RegisterModule(typeof(ActionsModule));
             RegisterModule(typeof(PatientModule));
         }
         #endregion Overrides

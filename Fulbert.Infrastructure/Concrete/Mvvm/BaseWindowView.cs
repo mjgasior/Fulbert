@@ -1,9 +1,9 @@
 ﻿using Fulbert.Infrastructure.Abstract.Mvvm;
-using System.Windows.Controls;
+using System.Windows;
 
 namespace Fulbert.Infrastructure.Concrete.Mvvm
 {
-    public class BaseView : UserControl, IView
+    public class BaseWindowView : Window, IView
     {
         public IViewModel ViewModel
         {
@@ -17,7 +17,7 @@ namespace Fulbert.Infrastructure.Concrete.Mvvm
             }
         }
 
-        public BaseView(IViewModel viewModel)
+        public BaseWindowView(IViewModel viewModel)
         {
             ViewModel = viewModel;
         }

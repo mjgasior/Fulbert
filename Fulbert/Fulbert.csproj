@@ -142,6 +142,10 @@
       <Project>{3a2cf97c-6b94-461a-9d59-a7d4c7bad8d7}</Project>
       <Name>Fulbert.Modules.PatientModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Presentation\Fulbert.Presentation.ActionsModule\Fulbert.Presentation.ActionsModule.csproj">
+      <Project>{034b79a3-1b4b-40f4-8f1b-2fbe834258e6}</Project>
+      <Name>Fulbert.Presentation.ActionsModule</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

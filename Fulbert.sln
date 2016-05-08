@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulbert.Modules.PatientModu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulbert.Infrastructure", "Fulbert.Infrastructure\Fulbert.Infrastructure.csproj", "{95FA0E4F-7269-4291-9859-BE3A5381D1FF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{574E3F33-29B8-49A5-838F-9BD3BA7E6A85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulbert.Presentation.ActionsModule", "Presentation\Fulbert.Presentation.ActionsModule\Fulbert.Presentation.ActionsModule.csproj", "{034B79A3-1B4B-40F4-8F1B-2FBE834258E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,10 @@ Global
 		{95FA0E4F-7269-4291-9859-BE3A5381D1FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95FA0E4F-7269-4291-9859-BE3A5381D1FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95FA0E4F-7269-4291-9859-BE3A5381D1FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{034B79A3-1B4B-40F4-8F1B-2FBE834258E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{034B79A3-1B4B-40F4-8F1B-2FBE834258E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{034B79A3-1B4B-40F4-8F1B-2FBE834258E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{034B79A3-1B4B-40F4-8F1B-2FBE834258E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,5 +96,6 @@ Global
 		{2EEF0440-3CDD-4812-A3AA-A676F93378E2} = {5A204D99-E45D-491B-B5A8-9C598752E461}
 		{EB4F8AF5-72B4-4DFD-B77B-0B178045A797} = {CBAAEC5E-C2CB-4956-BDE0-429FF3480E47}
 		{3A2CF97C-6B94-461A-9D59-A7D4C7BAD8D7} = {1EF34D50-6298-4142-8E1B-509C7EF4E9D9}
+		{034B79A3-1B4B-40F4-8F1B-2FBE834258E6} = {574E3F33-29B8-49A5-838F-9BD3BA7E6A85}
 	EndGlobalSection
 EndGlobal
