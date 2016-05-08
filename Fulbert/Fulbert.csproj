@@ -134,6 +134,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fulbert.Infrastructure\Fulbert.Infrastructure.csproj">
+      <Project>{95fa0e4f-7269-4291-9859-be3a5381d1ff}</Project>
+      <Name>Fulbert.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\Fulbert.Modules.PatientModule\Fulbert.Modules.PatientModule.csproj">
       <Project>{3a2cf97c-6b94-461a-9d59-a7d4c7bad8d7}</Project>
       <Name>Fulbert.Modules.PatientModule</Name>
