@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulbert.Presentation.ActionsModule", "Presentation\Fulbert.Presentation.ActionsModule\Fulbert.Presentation.ActionsModule.csproj", "{034B79A3-1B4B-40F4-8F1B-2FBE834258E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulbert.Presentation.Localization", "Presentation\Fulbert.Presentation.Localization\Fulbert.Presentation.Localization.csproj", "{D7E634BE-A8B0-4E90-80C6-D6D5F2491236}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{034B79A3-1B4B-40F4-8F1B-2FBE834258E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{034B79A3-1B4B-40F4-8F1B-2FBE834258E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{034B79A3-1B4B-40F4-8F1B-2FBE834258E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7E634BE-A8B0-4E90-80C6-D6D5F2491236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E634BE-A8B0-4E90-80C6-D6D5F2491236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E634BE-A8B0-4E90-80C6-D6D5F2491236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E634BE-A8B0-4E90-80C6-D6D5F2491236}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,5 +103,6 @@ Global
 		{EB4F8AF5-72B4-4DFD-B77B-0B178045A797} = {CBAAEC5E-C2CB-4956-BDE0-429FF3480E47}
 		{3A2CF97C-6B94-461A-9D59-A7D4C7BAD8D7} = {1EF34D50-6298-4142-8E1B-509C7EF4E9D9}
 		{034B79A3-1B4B-40F4-8F1B-2FBE834258E6} = {574E3F33-29B8-49A5-838F-9BD3BA7E6A85}
+		{D7E634BE-A8B0-4E90-80C6-D6D5F2491236} = {574E3F33-29B8-49A5-838F-9BD3BA7E6A85}
 	EndGlobalSection
 EndGlobal

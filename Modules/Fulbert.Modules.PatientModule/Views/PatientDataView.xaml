@@ -7,9 +7,34 @@
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
-    <Grid Background="Lime" Margin="10">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Background" Value="Lime"/>
+            </Style>
+
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Background" Value="Lime"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <UniformGrid Columns="2" Background="Purple">
         <Label>
-            Welcome to Fulbert Medical App - Add a patient view!
+            Patient first name
         </Label>
-    </Grid>
+        <TextBox>
+            
+        </TextBox>
+        <Label>
+            Patient last name
+        </Label>
+        <TextBox>
+
+        </TextBox>
+    </UniformGrid>
 </mvvm:BaseView>
+
+    
