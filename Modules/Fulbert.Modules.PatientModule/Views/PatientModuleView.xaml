@@ -7,10 +7,13 @@
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"
     xmlns:prism="http://www.codeplex.com/prism"
     xmlns:inf="clr-namespace:Fulbert.Infrastructure;assembly=Fulbert.Infrastructure"
+    xmlns:loc="http://wpflocalizeextension.codeplex.com"
+      loc:ResxLocalizationProvider.DefaultAssembly="Fulbert.Presentation.Localization"
+      loc:ResxLocalizationProvider.DefaultDictionary="Labels"
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
     
     <UniformGrid Columns="1">
-        <!--<Label Content="{lex:Loc PatientModule}"/>-->
+        <Label Content="{loc:Loc PatientModule}"/>
         <Button Margin="10" Command="{Binding SaveUserCommand}">
             Save user
         </Button>
