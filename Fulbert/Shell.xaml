@@ -7,6 +7,13 @@
         xmlns:inf="clr-namespace:Fulbert.Infrastructure;assembly=Fulbert.Infrastructure"
         xmlns:local="clr-namespace:Fulbert"
         xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"
+                                 
+        xmlns:loc="http://wpflocalizeextension.codeplex.com"
+          loc:ResxLocalizationProvider.DefaultAssembly="Fulbert"
+          loc:ResxLocalizationProvider.DefaultDictionary="Labels"
         mc:Ignorable="d" Title="Shell" Height="300" Width="300">
-    <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.MAINCONTENT}"/>
+    <UniformGrid Columns="1">
+        <Label Content="{loc:Loc MainScreen}"/>
+        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.MAINCONTENT}"/>
+    </UniformGrid>
 </mvvm:BaseWindowView>
