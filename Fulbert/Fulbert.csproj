@@ -101,11 +101,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FulbertBootstrapper.cs" />
-    <Compile Include="Resources\Labels.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Labels.resx</DependentUpon>
-    </Compile>
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -129,10 +124,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Labels.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Labels.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -162,6 +153,10 @@
     <ProjectReference Include="..\Presentation\Fulbert.Presentation.ActionsModule\Fulbert.Presentation.ActionsModule.csproj">
       <Project>{034b79a3-1b4b-40f4-8f1b-2fbe834258e6}</Project>
       <Name>Fulbert.Presentation.ActionsModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Presentation\Fulbert.Presentation.Localization\Fulbert.Presentation.Localization.csproj">
+      <Project>{d7e634be-a8b0-4e90-80c6-d6d5f2491236}</Project>
+      <Name>Fulbert.Presentation.Localization</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
