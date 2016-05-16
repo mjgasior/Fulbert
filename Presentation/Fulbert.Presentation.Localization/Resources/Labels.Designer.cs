@@ -61,6 +61,15 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edytuj to.
+        /// </summary>
+        public static string EditLabel {
+            get {
+                return ResourceManager.GetString("EditLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moduł pacjenta.
         /// </summary>
         public static string PatientModule {
