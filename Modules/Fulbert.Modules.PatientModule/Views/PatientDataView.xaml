@@ -5,6 +5,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:Fulbert.Modules.PatientModule.Views"
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+          lex:LocalizeDictionary.DesignCulture="pl-PL"
+          lex:ResxLocalizationProvider.DefaultAssembly="Fulbert.Presentation.Localization"
+          lex:ResxLocalizationProvider.DefaultDictionary="Labels"
+               
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
@@ -22,18 +27,14 @@
     </UserControl.Resources>
     
     <UniformGrid Columns="2" Background="Purple">
-        <Label>
-            Patient first name
-        </Label>
-        <TextBox>
-            
-        </TextBox>
-        <Label>
-            Patient last name
-        </Label>
-        <TextBox>
+        <Label Content="{lex:Loc PatientData}"/>
+        <Label />
+        
+        <Label Content="{lex:Loc FirstName}"/>
+        <TextBox/>
 
-        </TextBox>
+        <Label Content="{lex:Loc LastName}"/>
+        <TextBox/>
     </UniformGrid>
 </mvvm:BaseView>
 

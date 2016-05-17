@@ -11,9 +11,6 @@
         xmlns:loc="http://wpflocalizeextension.codeplex.com"
           loc:ResxLocalizationProvider.DefaultAssembly="Fulbert.Presentation.Localization"
           loc:ResxLocalizationProvider.DefaultDictionary="Labels"
-        mc:Ignorable="d" Title="Shell" Height="300" Width="300">
-    <UniformGrid Columns="1">
-        <Label Content="{loc:Loc PatientModule}"/>
-        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.MAINCONTENT}"/>
-    </UniformGrid>
+        mc:Ignorable="d" Title="{loc:Loc AppName}" Height="300" Width="300">
+    <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.MAINCONTENT}"/>
 </mvvm:BaseWindowView>

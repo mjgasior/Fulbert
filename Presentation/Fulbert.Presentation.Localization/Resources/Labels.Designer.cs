@@ -61,11 +61,47 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edytuj to.
+        ///   Looks up a localized string similar to Dodaj nowego pacjenta.
         /// </summary>
-        public static string EditLabel {
+        public static string AddNewPatient {
             get {
-                return ResourceManager.GetString("EditLabel", resourceCulture);
+                return ResourceManager.GetString("AddNewPatient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fulbert - aplikacja osobistej mini przychodni.
+        /// </summary>
+        public static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imię.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwisko.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dane personalne pacjenta.
+        /// </summary>
+        public static string PatientData {
+            get {
+                return ResourceManager.GetString("PatientData", resourceCulture);
             }
         }
         
