@@ -6,9 +6,9 @@
     xmlns:prism="http://www.codeplex.com/prism"
                
     xmlns:lex="http://wpflocalizeextension.codeplex.com"
-          lex:LocalizeDictionary.DesignCulture="pl-PL"
-          lex:ResxLocalizationProvider.DefaultAssembly="Fulbert.Presentation.Localization"
-          lex:ResxLocalizationProvider.DefaultDictionary="Labels"    
+      lex:LocalizeDictionary.DesignCulture="pl-PL"
+      lex:ResxLocalizationProvider.DefaultAssembly="Fulbert.Presentation.Localization"
+      lex:ResxLocalizationProvider.DefaultDictionary="Labels"    
     
     xmlns:local="clr-namespace:Fulbert.Modules.PatientModule.Views"
     xmlns:inf="clr-namespace:Fulbert.Infrastructure;assembly=Fulbert.Infrastructure"
@@ -23,5 +23,5 @@
         </UniformGrid>
         <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PATIENTMODULECONTENT}"/>
     </StackPanel>
-    
+
 </mvvm:BaseView>

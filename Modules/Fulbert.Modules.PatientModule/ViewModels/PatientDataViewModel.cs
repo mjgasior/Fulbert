@@ -1,7 +1,7 @@
-﻿using System;
-using Fulbert.Commons.Abstract.BLL;
+﻿using Fulbert.Commons.Abstract.BLL;
 using Fulbert.Commons.Models.Business;
 using Fulbert.Modules.PatientModule.Abstract.ViewModels;
+using Prism.Commands;
 using Prism.Mvvm;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
@@ -17,12 +17,25 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             get { return _patientModel; }
             set { SetProperty(ref _patientModel, value); }
         }
+
+        public DelegateCommand SavePatientDataCommand { get; private set; }
         #endregion Fields & Properties
 
         public PatientDataViewModel(IPatientService patientService)
         {
             PatientService = patientService;
             PatientModel = new Patient();
+            SavePatientDataCommand = new DelegateCommand(OnSavePatientData, CanSavePatientData);
+        }
+
+        private bool CanSavePatientData()
+        {
+            return true; // Place for validation
+        }
+
+        private void OnSavePatientData()
+        {
+            
         }
     }
 }

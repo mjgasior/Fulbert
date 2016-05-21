@@ -19,7 +19,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
 
         private void Initialize()
         {
-            //Patients = PatientService.GetAllPatients();
+            Patients = PatientService.GetAllPatients();
         }
     }
 }

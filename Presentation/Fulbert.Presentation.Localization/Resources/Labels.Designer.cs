@@ -131,5 +131,14 @@ namespace Fulbert.Presentation.Localization.Resources {
                 return ResourceManager.GetString("PatientModule", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapisz dane pacjenta.
+        /// </summary>
+        public static string SavePatientData {
+            get {
+                return ResourceManager.GetString("SavePatientData", resourceCulture);
+            }
+        }
     }
 }
