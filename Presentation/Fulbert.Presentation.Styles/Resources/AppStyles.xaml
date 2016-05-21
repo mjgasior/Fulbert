@@ -2,50 +2,97 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <SolidColorBrush Color="#fff" x:Key="APP_WHITE"/>
-    <SolidColorBrush Color="#efefef" x:Key="APP_ALMOST_WHITE"/>
-    <SolidColorBrush Color="#e0e0e0" x:Key="APP_BRIGHT_GRAY"/>
-    <SolidColorBrush Color="#909090" x:Key="APP_GRAY"/>
-    <SolidColorBrush Color="#191919" x:Key="APP_ALMOST_BLACK"/>
+    <Color x:Key="APP_COLOR_ALMOST_WHITE">#efefef</Color>
+    <Color x:Key="APP_COLOR_ALMOST_BLACK">#191919</Color>
+    <Color x:Key="APP_COLOR_THEME_BRIGHT">#c1e0ff</Color>
 
-    <FontFamily x:Key="APP_FONT_FAMILY">Segoe UI Light</FontFamily>
-    <sys:Double x:Key="APP_FONT_SIZE">16</sys:Double>
+    <SolidColorBrush Color="#fff" x:Key="APP_BRUSH_WHITE"/>
+    <SolidColorBrush Color="{StaticResource APP_COLOR_ALMOST_WHITE}" x:Key="APP_BRUSH_ALMOST_WHITE"/>
+    <SolidColorBrush Color="#e0e0e0" x:Key="APP_BRUSH_BRIGHT_GRAY"/>
+    <SolidColorBrush Color="#909090" x:Key="APP_BRUSH_GRAY"/>
+    <SolidColorBrush Color="{StaticResource APP_COLOR_ALMOST_BLACK}" x:Key="APP_BRUSH_ALMOST_BLACK"/>
+    <SolidColorBrush Color="#39f" x:Key="APP_BRUSH_THEME_BLUE"/>
+
+    <FontFamily x:Key="APP_BRUSH_FONT_FAMILY">Segoe UI Light</FontFamily>
+    <sys:Double x:Key="APP_BRUSH_FONT_SIZE">16</sys:Double>
 
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Margin" Value="10"/>
-        <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
-        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
-        <Setter Property="Background" Value="{StaticResource APP_BRIGHT_GRAY}"/>
+        <Setter Property="FontSize" Value="{StaticResource APP_BRUSH_FONT_SIZE}"/>
+        <Setter Property="FontFamily" Value="{StaticResource APP_BRUSH_FONT_FAMILY}"/>
+        <Setter Property="Background" Value="{StaticResource APP_BRUSH_BRIGHT_GRAY}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
     <Style TargetType="{x:Type Label}">
-        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="{StaticResource APP_BRUSH_FONT_FAMILY}"/>
+        <Setter Property="FontSize" Value="{StaticResource APP_BRUSH_FONT_SIZE}"/>
+        <Setter Property="Background" Value="{StaticResource APP_BRUSH_BRIGHT_GRAY}"/>
         <Setter Property="Margin" Value="10"/>
-        <Setter Property="Background" Value="{StaticResource APP_BRIGHT_GRAY}"/>
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="labelAppHeader">
-        <Setter Property="Background" Value="{StaticResource APP_GRAY}"/>
-        <Setter Property="Foreground" Value="{StaticResource APP_ALMOST_WHITE}"/>
-        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
+        <Setter Property="Background" Value="{StaticResource APP_BRUSH_GRAY}"/>
+        <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_ALMOST_WHITE}"/>
+        <Setter Property="FontFamily" Value="{StaticResource APP_BRUSH_FONT_FAMILY}"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Padding" Value="16"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="labelHeaderStyle" BasedOn="{StaticResource labelAppHeader}">
-        <Setter Property="Background" Value="{StaticResource APP_WHITE}"/>
-        <Setter Property="Foreground" Value="{StaticResource APP_ALMOST_BLACK}"/>
-        <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
+        <Setter Property="Background" Value="{StaticResource APP_BRUSH_WHITE}"/>
+        <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_ALMOST_BLACK}"/>
+        <Setter Property="FontSize" Value="{StaticResource APP_BRUSH_FONT_SIZE}"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" x:Key="labelButtonStyle">
+        <Setter Property="FontFamily" Value="{StaticResource APP_BRUSH_FONT_FAMILY}"/>
+        <Setter Property="FontSize" Value="{StaticResource APP_BRUSH_FONT_SIZE}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="8,5,8,9"/>
     </Style>
 
     <Style TargetType="{x:Type Button}">
-        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
-        <Setter Property="Background" Value="{StaticResource APP_BRIGHT_GRAY}"/>
-        <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
+        <Setter Property="Background" Value="{StaticResource APP_BRUSH_THEME_BLUE}"/>
+        <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_ALMOST_WHITE}"/>
         <Setter Property="Margin" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="borderContainer" BorderThickness="2" BorderBrush="{TemplateBinding Background}" Background="{TemplateBinding Background}">
+
+                        <Label x:Name="labelContent" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" 
+                               Style="{StaticResource labelButtonStyle}" Background="Transparent"/>
+                        
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="borderContainer" Storyboard.TargetProperty="Background.Color" 
+                                                        To="{StaticResource APP_COLOR_THEME_BRIGHT}" Duration="0:0:0.2"/>
+                                        <ColorAnimation Storyboard.TargetName="labelContent" Storyboard.TargetProperty="Foreground.Color" 
+                                                        To="{StaticResource APP_COLOR_ALMOST_BLACK}" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="borderContainer" Storyboard.TargetProperty="Background.Color" 
+                                                        To="{StaticResource APP_COLOR_ALMOST_WHITE}" Duration="0:0:0.2"/>
+                                        <ColorAnimation Storyboard.TargetName="labelContent" Storyboard.TargetProperty="Foreground.Color" 
+                                                        To="{StaticResource APP_COLOR_ALMOST_BLACK}" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary> 

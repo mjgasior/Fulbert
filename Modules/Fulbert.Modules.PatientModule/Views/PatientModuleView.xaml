@@ -17,7 +17,7 @@
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
     <StackPanel>
-        <UniformGrid Columns="5">
+        <UniformGrid Columns="5" Background="{StaticResource APP_BRUSH_ALMOST_WHITE}">
             <Button Command="{Binding NavigateCommand}" CommandParameter="{x:Type local:PatientDataView}" Content="{lex:Loc AddNewPatient}"/>
             <Button Command="{Binding NavigateCommand}" CommandParameter="{x:Type local:PatientsListView}" Content="{lex:Loc PatientList}"/> 
         </UniformGrid>
