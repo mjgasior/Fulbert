@@ -61,7 +61,7 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dodaj nowego pacjenta.
+        ///   Looks up a localized string similar to Nowy pacjent.
         /// </summary>
         public static string AddNewPatient {
             get {

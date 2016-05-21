@@ -8,8 +8,7 @@ namespace Fulbert
     /// </summary>
     public partial class Shell : BaseWindowView
     {
-        public Shell(IShellViewModel shellViewModel)
-            : base(shellViewModel)
+        public Shell(IShellViewModel shellViewModel) : base(shellViewModel)
         {
             InitializeComponent();
         }
