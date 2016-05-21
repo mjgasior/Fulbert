@@ -1,4 +1,5 @@
 ﻿using Fulbert.Commons.Utils;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -6,11 +7,24 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Fulbert.BLL.Services.Tests")]
 namespace Fulbert.Commons.Models.Business
 {
-    public class Patient
+    public class Patient : BindableBase
     {
         public Guid Id { get; private set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+
+        private string _firstName;
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { SetProperty(ref _firstName, value); }
+        }
+
+        private string _lastName;
+        public string LastName
+        {
+            get { return _lastName; }
+            set { SetProperty(ref _lastName, value); }
+        }
+
         public ICollection<Appointment> Appointments { get; set; }
 
         internal Patient(Guid id)

@@ -1,7 +1,9 @@
 ﻿using Fulbert.Commons.Abstract.BLL;
 using Fulbert.Commons.Models.Business;
 using Fulbert.Modules.PatientModule.Abstract.ViewModels;
+using Fulbert.Presentation.Localization.Resources;
 using Prism.Commands;
+using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
@@ -19,6 +21,8 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         }
 
         public DelegateCommand SavePatientDataCommand { get; private set; }
+
+        public InteractionRequest<INotification> NotificationRequest { get; private set; }
         #endregion Fields & Properties
 
         public PatientDataViewModel(IPatientService patientService)
@@ -26,6 +30,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             PatientService = patientService;
             PatientModel = new Patient();
             SavePatientDataCommand = new DelegateCommand(OnSavePatientData, CanSavePatientData);
+            NotificationRequest = new InteractionRequest<INotification>();
         }
 
         private bool CanSavePatientData()
@@ -35,7 +40,8 @@ namespace Fulbert.Modules.PatientModule.ViewModels
 
         private void OnSavePatientData()
         {
-            
+            PatientService.AddNewPatient(PatientModel);
+            NotificationRequest.Raise(new Confirmation { Content = Labels.SavedNewPatientData, Title = Labels.Saved });
         }
     }
 }

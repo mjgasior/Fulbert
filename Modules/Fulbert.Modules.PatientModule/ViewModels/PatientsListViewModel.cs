@@ -3,6 +3,7 @@ using Fulbert.Commons.Models.Business;
 using Fulbert.Modules.PatientModule.Abstract.ViewModels;
 using Prism.Mvvm;
 using System.Collections.Generic;
+using System;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
@@ -20,6 +21,12 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         private void Initialize()
         {
             Patients = PatientService.GetAllPatients();
+        }
+
+        internal void Refresh()
+        {
+            Initialize();
+            OnPropertyChanged(() => Patients);
         }
     }
 }

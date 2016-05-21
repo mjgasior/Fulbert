@@ -3,7 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    
+    xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+               
     xmlns:lex="http://wpflocalizeextension.codeplex.com"
       lex:LocalizeDictionary.DesignCulture="pl-PL"
       lex:ResxLocalizationProvider.DefaultAssembly="Fulbert.Presentation.Localization"
@@ -11,6 +13,16 @@
                
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"           
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+
+    <i:Interaction.Triggers>
+        <!--
+            Need to be styled like in the link below:
+            https://github.com/PrismLibrary/Prism-Samples-Wpf/blob/master/InteractivityQuickstart/InteractivityQuickstart/Views/InteractionRequestView.xaml
+        -->
+        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest, Mode=OneWay}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -24,7 +36,7 @@
                 <Setter Property="Background" Value="Lime"/>
             </Style>
 
-            <Style TargetType="{x:Type Label}" x:Key="labelHeaderStyle"> 
+            <Style TargetType="{x:Type Label}" x:Key="labelHeaderStyle">
                 <Setter Property="Background" Value="Gray"/>
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="FontFamily" Value="Segoe UI Light"/>
@@ -41,10 +53,10 @@
 
         <UniformGrid Columns="2" Background="Purple" DataContext="{Binding PatientModel}">
             <Label Content="{lex:Loc FirstName}"/>
-            <TextBox/>
+            <TextBox Text="{Binding FirstName}"/>
 
             <Label Content="{lex:Loc LastName}"/>
-            <TextBox/>
+            <TextBox Text="{Binding LastName}"/>
         </UniformGrid>
     </StackPanel>
 </mvvm:BaseView>

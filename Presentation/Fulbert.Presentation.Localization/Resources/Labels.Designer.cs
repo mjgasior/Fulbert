@@ -133,6 +133,24 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zapisano.
+        /// </summary>
+        public static string Saved {
+            get {
+                return ResourceManager.GetString("Saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapisano dane nowego pacjenta.
+        /// </summary>
+        public static string SavedNewPatientData {
+            get {
+                return ResourceManager.GetString("SavedNewPatientData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zapisz dane pacjenta.
         /// </summary>
         public static string SavePatientData {

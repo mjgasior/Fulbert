@@ -141,6 +141,12 @@
   <data name="PatientModule" xml:space="preserve">
     <value>Moduł pacjenta</value>
   </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Zapisano</value>
+  </data>
+  <data name="SavedNewPatientData" xml:space="preserve">
+    <value>Zapisano dane nowego pacjenta</value>
+  </data>
   <data name="SavePatientData" xml:space="preserve">
     <value>Zapisz dane pacjenta</value>
   </data>
