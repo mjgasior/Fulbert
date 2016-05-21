@@ -1,7 +1,7 @@
-﻿using Fulbert.Commons.Utils;
+﻿using Fulbert.Utils;
 using System;
 
-namespace Fulbert.Commons.Models.Business
+namespace Fulbert.BLL.ApplicationModels.Models
 {
     public class Appointment
     {

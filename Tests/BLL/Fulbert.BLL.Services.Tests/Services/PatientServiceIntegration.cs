@@ -1,5 +1,4 @@
 ﻿using Fulbert.BLL.Services.Services;
-using Fulbert.Commons.Models.Business;
 using Fulbert.DAL.PatientDAL;
 using Fulbert.Tests.Common;
 using NHibernate;
@@ -8,7 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Fulbert.DAL.PatientDAL.Tests;
-using Fulbert.Commons.Models.Entities;
+using Fulbert.BLL.ApplicationModels.Models;
+using Fulbert.DAL.RepositoryModels.Models;
 
 namespace Fulbert.BLL.Services.Tests.Services
 {

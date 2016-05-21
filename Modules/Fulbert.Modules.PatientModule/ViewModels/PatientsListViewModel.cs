@@ -1,9 +1,8 @@
-﻿using Fulbert.Commons.Abstract.BLL;
-using Fulbert.Commons.Models.Business;
+﻿using Fulbert.BLL.ApplicationModels.Abstract;
+using Fulbert.BLL.ApplicationModels.Models;
 using Fulbert.Modules.PatientModule.Abstract.ViewModels;
 using Prism.Mvvm;
 using System.Collections.Generic;
-using System;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {

@@ -1,4 +1,4 @@
-﻿namespace Fulbert.Commons.Utils
+﻿namespace Fulbert.Utils
 {
     public class Formatting
     {

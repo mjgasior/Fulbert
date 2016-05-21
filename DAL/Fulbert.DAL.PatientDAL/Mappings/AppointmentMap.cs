@@ -1,5 +1,5 @@
 ﻿using FluentNHibernate.Mapping;
-using Fulbert.Commons.Models.Entities;
+using Fulbert.DAL.RepositoryModels.Models;
 
 namespace Fulbert.DAL.PatientDAL.Mappings
 {

@@ -1,5 +1,5 @@
-﻿using Fulbert.Commons.Abstract.BLL;
-using Fulbert.Commons.Models.Business;
+﻿using Fulbert.BLL.ApplicationModels.Abstract;
+using Fulbert.BLL.ApplicationModels.Models;
 using Fulbert.Infrastructure.Abstract.Mvvm;
 using System.Collections.Generic;
 

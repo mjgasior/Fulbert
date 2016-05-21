@@ -1,13 +1,13 @@
 ﻿using NUnit.Framework;
 using Rhino.Mocks;
 using Fulbert.BLL.Services.Services;
-using Fulbert.Commons.Abstract.BLL;
-using Fulbert.Commons.Abstract.DAL;
-using Fulbert.Commons.Models.Business;
 using System;
-using Fulbert.Commons.Models.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using Fulbert.BLL.ApplicationModels.Abstract;
+using Fulbert.DAL.RepositoryModels.Abstract;
+using Fulbert.DAL.RepositoryModels.Models;
+using Fulbert.BLL.ApplicationModels.Models;
 
 namespace Fulbert.BLL.Services.Tests.Services
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Fulbert.Commons.Models.Business;
+using Fulbert.BLL.ApplicationModels.Models;
 
-namespace Fulbert.Commons.Abstract.BLL
+namespace Fulbert.BLL.ApplicationModels.Abstract
 {
     public interface IPatientService
     {

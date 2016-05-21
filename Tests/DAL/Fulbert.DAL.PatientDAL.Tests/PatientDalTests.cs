@@ -1,5 +1,5 @@
-﻿using Fulbert.Commons.Abstract.DAL;
-using Fulbert.Commons.Models.Entities;
+﻿using Fulbert.DAL.RepositoryModels.Abstract;
+using Fulbert.DAL.RepositoryModels.Models;
 using Fulbert.Tests.Common;
 using NUnit.Framework;
 using System;

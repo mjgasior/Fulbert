@@ -1,11 +1,11 @@
 ﻿using System;
-using Fulbert.Commons.Abstract.BLL;
-using Fulbert.Commons.Abstract.DAL;
-using Fulbert.Commons.Models.Business;
-using Fulbert.Commons.Models.Entities;
 using AutoMapper;
 using System.Linq;
 using System.Collections.Generic;
+using Fulbert.DAL.RepositoryModels.Abstract;
+using Fulbert.DAL.RepositoryModels.Models;
+using Fulbert.BLL.ApplicationModels.Models;
+using Fulbert.BLL.ApplicationModels.Abstract;
 
 namespace Fulbert.BLL.Services.Services
 {

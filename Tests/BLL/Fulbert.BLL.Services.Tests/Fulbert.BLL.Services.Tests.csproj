@@ -67,6 +67,10 @@
     <Compile Include="Services\PatientServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BLL\Fulbert.BLL.ApplicationModels\Fulbert.BLL.ApplicationModels.csproj">
+      <Project>{F553BD16-E276-41E2-948A-96F9E0EA6E05}</Project>
+      <Name>Fulbert.BLL.ApplicationModels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\BLL\Fulbert.BLL.Services\Fulbert.BLL.Services.csproj">
       <Project>{2eef0440-3cdd-4812-a3aa-a676f93378e2}</Project>
       <Name>Fulbert.BLL.Services</Name>
@@ -75,9 +79,9 @@
       <Project>{0b6c3ed5-7d80-42a2-a80a-d9ebb486555c}</Project>
       <Name>Fulbert.DAL.PatientDAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Fulbert.Commons\Fulbert.Commons.csproj">
-      <Project>{1d4e2a9d-f484-445d-8d5a-5110e6dadbe9}</Project>
-      <Name>Fulbert.Commons</Name>
+    <ProjectReference Include="..\..\..\DAL\Fulbert.DAL.RepositoryModels\Fulbert.DAL.RepositoryModels.csproj">
+      <Project>{26e3183e-12b2-47e9-bc70-bfaa7f3560cc}</Project>
+      <Name>Fulbert.DAL.RepositoryModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DAL\Fulbert.DAL.PatientDAL.Tests\Fulbert.DAL.PatientDAL.Tests.csproj">
       <Project>{4a0ebd74-6a1f-482a-a63d-3285a6322b44}</Project>

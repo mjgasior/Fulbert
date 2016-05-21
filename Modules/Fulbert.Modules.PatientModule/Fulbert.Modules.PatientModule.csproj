@@ -103,9 +103,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Fulbert.Commons\Fulbert.Commons.csproj">
-      <Project>{1d4e2a9d-f484-445d-8d5a-5110e6dadbe9}</Project>
-      <Name>Fulbert.Commons</Name>
+    <ProjectReference Include="..\..\BLL\Fulbert.BLL.ApplicationModels\Fulbert.BLL.ApplicationModels.csproj">
+      <Project>{f553bd16-e276-41e2-948a-96f9e0ea6e05}</Project>
+      <Name>Fulbert.BLL.ApplicationModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Fulbert.Infrastructure\Fulbert.Infrastructure.csproj">
       <Project>{95fa0e4f-7269-4291-9859-be3a5381d1ff}</Project>

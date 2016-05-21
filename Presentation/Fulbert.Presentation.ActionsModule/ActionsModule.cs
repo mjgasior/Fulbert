@@ -1,9 +1,9 @@
 ﻿using Microsoft.Practices.Unity;
 using Fulbert.Infrastructure.Concrete.Mvvm;
-using Fulbert.Commons.Abstract.BLL;
 using Fulbert.BLL.Services.Services;
-using Fulbert.Commons.Abstract.DAL;
+using Fulbert.BLL.ApplicationModels.Abstract;
 using Fulbert.DAL.PatientDAL;
+using Fulbert.DAL.RepositoryModels.Abstract;
 
 namespace Fulbert.Presentation.ActionsModule
 {

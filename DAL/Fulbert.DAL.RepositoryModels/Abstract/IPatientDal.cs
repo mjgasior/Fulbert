@@ -1,8 +1,8 @@
-﻿using Fulbert.Commons.Models.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
+using Fulbert.DAL.RepositoryModels.Models;
 
-namespace Fulbert.Commons.Abstract.DAL
+namespace Fulbert.DAL.RepositoryModels.Abstract
 {
     public interface IPatientDal
     {

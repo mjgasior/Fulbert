@@ -1,7 +1,7 @@
-﻿using Fulbert.Commons.Utils;
+﻿using Fulbert.Utils;
 using System;
 
-namespace Fulbert.Commons.Models.Entities
+namespace Fulbert.DAL.RepositoryModels.Models
 {
     public class AppointmentEntity : BaseEntity
     {
