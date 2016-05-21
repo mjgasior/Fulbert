@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Fulbert.Modules.PatientModule.Abstract.ViewModels
 {
-    public interface IPatientsListViewModel : IViewModel
+    public interface IPatientsListViewModel : IActivableViewModel
     {
         IPatientService PatientService { get; }
         ICollection<Patient> Patients { get; }

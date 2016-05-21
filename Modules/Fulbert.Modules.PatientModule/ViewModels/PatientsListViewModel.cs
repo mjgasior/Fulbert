@@ -14,18 +14,17 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         public PatientsListViewModel(IPatientService patientService)
         {
             PatientService = patientService;
-            Initialize();
         }
 
-        private void Initialize()
+        public void Activate()
         {
             Patients = PatientService.GetAllPatients();
+            OnPropertyChanged(() => Patients);
         }
 
-        internal void Refresh()
+        public void Deactivate()
         {
-            Initialize();
-            OnPropertyChanged(() => Patients);
+            
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<mvvm:BaseView x:Class="Fulbert.Modules.PatientModule.Views.PatientsListView"
+﻿<mvvm:BaseActivableView x:Class="Fulbert.Modules.PatientModule.Views.PatientsListView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,6 +14,6 @@
 
     <DataGrid ItemsSource="{Binding Patients}" AutoGenerateColumns="True"/>
 
-</mvvm:BaseView>
+</mvvm:BaseActivableView>
 
     

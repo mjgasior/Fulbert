@@ -68,8 +68,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\Mvvm\IActivableViewModel.cs" />
     <Compile Include="Abstract\Mvvm\IView.cs" />
     <Compile Include="Abstract\Mvvm\IViewModel.cs" />
+    <Compile Include="Concrete\Mvvm\BaseActivableView.cs" />
     <Compile Include="Concrete\Mvvm\BaseModule.cs" />
     <Compile Include="Concrete\Mvvm\BaseView.cs" />
     <Compile Include="Concrete\Mvvm\BaseWindowView.cs" />
