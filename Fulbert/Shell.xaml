@@ -11,6 +11,22 @@
         xmlns:loc="http://wpflocalizeextension.codeplex.com"
           loc:ResxLocalizationProvider.DefaultAssembly="Fulbert.Presentation.Localization"
           loc:ResxLocalizationProvider.DefaultDictionary="Labels"
-        mc:Ignorable="d" Title="{loc:Loc AppName}" Height="300" Width="300">
-    <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.MAINCONTENT}"/>
+        mc:Ignorable="d" Title="{loc:Loc FullAppName}" Height="600" Width="966">
+
+    <mvvm:BaseWindowView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Padding" Value="16"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </mvvm:BaseWindowView.Resources>
+    
+    <StackPanel>
+        <Label Content="{loc:Loc AppName}"/>
+        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.MAINCONTENT}"/>
+    </StackPanel>
 </mvvm:BaseWindowView>

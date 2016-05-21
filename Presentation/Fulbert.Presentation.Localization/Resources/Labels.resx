@@ -121,16 +121,22 @@
     <value>Dodaj nowego pacjenta</value>
   </data>
   <data name="AppName" xml:space="preserve">
-    <value>Fulbert - aplikacja osobistej mini przychodni</value>
+    <value>Fulbert</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>Imię</value>
+  </data>
+  <data name="FullAppName" xml:space="preserve">
+    <value>Fulbert - aplikacja osobistej mini przychodni</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Nazwisko</value>
   </data>
   <data name="PatientData" xml:space="preserve">
     <value>Dane personalne pacjenta</value>
+  </data>
+  <data name="PatientList" xml:space="preserve">
+    <value>Lista pacjentów</value>
   </data>
   <data name="PatientModule" xml:space="preserve">
     <value>Moduł pacjenta</value>

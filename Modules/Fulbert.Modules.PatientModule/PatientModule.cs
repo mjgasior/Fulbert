@@ -13,12 +13,17 @@ namespace Fulbert.Modules.PatientModule
         {
             Container.RegisterType<IPatientModuleViewModel, PatientModuleViewModel>();
             Container.RegisterType<IPatientDataViewModel, PatientDataViewModel>();
+            Container.RegisterType<IPatientsListViewModel, PatientsListViewModel>();
         }
 
         public override void Initialization()
         {
             RegionManager.RegisterViewWithRegion(RegionNames.MAINCONTENT, typeof(PatientModuleView));
-            RegionManager.RegisterViewWithRegion(RegionNames.PATIENTMODULECONTENT, typeof(PatientDataView));
+
+            Container.RegisterTypeForNavigation<PatientDataView>();
+            Container.RegisterTypeForNavigation<PatientsListView>();
+
+            RegionManager.RequestNavigate(RegionNames.PATIENTMODULECONTENT, typeof(PatientDataView).Name);
         }
     }
 }

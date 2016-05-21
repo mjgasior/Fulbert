@@ -70,7 +70,7 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fulbert - aplikacja osobistej mini przychodni.
+        ///   Looks up a localized string similar to Fulbert.
         /// </summary>
         public static string AppName {
             get {
@@ -84,6 +84,15 @@ namespace Fulbert.Presentation.Localization.Resources {
         public static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fulbert - aplikacja osobistej mini przychodni.
+        /// </summary>
+        public static string FullAppName {
+            get {
+                return ResourceManager.GetString("FullAppName", resourceCulture);
             }
         }
         
@@ -102,6 +111,15 @@ namespace Fulbert.Presentation.Localization.Resources {
         public static string PatientData {
             get {
                 return ResourceManager.GetString("PatientData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lista pacjentów.
+        /// </summary>
+        public static string PatientList {
+            get {
+                return ResourceManager.GetString("PatientList", resourceCulture);
             }
         }
         

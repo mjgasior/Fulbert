@@ -1,21 +1,26 @@
 ﻿using System;
 using Fulbert.Modules.PatientModule.Abstract.ViewModels;
 using Prism.Commands;
+using Fulbert.Infrastructure;
+using Prism.Regions;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
     public class PatientModuleViewModel : IPatientModuleViewModel
     {
-        public DelegateCommand SaveUserCommand { get; private set; }
+        private readonly IRegionManager _regionManager;
 
-        public PatientModuleViewModel()
+        public DelegateCommand<Type> NavigateCommand { get; private set; }
+
+        public PatientModuleViewModel(IRegionManager regionManager)
         {
-            SaveUserCommand = new DelegateCommand(OnSaveUserCommand);
+            _regionManager = regionManager;
+            NavigateCommand = new DelegateCommand<Type>(OnNavigate);
         }
 
-        private void OnSaveUserCommand()
+        private void OnNavigate(Type parameter)
         {
-            throw new NotImplementedException();
+            _regionManager.RequestNavigate(RegionNames.PATIENTMODULECONTENT, parameter.Name);
         }
     }
 }
