@@ -1,6 +1,7 @@
 ﻿using Fulbert.BLL.ApplicationModels.Abstract;
 using Fulbert.BLL.ApplicationModels.Models;
 using Fulbert.Infrastructure.Abstract.Mvvm;
+using Fulbert.Modules.PatientModule.Models;
 using System.Collections.Generic;
 
 namespace Fulbert.Modules.PatientModule.Abstract.ViewModels
@@ -9,5 +10,6 @@ namespace Fulbert.Modules.PatientModule.Abstract.ViewModels
     {
         IPatientService PatientService { get; }
         ICollection<Patient> Patients { get; }
+        PatientModuleRegionContext ModuleRegionContext { get; set; }
     }
 }

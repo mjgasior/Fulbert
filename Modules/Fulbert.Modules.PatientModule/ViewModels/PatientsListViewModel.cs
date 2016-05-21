@@ -3,6 +3,8 @@ using Fulbert.BLL.ApplicationModels.Models;
 using Fulbert.Modules.PatientModule.Abstract.ViewModels;
 using Prism.Mvvm;
 using System.Collections.Generic;
+using Fulbert.Modules.PatientModule.Models;
+using System;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
@@ -10,6 +12,8 @@ namespace Fulbert.Modules.PatientModule.ViewModels
     {
         public IPatientService PatientService { get; private set; }
         public ICollection<Patient> Patients { get; private set; }
+
+        public PatientModuleRegionContext ModuleRegionContext { get; set; }
 
         public PatientsListViewModel(IPatientService patientService)
         {

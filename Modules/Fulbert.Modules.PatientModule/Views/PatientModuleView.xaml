@@ -21,7 +21,8 @@
             <Button Command="{Binding NavigateCommand}" CommandParameter="{x:Type local:PatientDataView}" Content="{lex:Loc AddNewPatient}"/>
             <Button Command="{Binding NavigateCommand}" CommandParameter="{x:Type local:PatientsListView}" Content="{lex:Loc PatientList}"/> 
         </UniformGrid>
-        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PATIENTMODULECONTENT}"/>
+        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PATIENTMODULECONTENT}"
+                        prism:RegionManager.RegionContext="{Binding ModuleRegionContext}" />
     </StackPanel>
 
 </mvvm:BaseView>
