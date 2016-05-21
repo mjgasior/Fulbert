@@ -15,6 +15,9 @@
 
     <mvvm:BaseWindowView.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Fulbert.Presentation.Styles;component/Resources/AppStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
             <Style TargetType="{x:Type Label}">
                 <Setter Property="Background" Value="Black"/>
                 <Setter Property="Foreground" Value="White"/>
@@ -28,6 +31,7 @@
     
     <StackPanel>
         <Label Content="{loc:Loc AppName}"/>
+        <Label Content="{loc:Loc AppName}" Style="{StaticResource CustomLabel}"/>
         <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.MAINCONTENT}"/>
     </StackPanel>
 </mvvm:BaseWindowView>

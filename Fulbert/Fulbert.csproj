@@ -158,6 +158,10 @@
       <Project>{d7e634be-a8b0-4e90-80c6-d6d5f2491236}</Project>
       <Name>Fulbert.Presentation.Localization</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Presentation\Fulbert.Presentation.Styles\Fulbert.Presentation.Styles.csproj">
+      <Project>{61f8a224-77f3-4308-b791-59c8a023be63}</Project>
+      <Name>Fulbert.Presentation.Styles</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
