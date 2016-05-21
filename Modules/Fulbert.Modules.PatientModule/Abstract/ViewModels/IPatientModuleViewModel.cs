@@ -8,6 +8,7 @@ namespace Fulbert.Modules.PatientModule.Abstract.ViewModels
     public interface IPatientModuleViewModel : IViewModel
     {
         DelegateCommand<Type> NavigateCommand { get; }
-        PatientModuleRegionContext ModuleRegionContext { get; set; }
+        PatientModuleRegionContext ModuleRegionContext { get; }
+        string SelectedPatientName { get; }
     }
 }

@@ -10,6 +10,7 @@ namespace Fulbert.Modules.PatientModule.Abstract.ViewModels
     {
         IPatientService PatientService { get; }
         ICollection<Patient> Patients { get; }
+        Patient SelectedPatient { get; set; }
         PatientModuleRegionContext ModuleRegionContext { get; set; }
     }
 }

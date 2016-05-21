@@ -15,6 +15,17 @@ namespace Fulbert.Modules.PatientModule.ViewModels
 
         public PatientModuleRegionContext ModuleRegionContext { get; set; }
 
+        private Patient _selectedPatient;
+        public Patient SelectedPatient
+        {
+            get { return _selectedPatient; }
+            set
+            {
+                SetProperty(ref _selectedPatient, value);
+                ModuleRegionContext.SelectedPatientId = value == null ? Guid.Empty : value.Id;
+            }
+        }
+
         public PatientsListViewModel(IPatientService patientService)
         {
             PatientService = patientService;

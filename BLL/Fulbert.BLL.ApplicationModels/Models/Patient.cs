@@ -37,6 +37,11 @@ namespace Fulbert.BLL.ApplicationModels.Models
 
         }
 
+        public string ToFullNameString()
+        {
+            return string.Format(Formatting.S0_1, FirstName, LastName);
+        }
+
         public override string ToString()
         {
             return string.Format(Formatting.S0_1_2, Id, FirstName, LastName);
