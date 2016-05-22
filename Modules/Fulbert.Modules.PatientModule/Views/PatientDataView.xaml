@@ -15,10 +15,6 @@
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
     <i:Interaction.Triggers>
-        <!--
-            Need to be styled like in the link below:
-            https://github.com/PrismLibrary/Prism-Samples-Wpf/blob/master/InteractivityQuickstart/InteractivityQuickstart/Views/InteractionRequestView.xaml
-        -->
         <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest, Mode=OneWay}">
             <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
         </prism:InteractionRequestTrigger>

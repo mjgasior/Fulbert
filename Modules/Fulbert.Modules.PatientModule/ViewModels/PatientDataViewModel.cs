@@ -58,7 +58,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
                 _patientService.AddNewPatient(PatientModel);
                 message = Labels.SavedNewPatientData;
             }
-            NotificationRequest.Raise(new Confirmation { Content = message, Title = Labels.Saved });
+            NotificationRequest.Raise(new Notification { Content = message, Title = Labels.Saved });
         }
         #endregion Commands
 
