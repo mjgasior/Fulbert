@@ -44,7 +44,9 @@
             <TextBox Text="{Binding LastName}"/>
 
             <Label Content="{lex:Loc PeselNumber}"/>
-            <TextBox Text="{Binding Pesel}"/>
+            <TextBox Text="{Binding Path=Pesel, Mode=TwoWay, ValidatesOnDataErrors=True, 
+                            NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource textBoxInError}" MaxLength="11"/>
         </UniformGrid>
 
         <Button Command="{Binding SavePatientDataCommand}" Margin="10" Content="{lex:Loc SavePatientData}"/>

@@ -101,6 +101,11 @@ namespace Fulbert.BLL.ApplicationModels.Models
 
         public static bool IsValid(string pesel)
         {
+            if (pesel == null)
+            {
+                return false;
+            }
+
             bool toReturn = false;
             try
             {

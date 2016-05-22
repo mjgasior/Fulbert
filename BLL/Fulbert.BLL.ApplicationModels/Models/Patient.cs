@@ -2,12 +2,15 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Collections;
+using Fulbert.Presentation.Localization.Resources;
 
 [assembly: InternalsVisibleTo("Fulbert.BLL.Services.Tests")]
 namespace Fulbert.BLL.ApplicationModels.Models
 {
-    public class Patient : BindableBase
+    public class Patient : BindableBase, INotifyDataErrorInfo
     {
         public Guid Id { get; private set; }
 
@@ -34,6 +37,7 @@ namespace Fulbert.BLL.ApplicationModels.Models
 
         public ICollection<Appointment> Appointments { get; set; }
 
+
         internal Patient(Guid id)
         {
             Id = id;
@@ -52,6 +56,38 @@ namespace Fulbert.BLL.ApplicationModels.Models
         public override string ToString()
         {
             return string.Format(Formatting.S0_1_2, Id, FirstName, LastName);
+        }
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+        public bool HasErrors
+        {
+            get
+            {
+                return !Models.Pesel.IsValid(_pesel);
+            }
+        }
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            if (propertyName == "Pesel")
+            {
+                if (_pesel == null || _pesel.Length < 11)
+                {
+                    return new List<string>
+                    {
+                        Labels.PeselTooShort
+                    };
+                }
+                else
+                {
+                    return new List<string>
+                    {
+                        Labels.PeselIncorrect
+                    };
+                }
+                
+            }
+            return null;
         }
     }
 }

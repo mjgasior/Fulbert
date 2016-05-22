@@ -162,4 +162,10 @@
   <data name="PeselNumber" xml:space="preserve">
     <value>Numer PESEL</value>
   </data>
+  <data name="PeselIncorrect" xml:space="preserve">
+    <value>Numer PESEL jest błędny!</value>
+  </data>
+  <data name="PeselTooShort" xml:space="preserve">
+    <value>Numer PESEL jest za krótki!</value>
+  </data>
 </root>

@@ -151,11 +151,29 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Numer PESEL jest błędny!.
+        /// </summary>
+        public static string PeselIncorrect {
+            get {
+                return ResourceManager.GetString("PeselIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Numer PESEL.
         /// </summary>
         public static string PeselNumber {
             get {
                 return ResourceManager.GetString("PeselNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numer PESEL jest za krótki!.
+        /// </summary>
+        public static string PeselTooShort {
+            get {
+                return ResourceManager.GetString("PeselTooShort", resourceCulture);
             }
         }
         

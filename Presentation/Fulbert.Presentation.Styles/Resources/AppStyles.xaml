@@ -29,6 +29,21 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
+    <Style TargetType="{x:Type TextBox}" x:Key="textBoxInError">
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
+        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
+        <Setter Property="Background" Value="{StaticResource APP_BRUSH_BRIGHT_GRAY}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                <Setter Property="Background" Value="#aaff0000"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!--#region Labels-->
     <Style TargetType="{x:Type Label}">
         <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
