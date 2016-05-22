@@ -142,6 +142,24 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PESEL.
+        /// </summary>
+        public static string Pesel {
+            get {
+                return ResourceManager.GetString("Pesel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numer PESEL.
+        /// </summary>
+        public static string PeselNumber {
+            get {
+                return ResourceManager.GetString("PeselNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zapisano.
         /// </summary>
         public static string Saved {

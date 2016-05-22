@@ -76,10 +76,12 @@ namespace Fulbert.BLL.Services.Tests.Services
 
             string firstName = "David";
             string lastName = "Bowie";
+            string pesel = "47010813770";
             var patientEntity = new PatientEntity(patientId)
             {
                 FirstName = firstName,
                 LastName = lastName,
+                Pesel = pesel,
                 Appointments = new List<AppointmentEntity>
                 {
                     appointment
@@ -98,6 +100,7 @@ namespace Fulbert.BLL.Services.Tests.Services
             StringAssert.Contains(lastName, patient.LastName);
             Assert.AreEqual(date.Date, patient.Appointments.First().Date.Date);
             Assert.AreEqual(appointmentId, patient.Appointments.First().Id);
+            Assert.That(patient.Pesel, Is.EqualTo(pesel));
         }
 
         [Test]

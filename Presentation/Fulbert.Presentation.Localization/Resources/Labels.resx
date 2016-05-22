@@ -156,4 +156,10 @@
   <data name="Edit" xml:space="preserve">
     <value>Edytuj</value>
   </data>
+  <data name="Pesel" xml:space="preserve">
+    <value>PESEL</value>
+  </data>
+  <data name="PeselNumber" xml:space="preserve">
+    <value>Numer PESEL</value>
+  </data>
 </root>

@@ -10,6 +10,7 @@ namespace Fulbert.DAL.PatientDAL.Mappings
             Id(x => x.Id).Column("Id").GeneratedBy.Guid();
             Map(x => x.FirstName);
             Map(x => x.LastName);
+            Map(x => x.Pesel);
             HasMany(x => x.Appointments)
                 .Inverse()
                 .Cascade.All();

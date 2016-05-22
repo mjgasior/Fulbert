@@ -8,6 +8,7 @@ namespace Fulbert.DAL.RepositoryModels.Models
     {
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
+        public virtual string Pesel { get; set; }
         public virtual ICollection<AppointmentEntity> Appointments { get; set; }
         
         internal PatientEntity(Guid id) : this()
@@ -28,7 +29,7 @@ namespace Fulbert.DAL.RepositoryModels.Models
 
         public override string ToString()
         {
-            return string.Format(Formatting.S0_1_2, Id, FirstName, LastName);
+            return string.Format(Formatting.S0_1_2_3, Id, FirstName, LastName, Pesel);
         }
     }
 }

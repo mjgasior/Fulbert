@@ -25,6 +25,13 @@ namespace Fulbert.BLL.ApplicationModels.Models
             set { SetProperty(ref _lastName, value); }
         }
 
+        private string _pesel;
+        public string Pesel
+        {
+            get { return _pesel; }
+            set { SetProperty(ref _pesel, value); }
+        }
+
         public ICollection<Appointment> Appointments { get; set; }
 
         internal Patient(Guid id)

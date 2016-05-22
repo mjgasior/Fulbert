@@ -25,6 +25,7 @@ namespace Fulbert.DAL.PatientDAL.Tests
             // Arrange
             string firstName = "Peter";
             string lastName = "Steele";
+            string pesel = "62010417694";
             DateTime appointmentDate = DateTime.Now;
 
             // Act
@@ -32,6 +33,7 @@ namespace Fulbert.DAL.PatientDAL.Tests
                           {
                             FirstName = firstName,
                             LastName = lastName,
+                            Pesel = pesel
                           };
             patient.AddAppointment(new AppointmentEntity { Date = appointmentDate });
             _patientDal.SaveOrUpdatePatient(patient);
@@ -50,6 +52,8 @@ namespace Fulbert.DAL.PatientDAL.Tests
             ICollection<AppointmentEntity> appointments = result.Appointments;
             Assert.IsNotEmpty(appointments);
             Assert.IsTrue(appointments.Count == 1);
+
+            Assert.That(result.Pesel, Is.EqualTo(pesel));
         }
 
         [Test]

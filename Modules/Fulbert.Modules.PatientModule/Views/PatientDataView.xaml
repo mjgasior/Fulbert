@@ -42,6 +42,9 @@
 
             <Label Content="{lex:Loc LastName}"/>
             <TextBox Text="{Binding LastName}"/>
+
+            <Label Content="{lex:Loc PeselNumber}"/>
+            <TextBox Text="{Binding Pesel}"/>
         </UniformGrid>
 
         <Button Command="{Binding SavePatientDataCommand}" Margin="10" Content="{lex:Loc SavePatientData}"/>

@@ -16,6 +16,7 @@
         <DataGrid.Columns>
             <DataGridTextColumn Header="{lex:Loc FirstName}" Binding="{Binding FirstName}"/>
             <DataGridTextColumn Header="{lex:Loc LastName}" Binding="{Binding LastName}" />
+            <DataGridTextColumn Header="{lex:Loc Pesel}" Binding="{Binding Pesel}" />
             <DataGridTemplateColumn Width="*">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
