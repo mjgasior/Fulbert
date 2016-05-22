@@ -1,17 +1,23 @@
 ﻿using Fulbert.BLL.ApplicationModels.Abstract;
 using Fulbert.BLL.ApplicationModels.Models;
+using Fulbert.Infrastructure.Concrete.Mvvm;
 using Fulbert.Modules.PatientModule.Abstract.ViewModels;
+using Fulbert.Modules.PatientModule.Models;
 using Fulbert.Presentation.Localization.Resources;
 using Prism.Commands;
 using Prism.Interactivity.InteractionRequest;
-using Prism.Mvvm;
+using Prism.Regions;
+using System;
+using System.Linq;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
-    public class PatientDataViewModel : BindableBase, IPatientDataViewModel
+    public class PatientDataViewModel : NavigationViewModel, IPatientDataViewModel
     {
         #region Fields & Properties
-        public IPatientService PatientService { get; private set; }
+        private readonly IPatientService _patientService;
+
+        public bool IsEditMode { get; private set; }
 
         private Patient _patientModel;
         public Patient PatientModel
@@ -27,12 +33,13 @@ namespace Fulbert.Modules.PatientModule.ViewModels
 
         public PatientDataViewModel(IPatientService patientService)
         {
-            PatientService = patientService;
+            _patientService = patientService;
             PatientModel = new Patient();
             SavePatientDataCommand = new DelegateCommand(OnSavePatientData, CanSavePatientData);
             NotificationRequest = new InteractionRequest<INotification>();
         }
 
+        #region Commands
         private bool CanSavePatientData()
         {
             return true; // Place for validation
@@ -40,8 +47,34 @@ namespace Fulbert.Modules.PatientModule.ViewModels
 
         private void OnSavePatientData()
         {
-            PatientService.AddNewPatient(PatientModel);
-            NotificationRequest.Raise(new Confirmation { Content = Labels.SavedNewPatientData, Title = Labels.Saved });
+            string message;
+            if (IsEditMode)
+            {
+                _patientService.UpdatePatient(PatientModel);
+                message = Labels.SavedPatientData;
+            }
+            else
+            {
+                _patientService.AddNewPatient(PatientModel);
+                message = Labels.SavedNewPatientData;
+            }
+            NotificationRequest.Raise(new Confirmation { Content = message, Title = Labels.Saved });
+        }
+        #endregion Commands
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            IsEditMode = navigationContext.Parameters.Count() != 0;
+            if (IsEditMode)
+            {
+                Guid patietnId = Guid.Parse((string)navigationContext.Parameters[NavigationParams.PATIENT_ID_PARAM]);
+                PatientModel = _patientService.GetPatientById(patietnId);
+            }
+            else
+            {
+                PatientModel = new Patient();
+            }
+            OnPropertyChanged(() => IsEditMode);
         }
     }
 }

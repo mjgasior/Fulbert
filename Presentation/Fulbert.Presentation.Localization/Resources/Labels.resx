@@ -150,4 +150,7 @@
   <data name="SavePatientData" xml:space="preserve">
     <value>Zapisz dane pacjenta</value>
   </data>
+  <data name="SavedPatientData" xml:space="preserve">
+    <value>Zaktualizowano dane pacjenta</value>
+  </data>
 </root>

@@ -151,6 +151,15 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zaktualizowano dane pacjenta.
+        /// </summary>
+        public static string SavedPatientData {
+            get {
+                return ResourceManager.GetString("SavedPatientData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zapisz dane pacjenta.
         /// </summary>
         public static string SavePatientData {

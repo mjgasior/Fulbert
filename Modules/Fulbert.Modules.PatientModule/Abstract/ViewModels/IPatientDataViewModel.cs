@@ -7,8 +7,8 @@ namespace Fulbert.Modules.PatientModule.Abstract.ViewModels
 {
     public interface IPatientDataViewModel : IViewModel
     {
+        bool IsEditMode { get; }
         Patient PatientModel { get; }
-        IPatientService PatientService { get; }
         DelegateCommand SavePatientDataCommand { get; }
     }
 }

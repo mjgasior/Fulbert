@@ -1,21 +1,25 @@
 ﻿using Fulbert.BLL.ApplicationModels.Abstract;
 using Fulbert.BLL.ApplicationModels.Models;
 using Fulbert.Modules.PatientModule.Abstract.ViewModels;
-using Prism.Mvvm;
 using System.Collections.Generic;
 using Fulbert.Modules.PatientModule.Models;
 using System;
+using Prism.Regions;
+using Fulbert.Infrastructure.Concrete.Mvvm;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
-    public class PatientsListViewModel : BindableBase, IPatientsListViewModel
+    public class PatientsListViewModel : NavigationViewModel, IPatientsListViewModel
     {
-        public IPatientService PatientService { get; private set; }
+        private readonly IRegionManager _regionManager;
+        private readonly IPatientService _patientService;
+
         public ICollection<Patient> Patients { get; private set; }
 
         public PatientModuleRegionContext ModuleRegionContext { get; set; }
 
         private Patient _selectedPatient;
+
         public Patient SelectedPatient
         {
             get { return _selectedPatient; }
@@ -26,20 +30,16 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             }
         }
 
-        public PatientsListViewModel(IPatientService patientService)
+        public PatientsListViewModel(IRegionManager regionManager, IPatientService patientService)
         {
-            PatientService = patientService;
+            _regionManager = regionManager;
+            _patientService = patientService;
         }
 
-        public void Activate()
+        public override void OnNavigatedTo(NavigationContext navigationContext)
         {
-            Patients = PatientService.GetAllPatients();
+            Patients = _patientService.GetAllPatients();
             OnPropertyChanged(() => Patients);
-        }
-
-        public void Deactivate()
-        {
-            
         }
     }
 }

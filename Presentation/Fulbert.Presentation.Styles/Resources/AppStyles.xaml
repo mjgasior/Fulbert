@@ -2,16 +2,20 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+    <Color x:Key="APP_COLOR_WHITE">#fff</Color>
     <Color x:Key="APP_COLOR_ALMOST_WHITE">#efefef</Color>
     <Color x:Key="APP_COLOR_ALMOST_BLACK">#191919</Color>
+    <Color x:Key="APP_COLOR_GRAY">#909090</Color>
+    <Color x:Key="APP_COLOR_BRIGHT_GRAY">#e0e0e0</Color>
     <Color x:Key="APP_COLOR_THEME_BRIGHT">#c1e0ff</Color>
+    <Color x:Key="APP_COLOR_THEME_BLUE">#39f</Color>
 
-    <SolidColorBrush Color="#fff" x:Key="APP_BRUSH_WHITE"/>
+    <SolidColorBrush Color="{StaticResource APP_COLOR_WHITE}" x:Key="APP_BRUSH_WHITE"/>
     <SolidColorBrush Color="{StaticResource APP_COLOR_ALMOST_WHITE}" x:Key="APP_BRUSH_ALMOST_WHITE"/>
-    <SolidColorBrush Color="#e0e0e0" x:Key="APP_BRUSH_BRIGHT_GRAY"/>
-    <SolidColorBrush Color="#909090" x:Key="APP_BRUSH_GRAY"/>
+    <SolidColorBrush Color="{StaticResource APP_COLOR_BRIGHT_GRAY}" x:Key="APP_BRUSH_BRIGHT_GRAY"/>
+    <SolidColorBrush Color="{StaticResource APP_COLOR_GRAY}" x:Key="APP_BRUSH_GRAY"/>
     <SolidColorBrush Color="{StaticResource APP_COLOR_ALMOST_BLACK}" x:Key="APP_BRUSH_ALMOST_BLACK"/>
-    <SolidColorBrush Color="#39f" x:Key="APP_BRUSH_THEME_BLUE"/>
+    <SolidColorBrush Color="{StaticResource APP_COLOR_THEME_BLUE}" x:Key="APP_BRUSH_THEME_BLUE"/>
 
     <FontFamily x:Key="APP_BRUSH_FONT_FAMILY">Segoe UI Light</FontFamily>
     <sys:Double x:Key="APP_BRUSH_FONT_SIZE">16</sys:Double>
@@ -86,7 +90,16 @@
                                                         To="{StaticResource APP_COLOR_ALMOST_BLACK}" Duration="0:0:0.2"/>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name="Disabled"/>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="borderContainer" Storyboard.TargetProperty="Background.Color" 
+                                                        To="{StaticResource APP_COLOR_BRIGHT_GRAY}" Duration="0:0:0.2"/>
+                                        <ColorAnimation Storyboard.TargetName="borderContainer" Storyboard.TargetProperty="BorderBrush.Color" 
+                                                        To="{StaticResource APP_COLOR_BRIGHT_GRAY}" Duration="0:0:0.2"/>
+                                        <ColorAnimation Storyboard.TargetName="labelContent" Storyboard.TargetProperty="Foreground.Color" 
+                                                        To="{StaticResource APP_COLOR_GRAY}" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Border>

@@ -8,19 +8,23 @@ using Prism.Mvvm;
 using System.ComponentModel;
 using Fulbert.BLL.ApplicationModels.Abstract;
 using Fulbert.BLL.ApplicationModels.Models;
+using Fulbert.Modules.PatientModule.Views;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
     public class PatientModuleViewModel : BindableBase, IPatientModuleViewModel
     {
+        #region Fields and Properties
         private readonly IRegionManager _regionManager;
         private readonly IPatientService _patientService;
 
         public DelegateCommand<Type> NavigateCommand { get; private set; }
+        public DelegateCommand EditUserCommand { get; private set; }
 
         public PatientModuleRegionContext ModuleRegionContext { get; private set; }
 
         public string SelectedPatientName { get; private set; }
+        #endregion Fields and Properties
 
         public PatientModuleViewModel(IRegionManager regionManager, IPatientService patientService)
         {
@@ -28,6 +32,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             _patientService = patientService;
 
             NavigateCommand = new DelegateCommand<Type>(OnNavigate);
+            EditUserCommand = new DelegateCommand(OnEditUser, CanEditUser);
             InitializeRegionContext();
         }
 
@@ -44,13 +49,32 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             {
                 Patient selectedPatient = _patientService.GetPatientById(ModuleRegionContext.SelectedPatientId);
                 SelectedPatientName = selectedPatient.ToFullNameString();
-                OnPropertyChanged(() => SelectedPatientName);
             }
+            else
+            {
+                SelectedPatientName = string.Empty;
+            }
+            OnPropertyChanged(() => SelectedPatientName);
+            EditUserCommand.RaiseCanExecuteChanged();
         }
 
+        #region Commands
         private void OnNavigate(Type parameter)
         {
             _regionManager.RequestNavigate(RegionNames.PATIENTMODULECONTENT, parameter.Name);
         }
+
+        private void OnEditUser()
+        {
+            var parameters = new NavigationParameters();
+            parameters.Add(NavigationParams.PATIENT_ID_PARAM, ModuleRegionContext.SelectedPatientId.ToString());
+            _regionManager.RequestNavigate(RegionNames.PATIENTMODULECONTENT, typeof(PatientDataView).Name, parameters);
+        }
+
+        private bool CanEditUser()
+        {
+            return ModuleRegionContext.SelectedPatientId != Guid.Empty;
+        }
+        #endregion Commands
     }
 }
