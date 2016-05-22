@@ -19,7 +19,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         private readonly IPatientService _patientService;
 
         public DelegateCommand<Type> NavigateCommand { get; private set; }
-        public DelegateCommand EditUserCommand { get; private set; }
+        public DelegateCommand EditPatientCommand { get; private set; }
 
         public PatientModuleRegionContext ModuleRegionContext { get; private set; }
 
@@ -32,7 +32,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             _patientService = patientService;
 
             NavigateCommand = new DelegateCommand<Type>(OnNavigate);
-            EditUserCommand = new DelegateCommand(OnEditUser, CanEditUser);
+            EditPatientCommand = new DelegateCommand(OnEditPatient, CanEditPatient);
             InitializeRegionContext();
         }
 
@@ -55,7 +55,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
                 SelectedPatientName = string.Empty;
             }
             OnPropertyChanged(() => SelectedPatientName);
-            EditUserCommand.RaiseCanExecuteChanged();
+            EditPatientCommand.RaiseCanExecuteChanged();
         }
 
         #region Commands
@@ -64,14 +64,14 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             _regionManager.RequestNavigate(RegionNames.PATIENTMODULECONTENT, parameter.Name);
         }
 
-        private void OnEditUser()
+        private void OnEditPatient()
         {
             var parameters = new NavigationParameters();
             parameters.Add(NavigationParams.PATIENT_ID_PARAM, ModuleRegionContext.SelectedPatientId.ToString());
             _regionManager.RequestNavigate(RegionNames.PATIENTMODULECONTENT, typeof(PatientDataView).Name, parameters);
         }
 
-        private bool CanEditUser()
+        private bool CanEditPatient()
         {
             return ModuleRegionContext.SelectedPatientId != Guid.Empty;
         }

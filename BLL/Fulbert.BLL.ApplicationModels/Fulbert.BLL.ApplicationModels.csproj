@@ -47,6 +47,7 @@
     <Compile Include="Abstract\IPatientService.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\Pesel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

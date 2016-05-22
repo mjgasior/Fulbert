@@ -20,7 +20,7 @@
         <UniformGrid Columns="5" Background="{StaticResource APP_BRUSH_ALMOST_WHITE}">
             <Button Command="{Binding NavigateCommand}" CommandParameter="{x:Type local:PatientDataView}" Content="{lex:Loc AddNewPatient}"/>
             <Button Command="{Binding NavigateCommand}" CommandParameter="{x:Type local:PatientsListView}" Content="{lex:Loc PatientList}"/>
-            <Button Command="{Binding EditUserCommand}" Content="{Binding SelectedPatientName}"/>
+            <Button Command="{Binding EditPatientCommand}" Content="{Binding SelectedPatientName}"/>
         </UniformGrid>
         <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PATIENTMODULECONTENT}"
                         prism:RegionManager.RegionContext="{Binding ModuleRegionContext}" />
