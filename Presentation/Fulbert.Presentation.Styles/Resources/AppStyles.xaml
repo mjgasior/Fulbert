@@ -15,22 +15,24 @@
     <SolidColorBrush Color="{StaticResource APP_COLOR_BRIGHT_GRAY}" x:Key="APP_BRUSH_BRIGHT_GRAY"/>
     <SolidColorBrush Color="{StaticResource APP_COLOR_GRAY}" x:Key="APP_BRUSH_GRAY"/>
     <SolidColorBrush Color="{StaticResource APP_COLOR_ALMOST_BLACK}" x:Key="APP_BRUSH_ALMOST_BLACK"/>
+    <SolidColorBrush Color="{StaticResource APP_COLOR_THEME_BRIGHT}" x:Key="APP_BRUSH_THEME_BRIGHT"/>
     <SolidColorBrush Color="{StaticResource APP_COLOR_THEME_BLUE}" x:Key="APP_BRUSH_THEME_BLUE"/>
 
-    <FontFamily x:Key="APP_BRUSH_FONT_FAMILY">Segoe UI Light</FontFamily>
-    <sys:Double x:Key="APP_BRUSH_FONT_SIZE">16</sys:Double>
+    <FontFamily x:Key="APP_FONT_FAMILY">Segoe UI Light</FontFamily>
+    <sys:Double x:Key="APP_FONT_SIZE">16</sys:Double>
 
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Margin" Value="10"/>
-        <Setter Property="FontSize" Value="{StaticResource APP_BRUSH_FONT_SIZE}"/>
-        <Setter Property="FontFamily" Value="{StaticResource APP_BRUSH_FONT_FAMILY}"/>
+        <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
+        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
         <Setter Property="Background" Value="{StaticResource APP_BRUSH_BRIGHT_GRAY}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
+    <!--#region Labels-->
     <Style TargetType="{x:Type Label}">
-        <Setter Property="FontFamily" Value="{StaticResource APP_BRUSH_FONT_FAMILY}"/>
-        <Setter Property="FontSize" Value="{StaticResource APP_BRUSH_FONT_SIZE}"/>
+        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
+        <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
         <Setter Property="Background" Value="{StaticResource APP_BRUSH_BRIGHT_GRAY}"/>
         <Setter Property="Margin" Value="10"/>
     </Style>
@@ -38,7 +40,7 @@
     <Style TargetType="{x:Type Label}" x:Key="labelAppHeader">
         <Setter Property="Background" Value="{StaticResource APP_BRUSH_GRAY}"/>
         <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_ALMOST_WHITE}"/>
-        <Setter Property="FontFamily" Value="{StaticResource APP_BRUSH_FONT_FAMILY}"/>
+        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="Padding" Value="16"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -52,14 +54,16 @@
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="labelButtonStyle">
-        <Setter Property="FontFamily" Value="{StaticResource APP_BRUSH_FONT_FAMILY}"/>
-        <Setter Property="FontSize" Value="{StaticResource APP_BRUSH_FONT_SIZE}"/>
+        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
+        <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="8,5,8,9"/>
     </Style>
+    <!--#endregion Labels-->
 
+    <!--#region Buttons-->
     <Style TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{StaticResource APP_BRUSH_THEME_BLUE}"/>
         <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_ALMOST_WHITE}"/>
@@ -108,5 +112,74 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!--#endregion Buttons-->
 
+    <!--#region DataGrid-->
+    <Style TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
+        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
+        <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_GRAY}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource APP_BRUSH_THEME_BLUE}" 
+                            Background="{StaticResource APP_BRUSH_WHITE}">
+                        <ContentPresenter Margin="16,8,16,8"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_ALMOST_BLACK}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridCell}">
+        <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
+        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
+        <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_ALMOST_BLACK}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <ContentPresenter Margin="16,8,16,8"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridRowHeader}">
+        <Setter Property="Width" Value="0"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridRow}">
+        <Setter Property="Background" Value="{StaticResource APP_BRUSH_WHITE}"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource APP_BRUSH_THEME_BRIGHT}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="False"/>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="Background" Value="{StaticResource APP_BRUSH_ALMOST_WHITE}" />
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="{x:Type DataGrid}">
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource APP_BRUSH_THEME_BLUE}"/>
+        <Setter Property="Margin" Value="8"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource APP_BRUSH_THEME_BLUE}"/>
+    </Style>
+    <!--#endregion DataGrid-->
+    
 </ResourceDictionary> 

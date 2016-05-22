@@ -16,7 +16,20 @@
 
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest, Mode=OneWay}">
-            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowStyle>
+                    <Style TargetType="Window">
+                        <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+                        <Setter Property="WindowStyle" Value="None"/>
+                    </Style>
+                </prism:PopupWindowAction.WindowStyle>
+                <!--<prism:PopupWindowAction.WindowContent>
+                    <StackPanel>
+                        <Label Content="This is the content"/>
+                        <Button x:Name="OK" Content="Close" />
+                    </StackPanel>
+                </prism:PopupWindowAction.WindowContent>-->
+            </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 

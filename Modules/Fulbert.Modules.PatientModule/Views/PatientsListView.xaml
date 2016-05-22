@@ -12,7 +12,12 @@
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
-    <DataGrid ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}" AutoGenerateColumns="True"/>
+    <DataGrid ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="{lex:Loc FirstName}" Binding="{Binding FirstName}" MinWidth="200"/>
+            <DataGridTextColumn Header="{lex:Loc LastName}" Binding="{Binding LastName}" Width="*" />
+        </DataGrid.Columns>
+    </DataGrid>
 
 </mvvm:BaseView>
 
