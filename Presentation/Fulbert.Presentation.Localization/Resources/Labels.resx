@@ -153,4 +153,7 @@
   <data name="SavedPatientData" xml:space="preserve">
     <value>Zaktualizowano dane pacjenta</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edytuj</value>
+  </data>
 </root>

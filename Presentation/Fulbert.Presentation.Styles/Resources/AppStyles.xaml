@@ -112,6 +112,53 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="buttonSmallForDataGrid">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_ALMOST_BLACK}"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="borderContainer" BorderThickness="0" Background="{TemplateBinding Background}">
+                        <Label x:Name="labelContent" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" 
+                               Style="{StaticResource labelButtonStyle}" Background="Transparent" Padding="0" Margin="0" />
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="borderContainer" Storyboard.TargetProperty="Background.Color" 
+                                                        To="{StaticResource APP_COLOR_THEME_BRIGHT}" Duration="0:0:0.2"/>
+                                        <ColorAnimation Storyboard.TargetName="labelContent" Storyboard.TargetProperty="Foreground.Color" 
+                                                        To="{StaticResource APP_COLOR_ALMOST_BLACK}" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="borderContainer" Storyboard.TargetProperty="Background.Color" 
+                                                        To="{StaticResource APP_COLOR_ALMOST_WHITE}" Duration="0:0:0.2"/>
+                                        <ColorAnimation Storyboard.TargetName="labelContent" Storyboard.TargetProperty="Foreground.Color" 
+                                                        To="{StaticResource APP_COLOR_ALMOST_BLACK}" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="borderContainer" Storyboard.TargetProperty="Background.Color" 
+                                                        To="{StaticResource APP_COLOR_BRIGHT_GRAY}" Duration="0:0:0.2"/>
+                                        <ColorAnimation Storyboard.TargetName="labelContent" Storyboard.TargetProperty="Foreground.Color" 
+                                                        To="{StaticResource APP_COLOR_GRAY}" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <!--#endregion Buttons-->
 
     <!--#region DataGrid-->
@@ -137,6 +184,7 @@
     </Style>
 
     <Style TargetType="{x:Type DataGridCell}">
+        <Setter Property="MinWidth" Value="200"/>
         <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
         <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
         <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_ALMOST_BLACK}"/>

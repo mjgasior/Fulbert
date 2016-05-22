@@ -12,10 +12,21 @@
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
-    <DataGrid ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}">
+    <DataGrid ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}" x:Name="viewContainer">
         <DataGrid.Columns>
-            <DataGridTextColumn Header="{lex:Loc FirstName}" Binding="{Binding FirstName}" MinWidth="200"/>
-            <DataGridTextColumn Header="{lex:Loc LastName}" Binding="{Binding LastName}" Width="*" />
+            <DataGridTextColumn Header="{lex:Loc FirstName}" Binding="{Binding FirstName}"/>
+            <DataGridTextColumn Header="{lex:Loc LastName}" Binding="{Binding LastName}" />
+            <DataGridTemplateColumn Width="*">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid Background="Transparent">
+                            <Button Content="{lex:Loc Edit}" Style="{StaticResource buttonSmallForDataGrid}"
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mvvm:BaseView}}, Path=DataContext.EditPatientCommand}"
+                                    CommandParameter="{Binding}"/>
+                        </Grid>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
         </DataGrid.Columns>
     </DataGrid>
 
