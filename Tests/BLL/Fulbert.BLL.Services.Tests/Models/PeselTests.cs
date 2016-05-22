@@ -9,33 +9,33 @@ namespace Fulbert.BLL.Services.Tests.Models
     public class PeselTests : BaseTest
     {
         [Test]
-        public void Is_gender_valid()
+        [TestCase("10241401823", ExpectedResult = true)]
+        [TestCase("62010415616", ExpectedResult = false)]
+        public bool Is_gender_valid(string peselString)
         {
             // Arrange
-            string peselString = "02271400004";
-            // numbers 0, 2, 4, 6, 8 – denote female gender
-            // numbers 1, 3, 5, 7, 9 – denote male gender
 
             // Act
-            bool isValid = Pesel.IsValid(peselString);
-            Assert.IsTrue(isValid);
+            AssertIsPeselValid(peselString);
 
             var pesel = new Pesel(peselString);
 
             // Assert
-            Assert.IsTrue(pesel.IsAWoman);
+            return pesel.IsAWoman;
         }
 
         [Test]
-        public void Is_birthday_valid()
+        [TestCase("11521218830", 2111, 12, 12)]
+        [TestCase("02271400004", 2002, 7, 14)]
+        [TestCase("76043007270", 1976, 4, 30)]
+        [TestCase("02070803628", 1902, 7, 8)]
+        public void Is_birthday_valid(string peselString, int year, int month, int day)
         {
             // Arrange
-            string peselString = "02271400004";
-            DateTime birthday = new DateTime(2002, 7, 14);
+            DateTime birthday = new DateTime(year, month, day);
 
             // Act
-            bool isValid = Pesel.IsValid(peselString);
-            Assert.IsTrue(isValid);
+            AssertIsPeselValid(peselString);
 
             var pesel = new Pesel(peselString);
             DateTime peselBirthday = pesel.GetBirthday();
@@ -44,14 +44,34 @@ namespace Fulbert.BLL.Services.Tests.Models
             Assert.That(peselBirthday, Is.EqualTo(birthday));
         }
 
-    //        Rozważmy PESEL osoby urodzonej 8 lipca 1902 roku, płci żeńskiej(parzysta końcówka numeru z serii – 0362). Czyli mamy wówczas 0207080362. Teraz kolejne cyfry należy przemnożyć przez odpowiednie wagi i dodać do siebie.
-    //0*1 + 2*3 + 0*7 + 7*9 + 0*1 + 8*3 + 0*7 + 3*9 + 6*1 + 2*3 = 0 + 6 + 0 + 63 + 0 + 24 + 0 + 27 + 6 + 6 = 132
-    //Wynik dzielimy modulo przez 10.
-    //132 mod 10 = 2
-    //A następnie odejmujemy od 10
-    //10 - 2 = 8.
-    //I wynik dzielimy znów modulo 10
-    //8 mod 10 = 8
-    //Cyfra kontrolna to 8, zatem nasz prawidłowy numer PESEL to: 02070803628
+        [Test]
+        public void Is_age_calculated_correctly()
+        {
+            // Arrange
+            string peselString = "74082615670";
+            DateTime now = DateTime.Now;
+            DateTime birthday = new DateTime(1974, 08, 26);
+
+            int age = DateTime.Now.Year - birthday.Year;
+            if (now.Month < birthday.Month && now.Day < birthday.Day)
+            {
+                age--;
+            }
+
+            // Act
+            AssertIsPeselValid(peselString);
+            var pesel = new Pesel(peselString);
+            int ageFromPesel = pesel.GetAge();
+
+            // Assert
+            Assert.That(ageFromPesel, Is.EqualTo(age));
+        }
+
+        private void AssertIsPeselValid(string peselString)
+        {
+            bool isValid = Pesel.IsValid(peselString);
+            Assert.IsTrue(isValid);
+        }
     }
 }
+

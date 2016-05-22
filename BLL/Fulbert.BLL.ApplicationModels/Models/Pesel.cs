@@ -4,12 +4,14 @@ namespace Fulbert.BLL.ApplicationModels.Models
 {
     public class Pesel
     {
+        #region Fields and Properties
         private static readonly int[] multipliers = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 };
 
         private readonly string _personalIdString;
         private readonly int[] _peselNumbers;
 
         public bool IsAWoman { get; private set; }
+        #endregion Fields and Properties
 
         public Pesel(string personalIdString)
         {
@@ -18,27 +20,10 @@ namespace Fulbert.BLL.ApplicationModels.Models
             IsAWoman = IsEven(_peselNumbers[9]);
         }
 
-        public static bool IsEven(int value)
+        #region Methods
+        private static bool IsEven(int value)
         {
             return value % 2 == 0;
-        }
-
-        public int GetAge()
-        {
-            DateTime birthday = GetBirthday();
-            DateTime today = DateTime.Today;
-            int age = today.Year - GetBirthday().Year;
-
-            if (birthday > today.AddYears(-age))
-            {
-                age--;
-            }
-            return age;
-        }
-
-        public DateTime GetBirthday()
-        {
-            return new DateTime(GetBirthYear(), GetBirthMonth(), GetBirthDay());
         }
 
         private int GetBirthDay()
@@ -48,10 +33,6 @@ namespace Fulbert.BLL.ApplicationModels.Models
 
         private int GetBirthMonth()
         {
-            //int birthMonth = _peselNumbers[3];
-            //// here is the error - 17th month returned
-            //var month = (_peselNumbers[2] < 2) ? ExtractMonth() : birthMonth;
-            //return month;
             return IsEven(_peselNumbers[2]) ? _peselNumbers[3] : _peselNumbers[3] + 10;
         }
 
@@ -82,6 +63,37 @@ namespace Fulbert.BLL.ApplicationModels.Models
             return digits;
         }
 
+        private static object CountCheckSum(string pesel)
+        {
+            int sum = 0;
+            for (int i = 0; i < multipliers.Length; i++)
+            {
+                sum += multipliers[i] * int.Parse(pesel[i].ToString());
+            }
+
+            int reszta = sum % 10;
+            return reszta == 0 ? reszta.ToString() : (10 - reszta).ToString();
+        }
+        #endregion Methods
+
+        public int GetAge()
+        {
+            DateTime birthday = GetBirthday();
+            DateTime today = DateTime.Today;
+            int age = today.Year - GetBirthday().Year;
+
+            if (birthday > today.AddYears(-age))
+            {
+                age--;
+            }
+            return age;
+        }
+
+        public DateTime GetBirthday()
+        {
+            return new DateTime(GetBirthYear(), GetBirthMonth(), GetBirthDay());
+        }
+
         public override string ToString()
         {
             return _personalIdString;
@@ -102,18 +114,6 @@ namespace Fulbert.BLL.ApplicationModels.Models
                 toReturn = false;
             }
             return toReturn;
-        }
-
-        private static object CountCheckSum(string pesel)
-        {
-            int sum = 0;
-            for (int i = 0; i < multipliers.Length; i++)
-            {
-                sum += multipliers[i] * int.Parse(pesel[i].ToString());
-            }
-
-            int reszta = sum % 10;
-            return reszta == 0 ? reszta.ToString() : (10 - reszta).ToString();
         }
     }
 }
