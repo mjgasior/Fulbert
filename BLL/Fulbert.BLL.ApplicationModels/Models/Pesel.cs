@@ -7,14 +7,15 @@ namespace Fulbert.BLL.ApplicationModels.Models
         private static readonly int[] multipliers = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 };
 
         private readonly string _personalIdString;
+        private readonly int[] _peselNumbers;
 
         public bool IsAWoman { get; private set; }
 
         public Pesel(string personalIdString)
         {
             _personalIdString = personalIdString;
-            int[] pesel = GetPeselNumbers();
-            IsAWoman = IsEven(pesel[9]);
+            _peselNumbers = GetPeselNumbers();
+            IsAWoman = IsEven(_peselNumbers[9]);
         }
 
         public static bool IsEven(int value)
@@ -37,32 +38,32 @@ namespace Fulbert.BLL.ApplicationModels.Models
 
         public DateTime GetBirthday()
         {
-            int[] peselNumbers = GetPeselNumbers();
-            return new DateTime(GetBirthYear(peselNumbers), GetBirthMonth(peselNumbers), GetBirthDay(peselNumbers));
+            return new DateTime(GetBirthYear(), GetBirthMonth(), GetBirthDay());
         }
 
-        private int GetBirthDay(int[] peselNumbers)
+        private int GetBirthDay()
         {
-            return peselNumbers[4] * 10 + peselNumbers[5];
+            return _peselNumbers[4] * 10 + _peselNumbers[5];
         }
 
-        private int GetBirthMonth(int[] peselNumbers)
+        private int GetBirthMonth()
         {
-            int birthMonth = peselNumbers[3];
-            // here is the error - 17th month returned
-            var month = (peselNumbers[2] > 0) ? birthMonth + 10 : birthMonth;
-            return month;
+            //int birthMonth = _peselNumbers[3];
+            //// here is the error - 17th month returned
+            //var month = (_peselNumbers[2] < 2) ? ExtractMonth() : birthMonth;
+            //return month;
+            return IsEven(_peselNumbers[2]) ? _peselNumbers[3] : _peselNumbers[3] + 10;
         }
 
-        private int GetBirthYear(int[] peselNumbers)
+        private int GetBirthYear()
         {
-            int birthYear = 1900 + peselNumbers[0] * 10 + peselNumbers[1];
-            if (peselNumbers[2] >= 2 && peselNumbers[2] < 8)
+            int birthYear = 1900 + _peselNumbers[0] * 10 + _peselNumbers[1];
+            if (_peselNumbers[2] >= 2 && _peselNumbers[2] < 8)
             {
-                birthYear += (peselNumbers[2] / 2) * 100;
+                birthYear += (_peselNumbers[2] / 2) * 100;
             }
 
-            if (peselNumbers[2] >= 8)
+            if (_peselNumbers[2] >= 8)
             {
                 birthYear -= 100;
             }
