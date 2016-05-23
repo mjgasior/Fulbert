@@ -10,7 +10,8 @@
       lex:LocalizeDictionary.DesignCulture="pl-PL"
       lex:ResxLocalizationProvider.DefaultAssembly="Fulbert.Presentation.Localization"
       lex:ResxLocalizationProvider.DefaultDictionary="Labels"
-               
+              
+    xmlns:interaction="clr-namespace:Fulbert.Infrastructure.Concrete.Interactions;assembly=Fulbert.Infrastructure"
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"           
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
@@ -21,14 +22,13 @@
                     <Style TargetType="Window">
                         <Setter Property="SizeToContent" Value="WidthAndHeight"/>
                         <Setter Property="WindowStyle" Value="None"/>
+                        <Setter Property="MinWidth" Value="485"/>
+                        <Setter Property="MinHeight" Value="300"/>
                     </Style>
                 </prism:PopupWindowAction.WindowStyle>
-                <!--<prism:PopupWindowAction.WindowContent>
-                    <StackPanel>
-                        <Label Content="This is the content"/>
-                        <Button x:Name="OK" Content="Close" />
-                    </StackPanel>
-                </prism:PopupWindowAction.WindowContent>-->
+                <prism:PopupWindowAction.WindowContent>
+                    <interaction:NotificationContent/>
+                </prism:PopupWindowAction.WindowContent>
             </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
@@ -52,5 +52,3 @@
         <Button Command="{Binding SavePatientDataCommand}" Margin="10" Content="{lex:Loc SavePatientData}"/>
     </StackPanel>
 </mvvm:BaseView>
-
-    

@@ -19,7 +19,7 @@ namespace Fulbert.DAL.PatientDAL
                                 .Port(5432)
                                 .Database(databaseName)
                                 .Username("postgres")
-                                .Password("123456")))
+                                .Password("admin")))
               .Mappings(m => m.FluentMappings.AddFromAssemblyOf<NHibernateConfig>())
               .BuildSessionFactory();
         }
@@ -33,7 +33,7 @@ namespace Fulbert.DAL.PatientDAL
                                 .Port(5432)
                                 .Database(databaseName)
                                 .Username("postgres")
-                                .Password("123456")))
+                                .Password("admin")))
               .Mappings(m => m.FluentMappings.AddFromAssemblyOf<NHibernateConfig>())
               .ExposeConfiguration(config =>
               {

@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Abstract\Mvvm\IView.cs" />
     <Compile Include="Abstract\Mvvm\IViewModel.cs" />
+    <Compile Include="Concrete\Interactions\NotificationContent.cs" />
     <Compile Include="Concrete\Mvvm\BaseModule.cs" />
     <Compile Include="Concrete\Mvvm\BaseView.cs" />
     <Compile Include="Concrete\Mvvm\BaseWindowView.cs" />
