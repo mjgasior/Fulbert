@@ -9,5 +9,6 @@ namespace Fulbert.Modules.PatientModule.Abstract.ViewModels
         bool IsEditMode { get; }
         Patient PatientModel { get; }
         DelegateCommand SavePatientDataCommand { get; }
+        DelegateCommand AddAppointmentCommand { get; }
     }
 }

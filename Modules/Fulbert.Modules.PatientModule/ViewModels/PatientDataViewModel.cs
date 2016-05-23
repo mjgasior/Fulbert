@@ -9,6 +9,7 @@ using Prism.Interactivity.InteractionRequest;
 using Prism.Regions;
 using System;
 using System.Linq;
+using System.ComponentModel;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
@@ -23,10 +24,11 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         public Patient PatientModel
         {
             get { return _patientModel; }
-            set { SetProperty(ref _patientModel, value); }
+            private set { SetProperty(ref _patientModel, value); }
         }
 
         public DelegateCommand SavePatientDataCommand { get; private set; }
+        public DelegateCommand AddAppointmentCommand { get; private set; }
 
         public InteractionRequest<INotification> NotificationRequest { get; private set; }
         #endregion Fields & Properties
@@ -34,17 +36,16 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         public PatientDataViewModel(IPatientService patientService)
         {
             _patientService = patientService;
-            PatientModel = new Patient();
+
+            SetPatientModel(new Patient());
+
             SavePatientDataCommand = new DelegateCommand(OnSavePatientData, CanSavePatientData);
+            AddAppointmentCommand = new DelegateCommand(OnAddAppointment, CanAddAppointment);
             NotificationRequest = new InteractionRequest<INotification>();
         }
 
         #region Commands
-        private bool CanSavePatientData()
-        {
-            return true; // Place for validation
-        }
-
+        private bool CanSavePatientData() => !PatientModel.HasErrors; // Place for validation
         private void OnSavePatientData()
         {
             string message;
@@ -60,6 +61,12 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             }
             NotificationRequest.Raise(new Notification { Content = message, Title = Labels.Saved });
         }
+
+        private bool CanAddAppointment() => IsEditMode;
+        private void OnAddAppointment()
+        {
+            
+        }
         #endregion Commands
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
@@ -68,13 +75,29 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             if (IsEditMode)
             {
                 Guid patietnId = Guid.Parse((string)navigationContext.Parameters[NavigationParams.PATIENT_ID_PARAM]);
-                PatientModel = _patientService.GetPatientById(patietnId);
+                SetPatientModel(_patientService.GetPatientById(patietnId));
             }
             else
             {
-                PatientModel = new Patient();
+                SetPatientModel(new Patient());
             }
             OnPropertyChanged(() => IsEditMode);
+            AddAppointmentCommand.RaiseCanExecuteChanged();
+        }
+
+        private void SetPatientModel(Patient patient)
+        {
+            if (PatientModel != null)
+            {
+                PatientModel.ErrorsChanged -= OnModelErrorsChanged;
+            }
+            PatientModel = patient;
+            PatientModel.ErrorsChanged += OnModelErrorsChanged;
+        }
+
+        private void OnModelErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+        {
+            SavePatientDataCommand.RaiseCanExecuteChanged();
         }
     }
 }

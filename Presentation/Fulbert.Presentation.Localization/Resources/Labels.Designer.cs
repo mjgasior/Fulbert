@@ -61,6 +61,15 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodaj wizytę.
+        /// </summary>
+        public static string AddAppointment {
+            get {
+                return ResourceManager.GetString("AddAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nowy pacjent.
         /// </summary>
         public static string AddNewPatient {

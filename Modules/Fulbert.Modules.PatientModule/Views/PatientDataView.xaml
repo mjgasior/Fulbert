@@ -42,5 +42,7 @@
         </UniformGrid>
 
         <Button Command="{Binding SavePatientDataCommand}" Margin="10" Content="{lex:Loc SavePatientData}"/>
+        <Button Command="{Binding AddAppointmentCommand}" Margin="10" Content="{lex:Loc AddAppointment}" 
+                Visibility="{Binding IsEditMode, Converter={StaticResource BoolToVisibleConverter}}"/>
     </StackPanel>
 </mvvm:BaseView>

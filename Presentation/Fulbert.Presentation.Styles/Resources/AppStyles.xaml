@@ -3,6 +3,8 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:interaction="clr-namespace:Fulbert.Infrastructure.Concrete.Interactions;assembly=Fulbert.Infrastructure">
 
+    <BooleanToVisibilityConverter x:Key="BoolToVisibleConverter"/>
+
     <Color x:Key="APP_COLOR_WHITE">#fff</Color>
     <Color x:Key="APP_COLOR_ALMOST_WHITE">#efefef</Color>
     <Color x:Key="APP_COLOR_ALMOST_BLACK">#191919</Color>
@@ -255,23 +257,25 @@
         <Setter Property="MinWidth" Value="485"/>
         <Setter Property="MinHeight" Value="300"/>
         <Setter Property="AllowsTransparency" Value="True"/>
-        <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
     </Style>
     
     <Style TargetType="{x:Type interaction:NotificationContent}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type interaction:NotificationContent}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Label x:Name="PART_Title" Style="{StaticResource labelAppHeader}"/>
-                        <Label x:Name="PART_Content" Grid.Row="1"/>
-                        <Button x:Name="PART_OkButton" Content="OK" Grid.Row="2"/>
-                    </Grid>
+                    <Border BorderThickness="2" BorderBrush="{StaticResource APP_BRUSH_ALMOST_BLACK}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label x:Name="PART_Title" Style="{StaticResource labelAppHeader}"/>
+                            <Label x:Name="PART_Content" Grid.Row="1"/>
+                            <Button x:Name="PART_OkButton" Content="OK" Grid.Row="2"/>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

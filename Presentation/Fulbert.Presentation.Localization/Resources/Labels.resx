@@ -168,4 +168,7 @@
   <data name="PeselTooShort" xml:space="preserve">
     <value>Numer PESEL jest za krótki!</value>
   </data>
+  <data name="AddAppointment" xml:space="preserve">
+    <value>Dodaj wizytę</value>
+  </data>
 </root>

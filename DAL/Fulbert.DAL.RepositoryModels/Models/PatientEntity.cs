@@ -29,7 +29,7 @@ namespace Fulbert.DAL.RepositoryModels.Models
 
         public override string ToString()
         {
-            return string.Format(Formatting.S0_1_2_3, Id, FirstName, LastName, Pesel);
+            return $"{Id} {FirstName} {LastName} {Pesel}";
         }
     }
 }
