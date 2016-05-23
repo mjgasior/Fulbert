@@ -30,7 +30,8 @@
 
         <UniformGrid Columns="2" DataContext="{Binding PatientModel}">
             <Label Content="{lex:Loc FirstName}"/>
-            <TextBox Text="{Binding FirstName}"/>
+            <TextBox Text="{Binding Path=FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, 
+                            NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label Content="{lex:Loc LastName}"/>
             <TextBox Text="{Binding LastName}"/>

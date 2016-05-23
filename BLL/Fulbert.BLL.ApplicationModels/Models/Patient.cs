@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections;
 using Fulbert.Presentation.Localization.Resources;
+using System.ComponentModel.DataAnnotations;
 
 [assembly: InternalsVisibleTo("Fulbert.BLL.Services.Tests")]
 namespace Fulbert.BLL.ApplicationModels.Models
@@ -15,6 +16,8 @@ namespace Fulbert.BLL.ApplicationModels.Models
         public Guid Id { get; private set; }
 
         private string _firstName;
+        // try this https://code.msdn.microsoft.com/windowsdesktop/Validation-in-MVVM-using-12dafef3
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Must be set!")]
         public string FirstName
         {
             get { return _firstName; }
@@ -29,6 +32,7 @@ namespace Fulbert.BLL.ApplicationModels.Models
         }
 
         private string _pesel;
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Must be set!")]
         public string Pesel
         {
             get { return _pesel; }
