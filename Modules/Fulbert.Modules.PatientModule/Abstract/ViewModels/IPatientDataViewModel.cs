@@ -1,5 +1,4 @@
-﻿using Fulbert.BLL.ApplicationModels.Abstract;
-using Fulbert.BLL.ApplicationModels.Models;
+﻿using Fulbert.BLL.ApplicationModels.Models;
 using Fulbert.Infrastructure.Abstract.Mvvm;
 using Prism.Commands;
 

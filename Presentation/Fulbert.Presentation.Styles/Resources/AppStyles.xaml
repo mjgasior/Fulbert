@@ -22,6 +22,7 @@
     <FontFamily x:Key="APP_FONT_FAMILY">Segoe UI Light</FontFamily>
     <sys:Double x:Key="APP_FONT_SIZE">16</sys:Double>
 
+    <!--#region TextBoxes-->
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Margin" Value="10"/>
         <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
@@ -44,6 +45,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <!--#endregion TextBoxes-->
 
     <!--#region Labels-->
     <Style TargetType="{x:Type Label}">
@@ -247,16 +249,28 @@
     <!--#endregion DataGrid-->
     
     <!--#region InteractionRequests-->
+    <Style TargetType="{x:Type Window}" x:Key="windowInteractive">
+        <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="MinWidth" Value="485"/>
+        <Setter Property="MinHeight" Value="300"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
+    </Style>
+    
     <Style TargetType="{x:Type interaction:NotificationContent}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type interaction:NotificationContent}">
                     <Grid>
-                        <StackPanel>
-                            <Label x:Name="PART_Title" Style="{StaticResource labelAppHeader}"/>
-                            <Label x:Name="PART_Content"/>
-                            <Button x:Name="PART_OkButton" Content="OK"/>
-                        </StackPanel>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="PART_Title" Style="{StaticResource labelAppHeader}"/>
+                        <Label x:Name="PART_Content" Grid.Row="1"/>
+                        <Button x:Name="PART_OkButton" Content="OK" Grid.Row="2"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
