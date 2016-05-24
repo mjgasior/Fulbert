@@ -71,8 +71,8 @@ namespace Fulbert.BLL.ApplicationModels.Models
                 sum += multipliers[i] * int.Parse(pesel[i].ToString());
             }
 
-            int reszta = sum % 10;
-            return reszta == 0 ? reszta.ToString() : (10 - reszta).ToString();
+            int moduloResult = sum % 10;
+            return moduloResult == 0 ? moduloResult.ToString() : (10 - moduloResult).ToString();
         }
         #endregion Methods
 

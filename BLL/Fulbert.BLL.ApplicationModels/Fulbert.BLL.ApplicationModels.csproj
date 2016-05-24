@@ -55,6 +55,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Fulbert.Infrastructure\Fulbert.Infrastructure.csproj">
+      <Project>{95FA0E4F-7269-4291-9859-BE3A5381D1FF}</Project>
+      <Name>Fulbert.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Fulbert.Utils\Fulbert.Utils.csproj">
       <Project>{f973e65f-55ba-461f-ad47-cb1ca11948f8}</Project>
       <Name>Fulbert.Utils</Name>
