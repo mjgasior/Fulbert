@@ -5,12 +5,14 @@ using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations;
 using Fulbert.Infrastructure.Concrete.Mvvm;
 using Fulbert.Infrastructure.Concrete.Validation;
+using Fulbert.Infrastructure.Abstract.Validation;
 
 [assembly: InternalsVisibleTo("Fulbert.BLL.Services.Tests")]
 namespace Fulbert.BLL.ApplicationModels.Models
 {
     public class Patient : ValidatableModel
     {
+        private IValidationEngine _validator;
         public Guid Id { get; private set; }
 
         private string _firstName;
@@ -50,7 +52,7 @@ namespace Fulbert.BLL.ApplicationModels.Models
 
         public Patient()
         {
-
+            _validator = new ValidationEngine();
         }
 
         #region Methods
