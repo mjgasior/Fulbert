@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using Microsoft.Practices.ObjectBuilder2;
+using Prism.Mvvm;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Fulbert.Infrastructure.Concrete.Mvvm
 {
-    // source: https://anthymecaillard.wordpress.com/2012/03/26/wpf-4-5-validation-asynchrone/
+    // based on code from: https://anthymecaillard.wordpress.com/2012/03/26/wpf-4-5-validation-asynchrone/
     public class ValidatableModel : BindableBase, INotifyDataErrorInfo
     {
         #region Fields and Properties
@@ -19,7 +20,6 @@ namespace Fulbert.Infrastructure.Concrete.Mvvm
 
         private object _lock = new object();
         private ConcurrentDictionary<string, List<string>> _errors = new ConcurrentDictionary<string, List<string>>();
-
 
         public bool HasErrors
         {
@@ -29,11 +29,11 @@ namespace Fulbert.Infrastructure.Concrete.Mvvm
         #endregion Fields and Properties
 
         #region Methods
-        protected override void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        protected async override void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
-            //await ValidateAsync();
-            Validate(); // making it sync because of command refresh on error changed event
+            IEnumerable<string> errorKeys = await Task.Run(() => Validate());
+            errorKeys.ForEach(key => OnErrorsChanged(key));
         }
 
         public void OnErrorsChanged(string propertyName)
@@ -52,26 +52,22 @@ namespace Fulbert.Infrastructure.Concrete.Mvvm
             return errorsForName;
         }
 
-        public Task ValidateAsync()
-        {
-            return Task.Run(() => Validate());
-        }
-
-        public void Validate()
+        public IEnumerable<string> Validate()
         {
             lock (_lock)
             {
+                var errorsChangedKeysList = new List<string>();
                 var validationContext = new ValidationContext(this, null, null);
                 var validationResults = new List<ValidationResult>();
                 Validator.TryValidateObject(this, validationContext, validationResults, true);
 
-                foreach (var kv in _errors.ToList())
+                foreach (KeyValuePair<string, List<string>> kv in _errors.ToList())
                 {
                     if (validationResults.All(r => r.MemberNames.All(m => m != kv.Key)))
                     {
                         List<string> outLi;
                         _errors.TryRemove(kv.Key, out outLi);
-                        OnErrorsChanged(kv.Key);
+                        errorsChangedKeysList.Add(kv.Key);
                     }
                 }
 
@@ -82,7 +78,7 @@ namespace Fulbert.Infrastructure.Concrete.Mvvm
 
                 foreach (var prop in q)
                 {
-                    var messages = prop.Select(r => r.ErrorMessage).ToList();
+                    List<string> messages = prop.Select(r => r.ErrorMessage).ToList();
 
                     if (_errors.ContainsKey(prop.Key))
                     {
@@ -90,8 +86,10 @@ namespace Fulbert.Infrastructure.Concrete.Mvvm
                         _errors.TryRemove(prop.Key, out outLi);
                     }
                     _errors.TryAdd(prop.Key, messages);
-                    OnErrorsChanged(prop.Key);
+                    errorsChangedKeysList.Add(prop.Key);
                 }
+
+                return errorsChangedKeysList;
             }
         }
         #endregion Methods
