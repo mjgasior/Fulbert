@@ -41,6 +41,20 @@
                      Style="{StaticResource textBoxInError}" MaxLength="11"/>
         </UniformGrid>
 
+        <StackPanel Margin="5">
+            <StackPanel.Resources>
+                <DataTemplate DataType="{x:Type ValidationError}">
+                    <TextBlock Text="{Binding ErrorContent}" Foreground="White" Background="Red" VerticalAlignment="Center" FontWeight="Bold"/>
+                </DataTemplate>
+            </StackPanel.Resources>
+            <TextBox Name="TextBox1" Text="{Binding PatientModel.FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+            <ContentPresenter Content="{Binding ElementName=TextBox1, Path=(Validation.Errors).CurrentItem}" HorizontalAlignment="Left"/>
+
+            <TextBox Name="TextBox2" Text="{Binding PatientModel.Pesel, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+            <ContentPresenter Content="{Binding ElementName= TextBox2, Path=(Validation.Errors).CurrentItem}" HorizontalAlignment="Left"/>
+            
+        </StackPanel>
+
         <Button Command="{Binding SavePatientDataCommand}" Margin="10" Content="{lex:Loc SavePatientData}"/>
         <Button Command="{Binding AddAppointmentCommand}" Margin="10" Content="{lex:Loc AddAppointment}" 
                 Visibility="{Binding IsEditMode, Converter={StaticResource BoolToVisibleConverter}}"/>

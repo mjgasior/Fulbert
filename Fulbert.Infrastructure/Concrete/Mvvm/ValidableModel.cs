@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace Fulbert.Infrastructure.Concrete.Mvvm
 {
-    public class ValidatableModel : BindableBase, INotifyDataErrorInfo
+    public abstract class ValidatableModel : BindableBase, INotifyDataErrorInfo
     {
         #region Fields and Properties
         private IValidationEngine _validator;
