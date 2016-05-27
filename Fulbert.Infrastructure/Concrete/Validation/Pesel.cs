@@ -1,24 +1,10 @@
 ﻿using System;
 
-namespace Fulbert.BLL.ApplicationModels.Models
+namespace Fulbert.Infrastructure.Concrete.Validation
 {
     public class Pesel
     {
-        #region Fields and Properties
         private static readonly int[] multipliers = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 };
-
-        private readonly string _personalIdString;
-        private readonly int[] _peselNumbers;
-
-        public bool IsAWoman { get; private set; }
-        #endregion Fields and Properties
-
-        public Pesel(string personalIdString)
-        {
-            _personalIdString = personalIdString;
-            _peselNumbers = GetPeselNumbers();
-            IsAWoman = IsEven(_peselNumbers[9]);
-        }
 
         #region Methods
         private static bool IsEven(int value)
@@ -26,35 +12,35 @@ namespace Fulbert.BLL.ApplicationModels.Models
             return value % 2 == 0;
         }
 
-        private int GetBirthDay()
+        private static int GetBirthDay(int[] peselNumbers)
         {
-            return _peselNumbers[4] * 10 + _peselNumbers[5];
+            return peselNumbers[4] * 10 + peselNumbers[5];
         }
 
-        private int GetBirthMonth()
+        private static int GetBirthMonth(int[] peselNumbers)
         {
-            return IsEven(_peselNumbers[2]) ? _peselNumbers[3] : _peselNumbers[3] + 10;
+            return IsEven(peselNumbers[2]) ? peselNumbers[3] : peselNumbers[3] + 10;
         }
 
-        private int GetBirthYear()
+        private static int GetBirthYear(int[] peselNumbers)
         {
-            int birthYear = 1900 + _peselNumbers[0] * 10 + _peselNumbers[1];
-            if (_peselNumbers[2] >= 2 && _peselNumbers[2] < 8)
+            int birthYear = 1900 + peselNumbers[0] * 10 + peselNumbers[1];
+            if (peselNumbers[2] >= 2 && peselNumbers[2] < 8)
             {
-                birthYear += (_peselNumbers[2] / 2) * 100;
+                birthYear += (peselNumbers[2] / 2) * 100;
             }
 
-            if (_peselNumbers[2] >= 8)
+            if (peselNumbers[2] >= 8)
             {
                 birthYear -= 100;
             }
             return birthYear;
         }
 
-        private int[] GetPeselNumbers()
+        private static int[] GetPeselNumbers(string peselString)
         {
             int peselLength = 11;
-            char[] characters = _personalIdString.ToCharArray();
+            char[] characters = peselString.ToCharArray();
             int[] digits = new int[peselLength];
             for (int i = 0; i < peselLength; i++)
             {
@@ -76,22 +62,9 @@ namespace Fulbert.BLL.ApplicationModels.Models
         }
         #endregion Methods
 
-        public int GetAge()
+        public static DateTime GetBirthday(int[] peselNumbers)
         {
-            DateTime birthday = GetBirthday();
-            DateTime today = DateTime.Today;
-            int age = today.Year - GetBirthday().Year;
-
-            if (birthday > today.AddYears(-age))
-            {
-                age--;
-            }
-            return age;
-        }
-
-        public DateTime GetBirthday()
-        {
-            return new DateTime(GetBirthYear(), GetBirthMonth(), GetBirthDay());
+            return new DateTime(GetBirthYear(peselNumbers), GetBirthMonth(peselNumbers), GetBirthDay(peselNumbers));
         }
 
         public static bool IsValid(string pesel)
@@ -108,17 +81,14 @@ namespace Fulbert.BLL.ApplicationModels.Models
                 {
                     toReturn = CountCheckSum(pesel).Equals(pesel[10].ToString());
                 }
+                int[] peselNumbers = GetPeselNumbers(pesel);
+                DateTime birthDate = GetBirthday(peselNumbers);
             }
             catch (Exception)
             {
                 toReturn = false;
             }
             return toReturn;
-        }
-
-        public override string ToString()
-        {
-            return _personalIdString;
         }
     }
 }
