@@ -14,13 +14,56 @@
     xmlns:interaction="clr-namespace:Fulbert.Infrastructure.Concrete.Interactions;assembly=Fulbert.Infrastructure"
     xmlns:behavior="clr-namespace:Fulbert.Infrastructure.Concrete.Behaviors;assembly=Fulbert.Infrastructure"
     xmlns:control="clr-namespace:Fulbert.Presentation.Controls.Extended;assembly=Fulbert.Presentation.Controls"
+    xmlns:controld="clr-namespace:Fulbert.Modules.PatientModule.Models"
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"           
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type ValidationError}">
-            <TextBlock Text="{Binding ErrorContent}" Foreground="White" Background="Red" VerticalAlignment="Center" FontWeight="Bold"/>
-        </DataTemplate>
+        <Style TargetType="{x:Type controld:HeaderTextBox}">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
+            <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
+            <Setter Property="Background" Value="{StaticResource APP_BRUSH_BRIGHT_GRAY}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type controld:HeaderTextBox}">
+                        <StackPanel>
+                            <Label Content="{TemplateBinding Header}" Foreground="{TemplateBinding Foreground}" 
+                                   Padding="0" FontSize="12" Margin="5" Background="Transparent" Opacity="0.75"/>
+                            <Border Background="{TemplateBinding Background}" Padding="5">
+                                <ScrollViewer x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}" BorderThickness="0" IsTabStop="False"/>
+                            </Border>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder x:Name="ErrorAdorner"/>
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
+                                <Grid Width="12" Height="12">
+                                    <Ellipse Width="12" Height="12" Fill="Red" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Foreground="White" FontWeight="Heavy" FontSize="8" HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center" TextAlignment="Center" ToolTip="{Binding ElementName=ErrorAdorner,  
+                                            Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">X</TextBlock>
+                                </Grid>
+                                <TextBlock Foreground="Red" FontWeight="Normal" Margin="2,0,0,0" 
+                                           Text="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     
     <i:Interaction.Triggers>
@@ -33,25 +76,23 @@
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
     
-    <StackPanel>
+    <StackPanel Width="300">
         <Label Content="{lex:Loc PatientData}" Style="{StaticResource labelHeaderStyle}"/>
 
-        <UniformGrid Columns="2" DataContext="{Binding PatientModel}">
-            <Label Content="{lex:Loc FirstName}"/>
-            <TextBox Text="{Binding Path=FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+        <StackPanel DataContext="{Binding PatientModel}">
+            <controld:HeaderTextBox Text="{Binding Path=FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
+                                MaxLength="11" Header="{lex:Loc FirstName}"/>
 
-            <Label Content="{lex:Loc LastName}"/>
-            <TextBox Text="{Binding LastName, ValidatesOnNotifyDataErrors=True}"/>
+            <controld:HeaderTextBox Text="{Binding Path=LastName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
+                                MaxLength="11" Header="{lex:Loc LastName}"/>
 
-            <Label Content="{lex:Loc PeselNumber}"/>
-            <TextBox Text="{Binding Path=Pesel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                     MaxLength="11">
+            <controld:HeaderTextBox Text="{Binding Path=Pesel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
+                                MaxLength="11" Header="{lex:Loc PeselNumber}">
                 <i:Interaction.Behaviors>
                     <behavior:OnlyNumericInputBehavior/>
                 </i:Interaction.Behaviors>
-            </TextBox>
-
-        </UniformGrid>
+            </controld:HeaderTextBox>
+        </StackPanel>
 
         <Button Command="{Binding SavePatientDataCommand}" Margin="10" Content="{lex:Loc SavePatientData}"/>
         <Button Command="{Binding AddAppointmentCommand}" Margin="10" Content="{lex:Loc AddAppointment}" 
