@@ -84,7 +84,6 @@
     <Compile Include="Abstract\ViewModels\IPatientsListViewModel.cs" />
     <Compile Include="Abstract\ViewModels\IPatientDataViewModel.cs" />
     <Compile Include="Abstract\ViewModels\IPatientModuleViewModel.cs" />
-    <Compile Include="Models\ControlD.cs" />
     <Compile Include="Models\HeaderTextBox.cs" />
     <Compile Include="Models\NavigationParams.cs" />
     <Compile Include="Models\PatientModuleRegionContext.cs" />

@@ -37,8 +37,16 @@ namespace Fulbert.BLL.ApplicationModels.Models
         public string Pesel
         {
             get { return _pesel; }
-            set { SetProperty(ref _pesel, value); }
+            set
+            {
+                SetProperty(ref _pesel, value);
+                SetAgeAndGender(_pesel);
+            }
         }
+
+        public int Age { get; private set; }
+        public DateTime Birthday { get; private set; }
+        public bool IsAWoman { get; private set; }
 
         public ICollection<Appointment> Appointments { get; set; }
 
@@ -53,6 +61,21 @@ namespace Fulbert.BLL.ApplicationModels.Models
         }
 
         #region Methods
+        private void SetAgeAndGender(string peselString)
+        {
+            if (Models.Pesel.IsValid(peselString))
+            {
+                Pesel pesel = new Pesel(peselString);
+                Age = pesel.GetAge();
+                IsAWoman = pesel.IsAWoman;
+                Birthday = pesel.GetBirthday();
+
+                OnPropertyChanged(() => Age);
+                OnPropertyChanged(() => IsAWoman);
+                OnPropertyChanged(() => Birthday);
+            }
+        }
+
         public string ToFullNameString()
         {
             return string.Format(Formatting.S0_1, FirstName, LastName);

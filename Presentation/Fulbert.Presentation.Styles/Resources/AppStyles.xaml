@@ -46,15 +46,14 @@
                             <TextBlock Foreground="Red" FontWeight="Normal" Margin="2,0,0,0" Text="{Binding ElementName=ErrorAdorner, 
                                 Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
                         </StackPanel>
-                        <AdornedElementPlaceholder x:Name="ErrorAdorner" ></AdornedElementPlaceholder>
+                        <AdornedElementPlaceholder x:Name="ErrorAdorner"/>
                     </DockPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
-                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

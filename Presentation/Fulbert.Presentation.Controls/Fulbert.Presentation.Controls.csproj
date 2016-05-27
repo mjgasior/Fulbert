@@ -44,7 +44,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extended\ControlC.cs" />
     <Compile Include="Extended\HeaderTextBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

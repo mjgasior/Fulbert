@@ -180,4 +180,13 @@
   <data name="ErrorPeselFormat" xml:space="preserve">
     <value>Numer PESEL musi zawierać dokładnie 11 liczb!</value>
   </data>
+  <data name="FormatAge" xml:space="preserve">
+    <value>Wiek {0} lat.</value>
+  </data>
+  <data name="FormatBirthday" xml:space="preserve">
+    <value>Data urodzenia {0:dd.MM.yyyy} roku.</value>
+  </data>
+  <data name="FormatGender" xml:space="preserve">
+    <value>Czy to kobieta? {0}</value>
+  </data>
 </root>

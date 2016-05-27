@@ -20,7 +20,7 @@
 
     <UserControl.Resources>
         <Style TargetType="{x:Type controld:HeaderTextBox}">
-            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Margin" Value="10,10,10,20"/>
             <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
             <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
             <Setter Property="Background" Value="{StaticResource APP_BRUSH_BRIGHT_GRAY}"/>
@@ -43,12 +43,12 @@
                     <ControlTemplate>
                         <StackPanel>
                             <AdornedElementPlaceholder x:Name="ErrorAdorner"/>
-                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
+                            <StackPanel Orientation="Horizontal" Margin="5">
                                 <Grid Width="12" Height="12">
                                     <Ellipse Width="12" Height="12" Fill="Red" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     <TextBlock Foreground="White" FontWeight="Heavy" FontSize="8" HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center" TextAlignment="Center" ToolTip="{Binding ElementName=ErrorAdorner,  
-                                            Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">X</TextBlock>
+                                               VerticalAlignment="Center" TextAlignment="Center" 
+                                               ToolTip="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">X</TextBlock>
                                 </Grid>
                                 <TextBlock Foreground="Red" FontWeight="Normal" Margin="2,0,0,0" 
                                            Text="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
@@ -59,8 +59,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -79,19 +78,23 @@
     <StackPanel Width="300">
         <Label Content="{lex:Loc PatientData}" Style="{StaticResource labelHeaderStyle}"/>
 
-        <StackPanel DataContext="{Binding PatientModel}">
+        <StackPanel DataContext="{Binding PatientModel}" Margin="0,0,0,10">
             <controld:HeaderTextBox Text="{Binding Path=FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                                MaxLength="11" Header="{lex:Loc FirstName}"/>
+                                    MaxLength="20" Header="{lex:Loc FirstName}"/>
 
             <controld:HeaderTextBox Text="{Binding Path=LastName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                                MaxLength="11" Header="{lex:Loc LastName}"/>
+                                    MaxLength="20" Header="{lex:Loc LastName}"/>
 
             <controld:HeaderTextBox Text="{Binding Path=Pesel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                                MaxLength="11" Header="{lex:Loc PeselNumber}">
+                                    MaxLength="11" Header="{lex:Loc PeselNumber}">
                 <i:Interaction.Behaviors>
                     <behavior:OnlyNumericInputBehavior/>
                 </i:Interaction.Behaviors>
             </controld:HeaderTextBox>
+
+            <Label Content="{Binding Age}" ContentStringFormat="{lex:Loc FormatAge}" />
+            <Label Content="{Binding Birthday}" ContentStringFormat="{lex:Loc FormatBirthday}" />
+            <Label Content="{Binding IsAWoman}" ContentStringFormat="{lex:Loc FormatGender}" />
         </StackPanel>
 
         <Button Command="{Binding SavePatientDataCommand}" Margin="10" Content="{lex:Loc SavePatientData}"/>

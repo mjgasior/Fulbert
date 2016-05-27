@@ -133,6 +133,33 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wiek {0} lat..
+        /// </summary>
+        public static string FormatAge {
+            get {
+                return ResourceManager.GetString("FormatAge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data urodzenia {0:dd.MM.yyyy} roku..
+        /// </summary>
+        public static string FormatBirthday {
+            get {
+                return ResourceManager.GetString("FormatBirthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czy to kobieta? {0}.
+        /// </summary>
+        public static string FormatGender {
+            get {
+                return ResourceManager.GetString("FormatGender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fulbert - aplikacja osobistej mini przychodni.
         /// </summary>
         public static string FullAppName {
