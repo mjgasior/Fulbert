@@ -97,6 +97,33 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Numer PESEL musi zawierać dokadnie 11 liczb!.
+        /// </summary>
+        public static string ErrorPeselFormat {
+            get {
+                return ResourceManager.GetString("ErrorPeselFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ten numer pesel jest błędny!.
+        /// </summary>
+        public static string ErrorPeselValidation {
+            get {
+                return ResourceManager.GetString("ErrorPeselValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To pole nie może być puste!.
+        /// </summary>
+        public static string ErrorRequired {
+            get {
+                return ResourceManager.GetString("ErrorRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Imię.
         /// </summary>
         public static string FirstName {

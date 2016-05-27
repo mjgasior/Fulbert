@@ -171,4 +171,13 @@
   <data name="AddAppointment" xml:space="preserve">
     <value>Dodaj wizytę</value>
   </data>
+  <data name="ErrorPeselValidation" xml:space="preserve">
+    <value>Ten numer pesel jest błędny!</value>
+  </data>
+  <data name="ErrorRequired" xml:space="preserve">
+    <value>To pole nie może być puste!</value>
+  </data>
+  <data name="ErrorPeselFormat" xml:space="preserve">
+    <value>Numer PESEL musi zawierać dokadnie 11 liczb!</value>
+  </data>
 </root>

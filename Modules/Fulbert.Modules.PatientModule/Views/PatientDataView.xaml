@@ -12,6 +12,7 @@
       lex:ResxLocalizationProvider.DefaultDictionary="Labels"
               
     xmlns:interaction="clr-namespace:Fulbert.Infrastructure.Concrete.Interactions;assembly=Fulbert.Infrastructure"
+    xmlns:behavior="clr-namespace:Fulbert.Infrastructure.Concrete.Behaviors;assembly=Fulbert.Infrastructure"
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"           
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
@@ -38,7 +39,12 @@
             <Label Content="{lex:Loc PeselNumber}"/>
             <TextBox Text="{Binding Path=Pesel, Mode=TwoWay, ValidatesOnDataErrors=True, 
                             NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource textBoxInError}" MaxLength="11"/>
+                     Style="{StaticResource textBoxInError}" MaxLength="11">
+                <i:Interaction.Behaviors>
+                    <behavior:OnlyNumericInputBehavior/>
+                </i:Interaction.Behaviors>
+            </TextBox>
+
         </UniformGrid>
 
         <StackPanel Margin="5">

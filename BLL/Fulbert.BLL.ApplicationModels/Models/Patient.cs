@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations;
 using Fulbert.Infrastructure.Concrete.Mvvm;
 using Fulbert.Infrastructure.Concrete.Validation;
-using Fulbert.Infrastructure.Abstract.Validation;
+using Fulbert.Presentation.Localization.Resources;
 
 [assembly: InternalsVisibleTo("Fulbert.BLL.Services.Tests")]
 namespace Fulbert.BLL.ApplicationModels.Models
@@ -15,8 +15,7 @@ namespace Fulbert.BLL.ApplicationModels.Models
         public Guid Id { get; private set; }
 
         private string _firstName;
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Must be set!")]
-        [StringLength(7, MinimumLength = 3, ErrorMessage = "Name exceeded 50 letters")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = nameof(Labels.ErrorRequired))]
         public string FirstName
         {
             get { return _firstName; }
@@ -24,9 +23,7 @@ namespace Fulbert.BLL.ApplicationModels.Models
         }
 
         private string _lastName;
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Must be set!")]
-        [StringLength(7, ErrorMessage = "Name exceeded 50 letters")]
-        [MinLength(5, ErrorMessage = "Too short string!")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = nameof(Labels.ErrorRequired))]
         public string LastName
         {
             get { return _lastName; }
@@ -34,8 +31,9 @@ namespace Fulbert.BLL.ApplicationModels.Models
         }
 
         private string _pesel;
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Must be set!")]
-        [PeselValidation]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = nameof(Labels.ErrorRequired))]
+        [RegularExpression("^[0-9]{11}$", ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = nameof(Labels.ErrorPeselFormat))]
+        [PeselValidation(ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = nameof(Labels.ErrorPeselValidation))]
         public string Pesel
         {
             get { return _pesel; }
