@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                    xmlns:interaction="clr-namespace:Fulbert.Infrastructure.Concrete.Interactions;assembly=Fulbert.Infrastructure">
+                    xmlns:interaction="clr-namespace:Fulbert.Infrastructure.Concrete.Interactions;assembly=Fulbert.Infrastructure"
+                    xmlns:control="clr-namespace:Fulbert.Presentation.Controls.Extended;assembly=Fulbert.Presentation.Controls">
 
     <BooleanToVisibilityConverter x:Key="BoolToVisibleConverter"/>
 
@@ -31,19 +32,29 @@
         <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
         <Setter Property="Background" Value="{StaticResource APP_BRUSH_BRIGHT_GRAY}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-    </Style>
-
-    <Style TargetType="{x:Type TextBox}" x:Key="textBoxInError">
-        <Setter Property="Margin" Value="10"/>
-        <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
-        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
-        <Setter Property="Background" Value="{StaticResource APP_BRUSH_BRIGHT_GRAY}"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <DockPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                            <Grid Width="12" Height="12">
+                                <Ellipse Width="12" Height="12" Fill="Red" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Foreground="White" FontWeight="Heavy" FontSize="8" HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center" TextAlignment="Center" ToolTip="{Binding ElementName=ErrorAdorner,  
+                                            Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">X</TextBlock>
+                            </Grid>
+                            <TextBlock Foreground="Red" FontWeight="Normal" Margin="2,0,0,0" Text="{Binding ElementName=ErrorAdorner, 
+                                Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                        </StackPanel>
+                        <AdornedElementPlaceholder x:Name="ErrorAdorner" ></AdornedElementPlaceholder>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
                 <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},
                         Path=(Validation.Errors)[0].ErrorContent}"/>
-                <Setter Property="Background" Value="#aaff0000"/>
             </Trigger>
         </Style.Triggers>
     </Style>

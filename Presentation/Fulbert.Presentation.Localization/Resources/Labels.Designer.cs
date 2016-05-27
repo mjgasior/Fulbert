@@ -97,7 +97,7 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Numer PESEL musi zawierać dokadnie 11 liczb!.
+        ///   Looks up a localized string similar to Numer PESEL musi zawierać dokładnie 11 liczb!.
         /// </summary>
         public static string ErrorPeselFormat {
             get {

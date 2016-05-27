@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulbert", "Fulbert\Fulbert.csproj", "{BAF0F03A-215D-4E88-BE02-A86E06CDF746}"
 EndProject
@@ -44,6 +44,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulbert.Utils", "Fulbert.Utils\Fulbert.Utils.csproj", "{F973E65F-55BA-461F-AD47-CB1CA11948F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulbert.Presentation.Styles", "Presentation\Fulbert.Presentation.Styles\Fulbert.Presentation.Styles.csproj", "{61F8A224-77F3-4308-B791-59C8A023BE63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulbert.Presentation.Controls", "Presentation\Fulbert.Presentation.Controls\Fulbert.Presentation.Controls.csproj", "{E6D4CCFC-65CC-4FA7-B280-6F88BC7EE083}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +109,10 @@ Global
 		{61F8A224-77F3-4308-B791-59C8A023BE63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61F8A224-77F3-4308-B791-59C8A023BE63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61F8A224-77F3-4308-B791-59C8A023BE63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6D4CCFC-65CC-4FA7-B280-6F88BC7EE083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6D4CCFC-65CC-4FA7-B280-6F88BC7EE083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6D4CCFC-65CC-4FA7-B280-6F88BC7EE083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6D4CCFC-65CC-4FA7-B280-6F88BC7EE083}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,5 +131,6 @@ Global
 		{26E3183E-12B2-47E9-BC70-BFAA7F3560CC} = {F670ACA2-7BF1-4C0A-9234-320775508095}
 		{F553BD16-E276-41E2-948A-96F9E0EA6E05} = {5A204D99-E45D-491B-B5A8-9C598752E461}
 		{61F8A224-77F3-4308-B791-59C8A023BE63} = {574E3F33-29B8-49A5-838F-9BD3BA7E6A85}
+		{E6D4CCFC-65CC-4FA7-B280-6F88BC7EE083} = {574E3F33-29B8-49A5-838F-9BD3BA7E6A85}
 	EndGlobalSection
 EndGlobal

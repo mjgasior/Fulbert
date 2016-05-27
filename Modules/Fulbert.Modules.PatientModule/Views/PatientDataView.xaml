@@ -13,9 +13,16 @@
               
     xmlns:interaction="clr-namespace:Fulbert.Infrastructure.Concrete.Interactions;assembly=Fulbert.Infrastructure"
     xmlns:behavior="clr-namespace:Fulbert.Infrastructure.Concrete.Behaviors;assembly=Fulbert.Infrastructure"
+    xmlns:control="clr-namespace:Fulbert.Presentation.Controls.Extended;assembly=Fulbert.Presentation.Controls"
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"           
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type ValidationError}">
+            <TextBlock Text="{Binding ErrorContent}" Foreground="White" Background="Red" VerticalAlignment="Center" FontWeight="Bold"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest, Mode=OneWay}">
             <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" WindowStyle="{StaticResource windowInteractive}">
@@ -37,29 +44,14 @@
             <TextBox Text="{Binding LastName, ValidatesOnNotifyDataErrors=True}"/>
 
             <Label Content="{lex:Loc PeselNumber}"/>
-            <TextBox Text="{Binding Path=Pesel, Mode=TwoWay, ValidatesOnDataErrors=True, 
-                            NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource textBoxInError}" MaxLength="11">
+            <TextBox Text="{Binding Path=Pesel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
+                     MaxLength="11">
                 <i:Interaction.Behaviors>
                     <behavior:OnlyNumericInputBehavior/>
                 </i:Interaction.Behaviors>
             </TextBox>
 
         </UniformGrid>
-
-        <StackPanel Margin="5">
-            <StackPanel.Resources>
-                <DataTemplate DataType="{x:Type ValidationError}">
-                    <TextBlock Text="{Binding ErrorContent}" Foreground="White" Background="Red" VerticalAlignment="Center" FontWeight="Bold"/>
-                </DataTemplate>
-            </StackPanel.Resources>
-            <TextBox Name="TextBox1" Text="{Binding PatientModel.FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
-            <ContentPresenter Content="{Binding ElementName=TextBox1, Path=(Validation.Errors).CurrentItem}" HorizontalAlignment="Left"/>
-
-            <TextBox Name="TextBox2" Text="{Binding PatientModel.Pesel, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
-            <ContentPresenter Content="{Binding ElementName= TextBox2, Path=(Validation.Errors).CurrentItem}" HorizontalAlignment="Left"/>
-            
-        </StackPanel>
 
         <Button Command="{Binding SavePatientDataCommand}" Margin="10" Content="{lex:Loc SavePatientData}"/>
         <Button Command="{Binding AddAppointmentCommand}" Margin="10" Content="{lex:Loc AddAppointment}" 

@@ -178,6 +178,6 @@
     <value>To pole nie może być puste!</value>
   </data>
   <data name="ErrorPeselFormat" xml:space="preserve">
-    <value>Numer PESEL musi zawierać dokadnie 11 liczb!</value>
+    <value>Numer PESEL musi zawierać dokładnie 11 liczb!</value>
   </data>
 </root>

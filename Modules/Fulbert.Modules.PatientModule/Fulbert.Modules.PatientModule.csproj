@@ -113,6 +113,10 @@
       <Project>{95fa0e4f-7269-4291-9859-be3a5381d1ff}</Project>
       <Name>Fulbert.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Presentation\Fulbert.Presentation.Controls\Fulbert.Presentation.Controls.csproj">
+      <Project>{e6d4ccfc-65cc-4fa7-b280-6f88bc7ee083}</Project>
+      <Name>Fulbert.Presentation.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Presentation\Fulbert.Presentation.Localization\Fulbert.Presentation.Localization.csproj">
       <Project>{d7e634be-a8b0-4e90-80c6-d6d5f2491236}</Project>
       <Name>Fulbert.Presentation.Localization</Name>
