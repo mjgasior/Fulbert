@@ -275,5 +275,14 @@ namespace Fulbert.Presentation.Localization.Resources {
                 return ResourceManager.GetString("SavePatientData", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wpisz frazę do wyszukania.
+        /// </summary>
+        public static string SearchPhrase {
+            get {
+                return ResourceManager.GetString("SearchPhrase", resourceCulture);
+            }
+        }
     }
 }

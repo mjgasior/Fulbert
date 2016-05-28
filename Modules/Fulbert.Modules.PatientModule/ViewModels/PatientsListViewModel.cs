@@ -9,6 +9,8 @@ using Fulbert.Infrastructure.Concrete.Mvvm;
 using Prism.Commands;
 using Fulbert.Modules.PatientModule.Views;
 using Fulbert.Infrastructure;
+using System.Linq;
+using Fulbert.Infrastructure.Concrete.Extensions;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
@@ -16,6 +18,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
     {
         private readonly IRegionManager _regionManager;
         private readonly IPatientService _patientService;
+        private ICollection<Patient> _allPatientsList;
 
         public DelegateCommand<Patient> EditPatientCommand { get; private set; }
         public ICollection<Patient> Patients { get; private set; }
@@ -33,6 +36,19 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             }
         }
 
+        private string _searchPhrase;
+        public string SearchPhrase
+        {
+            get { return _searchPhrase; }
+            set
+            {
+                if (SetProperty(ref _searchPhrase, value))
+                {
+                    SearchPatientsList();
+                }
+            }
+        }
+
         public PatientsListViewModel(IRegionManager regionManager, IPatientService patientService)
         {
             _regionManager = regionManager;
@@ -43,7 +59,8 @@ namespace Fulbert.Modules.PatientModule.ViewModels
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
-            Patients = _patientService.GetAllPatients();
+            _allPatientsList = _patientService.GetAllPatients();
+            Patients = _allPatientsList;
             OnPropertyChanged(() => Patients);
         }
 
@@ -53,6 +70,20 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             var parameters = new NavigationParameters();
             parameters.Add(NavigationParams.PATIENT_ID_PARAM, patientToEdit.Id.ToString());
             _regionManager.RequestNavigate(RegionNames.PATIENTMODULECONTENT, typeof(PatientDataView).Name, parameters);
+        }
+
+        private void SearchPatientsList()
+        {
+            if (_searchPhrase == string.Empty)
+            {
+                Patients = _allPatientsList;
+            }
+            else
+            {
+                var usersList = new List<Patient>();
+                Patients = _allPatientsList.WhereAtLeastOneProperty((string s) => s != null && s.Contains(_searchPhrase)).ToList();
+            }
+            OnPropertyChanged(() => Patients);
         }
     }
 }

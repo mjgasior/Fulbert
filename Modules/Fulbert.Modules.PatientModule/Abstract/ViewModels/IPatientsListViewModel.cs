@@ -13,5 +13,6 @@ namespace Fulbert.Modules.PatientModule.Abstract.ViewModels
         ICollection<Patient> Patients { get; }
         Patient SelectedPatient { get; set; }
         PatientModuleRegionContext ModuleRegionContext { get; set; }
+        string SearchPhrase { get; set; }
     }
 }

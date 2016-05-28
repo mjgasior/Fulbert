@@ -10,26 +10,33 @@
       lex:ResxLocalizationProvider.DefaultDictionary="Labels"
 
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"
+    xmlns:control="clr-namespace:Fulbert.Presentation.Controls.Extended;assembly=Fulbert.Presentation.Controls"
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
-    <DataGrid ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}" x:Name="viewContainer">
-        <DataGrid.Columns>
-            <DataGridTextColumn Header="{lex:Loc FirstName}" Binding="{Binding FirstName}"/>
-            <DataGridTextColumn Header="{lex:Loc LastName}" Binding="{Binding LastName}" />
-            <DataGridTextColumn Header="{lex:Loc Pesel}" Binding="{Binding Pesel}" />
-            <DataGridTemplateColumn Width="*">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Grid Background="Transparent">
-                            <Button Content="{lex:Loc Edit}" Style="{StaticResource buttonSmallForDataGrid}"
+    <StackPanel>
+        <control:HeaderTextBox Header="{lex:Loc SearchPhrase}" Text="{Binding SearchPhrase, UpdateSourceTrigger=PropertyChanged}" 
+                               Width="400" HorizontalAlignment="Left"/>
+
+        <DataGrid ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}" x:Name="viewContainer">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{lex:Loc FirstName}" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="{lex:Loc LastName}" Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="{lex:Loc Pesel}" Binding="{Binding Pesel}" />
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid Background="Transparent">
+                                <Button Content="{lex:Loc Edit}" Style="{StaticResource buttonSmallForDataGrid}"
                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mvvm:BaseView}}, Path=DataContext.EditPatientCommand}"
                                     CommandParameter="{Binding}"/>
-                        </Grid>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-        </DataGrid.Columns>
-    </DataGrid>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+        
 
 </mvvm:BaseView>
 

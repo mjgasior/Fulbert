@@ -73,6 +73,7 @@
     <Compile Include="Abstract\Mvvm\IViewModel.cs" />
     <Compile Include="Abstract\Validation\IValidationEngine.cs" />
     <Compile Include="Concrete\Behaviors\OnlyNumericInputBehavior.cs" />
+    <Compile Include="Concrete\Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Concrete\Interactions\NotificationContent.cs" />
     <Compile Include="Concrete\Mvvm\BaseModule.cs" />
     <Compile Include="Concrete\Mvvm\BaseView.cs" />

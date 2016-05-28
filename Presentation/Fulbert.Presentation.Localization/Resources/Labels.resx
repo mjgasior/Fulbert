@@ -189,4 +189,7 @@
   <data name="FormatGender" xml:space="preserve">
     <value>Czy to kobieta? {0}</value>
   </data>
+  <data name="SearchPhrase" xml:space="preserve">
+    <value>Wpisz frazę do wyszukania</value>
+  </data>
 </root>
