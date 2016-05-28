@@ -191,14 +191,14 @@
     <Style TargetType="{x:Type Button}" x:Key="buttonSmallForDataGrid">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_ALMOST_BLACK}"/>
-        <Setter Property="Margin" Value="2"/>
-        <Setter Property="Width" Value="200"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Width" Value="100"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border x:Name="borderContainer" BorderThickness="0" Background="{TemplateBinding Background}">
                         <Label x:Name="labelContent" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" 
-                               Style="{StaticResource labelButtonStyle}" Background="Transparent" Padding="0" Margin="0" />
+                               Style="{StaticResource labelButtonStyle}" Background="Transparent" Padding="0" Margin="2" />
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -206,9 +206,9 @@
                                 <VisualState x:Name="MouseOver">
                                     <Storyboard>
                                         <ColorAnimation Storyboard.TargetName="borderContainer" Storyboard.TargetProperty="Background.Color" 
-                                                        To="{StaticResource APP_COLOR_THEME_BRIGHT}" Duration="0:0:0.2"/>
+                                                        To="{StaticResource APP_COLOR_THEME_BLUE}" Duration="0:0:0.2"/>
                                         <ColorAnimation Storyboard.TargetName="labelContent" Storyboard.TargetProperty="Foreground.Color" 
-                                                        To="{StaticResource APP_COLOR_ALMOST_BLACK}" Duration="0:0:0.2"/>
+                                                        To="{StaticResource APP_COLOR_ALMOST_WHITE}" Duration="0:0:0.2"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">

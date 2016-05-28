@@ -10,6 +10,8 @@ using Prism.Regions;
 using System;
 using System.Linq;
 using System.ComponentModel;
+using Fulbert.Modules.PatientModule.Views;
+using Fulbert.Infrastructure;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
@@ -17,6 +19,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
     {
         #region Fields & Properties
         private readonly IPatientService _patientService;
+        private readonly IRegionManager _regionManager;
 
         public bool IsEditMode { get; private set; }
 
@@ -33,9 +36,10 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         public InteractionRequest<INotification> NotificationRequest { get; private set; }
         #endregion Fields & Properties
 
-        public PatientDataViewModel(IPatientService patientService)
+        public PatientDataViewModel(IRegionManager regionManager, IPatientService patientService)
         {
             _patientService = patientService;
+            _regionManager = regionManager;
 
             SetPatientModel(new Patient());
 
@@ -48,18 +52,17 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         private bool CanSavePatientData() => !PatientModel.HasErrors;
         private void OnSavePatientData()
         {
-            string message;
             if (IsEditMode)
             {
                 _patientService.UpdatePatient(PatientModel);
-                message = Labels.SavedPatientData;
+                RaiseSaveNotification(Labels.SavedPatientData);
             }
             else
             {
                 _patientService.AddNewPatient(PatientModel);
-                message = Labels.SavedNewPatientData;
-            }
-            NotificationRequest.Raise(new Notification { Content = message, Title = Labels.Saved });
+                RaiseSaveNotification(Labels.SavedNewPatientData);
+                _regionManager.RequestNavigate(RegionNames.PATIENTMODULECONTENT, typeof(PatientsListView).Name);
+            }            
         }
 
         private bool CanAddAppointment() => IsEditMode;
@@ -86,6 +89,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             SavePatientDataCommand.RaiseCanExecuteChanged();
         }
 
+        #region Methods
         private void SetPatientModel(Patient patient)
         {
             if (PatientModel != null)
@@ -100,5 +104,11 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         {
             SavePatientDataCommand.RaiseCanExecuteChanged();
         }
+
+        private void RaiseSaveNotification(string message)
+        {
+            NotificationRequest.Raise(new Notification { Content = message, Title = Labels.Saved });
+        }
+        #endregion Methods
     }
 }

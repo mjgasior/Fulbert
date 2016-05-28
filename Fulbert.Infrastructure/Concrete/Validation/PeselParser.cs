@@ -2,7 +2,7 @@
 
 namespace Fulbert.Infrastructure.Concrete.Validation
 {
-    public class PeselParser
+    public static class PeselParser
     {
         private static readonly int[] multipliers = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 };
 
