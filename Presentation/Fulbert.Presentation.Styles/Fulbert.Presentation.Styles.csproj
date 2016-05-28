@@ -68,6 +68,10 @@
       <Project>{95fa0e4f-7269-4291-9859-be3a5381d1ff}</Project>
       <Name>Fulbert.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Fulbert.Presentation.Controls\Fulbert.Presentation.Controls.csproj">
+      <Project>{a351bf4e-e872-4f68-99a9-58f7cf72ea18}</Project>
+      <Name>Fulbert.Presentation.Controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
