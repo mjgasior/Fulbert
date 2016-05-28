@@ -80,7 +80,7 @@
     <Compile Include="Concrete\Mvvm\NavigationViewModel.cs" />
     <Compile Include="Concrete\Mvvm\UnityExtensions.cs" />
     <Compile Include="Concrete\Mvvm\ValidableModel.cs" />
-    <Compile Include="Concrete\Validation\Pesel.cs" />
+    <Compile Include="Concrete\Validation\PeselParser.cs" />
     <Compile Include="Concrete\Validation\PeselValidationAttribute.cs" />
     <Compile Include="Concrete\Validation\ValidationEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

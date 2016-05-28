@@ -45,7 +45,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         }
 
         #region Commands
-        private bool CanSavePatientData() => !PatientModel.HasErrors; // Place for validation
+        private bool CanSavePatientData() => !PatientModel.HasErrors;
         private void OnSavePatientData()
         {
             string message;
@@ -83,6 +83,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             }
             OnPropertyChanged(() => IsEditMode);
             AddAppointmentCommand.RaiseCanExecuteChanged();
+            SavePatientDataCommand.RaiseCanExecuteChanged();
         }
 
         private void SetPatientModel(Patient patient)

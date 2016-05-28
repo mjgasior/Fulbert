@@ -2,7 +2,7 @@
 
 namespace Fulbert.Infrastructure.Concrete.Validation
 {
-    public class Pesel
+    public class PeselParser
     {
         private static readonly int[] multipliers = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 };
 
@@ -37,18 +37,6 @@ namespace Fulbert.Infrastructure.Concrete.Validation
             return birthYear;
         }
 
-        private static int[] GetPeselNumbers(string peselString)
-        {
-            int peselLength = 11;
-            char[] characters = peselString.ToCharArray();
-            int[] digits = new int[peselLength];
-            for (int i = 0; i < peselLength; i++)
-            {
-                digits[i] = int.Parse(characters[i].ToString());
-            }
-            return digits;
-        }
-
         private static object CountCheckSum(string pesel)
         {
             int sum = 0;
@@ -61,6 +49,18 @@ namespace Fulbert.Infrastructure.Concrete.Validation
             return moduloResult == 0 ? moduloResult.ToString() : (10 - moduloResult).ToString();
         }
         #endregion Methods
+
+        public static int[] GetPeselNumbers(string peselString)
+        {
+            int peselLength = 11;
+            char[] characters = peselString.ToCharArray();
+            int[] digits = new int[peselLength];
+            for (int i = 0; i < peselLength; i++)
+            {
+                digits[i] = int.Parse(characters[i].ToString());
+            }
+            return digits;
+        }
 
         public static DateTime GetBirthday(int[] peselNumbers)
         {

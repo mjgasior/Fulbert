@@ -10,7 +10,7 @@ namespace Fulbert.Infrastructure.Concrete.Validation
 
         public override bool IsValid(object pesel)
         {
-            return Pesel.IsValid((string)pesel);
+            return PeselParser.IsValid((string)pesel);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Fulbert.BLL.Services.Tests.Models
     [Category(TestCategories.APPLICATION)]
     public class PeselTests : BaseTest
     {
+        #region Tests
         [Test]
         [TestCase("10241401823", ExpectedResult = true)]
         [TestCase("62010415616", ExpectedResult = false)]
@@ -53,7 +54,7 @@ namespace Fulbert.BLL.Services.Tests.Models
             DateTime birthday = new DateTime(1974, 08, 26);
 
             int age = DateTime.Now.Year - birthday.Year;
-            if (now.Month < birthday.Month && now.Day < birthday.Day)
+            if (IsTodayBeforeBirthday(now, birthday))
             {
                 age--;
             }
@@ -67,11 +68,33 @@ namespace Fulbert.BLL.Services.Tests.Models
             Assert.That(ageFromPesel, Is.EqualTo(age));
         }
 
+        [Test]
+        [TestCase("000000000000")]
+        [TestCase("00000000000")]
+        [TestCase("0")]
+        [TestCase("")]
+        [TestCase("14141400001")]
+        [TestCase("10103200003")]       
+        public void Is_PESEL_number_invalid(string peselString)
+        {
+            // Act & Arrange
+            Assert.IsFalse(Pesel.IsValid(peselString));
+        }
+
+        #endregion Tests
+
+        #region Methods
+        private bool IsTodayBeforeBirthday(DateTime now, DateTime birthday)
+        {
+            return (now.Month < birthday.Month) || (now.Month == birthday.Month && now.Day < birthday.Day);
+        }
+
         private void AssertIsPeselValid(string peselString)
         {
             bool isValid = Pesel.IsValid(peselString);
             Assert.IsTrue(isValid);
         }
+        #endregion Methods
     }
 }
 

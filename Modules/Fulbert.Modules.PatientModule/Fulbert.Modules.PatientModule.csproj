@@ -116,6 +116,7 @@
     <ProjectReference Include="..\..\Presentation\Fulbert.Presentation.Controls\Fulbert.Presentation.Controls.csproj">
       <Project>{a351bf4e-e872-4f68-99a9-58f7cf72ea18}</Project>
       <Name>Fulbert.Presentation.Controls</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Presentation\Fulbert.Presentation.Localization\Fulbert.Presentation.Localization.csproj">
       <Project>{d7e634be-a8b0-4e90-80c6-d6d5f2491236}</Project>
