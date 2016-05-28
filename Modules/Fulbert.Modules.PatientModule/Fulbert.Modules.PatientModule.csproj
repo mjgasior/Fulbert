@@ -84,7 +84,6 @@
     <Compile Include="Abstract\ViewModels\IPatientsListViewModel.cs" />
     <Compile Include="Abstract\ViewModels\IPatientDataViewModel.cs" />
     <Compile Include="Abstract\ViewModels\IPatientModuleViewModel.cs" />
-    <Compile Include="Models\HeaderTextBox.cs" />
     <Compile Include="Models\NavigationParams.cs" />
     <Compile Include="Models\PatientModuleRegionContext.cs" />
     <Compile Include="PatientModule.cs" />
@@ -115,7 +114,7 @@
       <Name>Fulbert.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Presentation\Fulbert.Presentation.Controls\Fulbert.Presentation.Controls.csproj">
-      <Project>{e6d4ccfc-65cc-4fa7-b280-6f88bc7ee083}</Project>
+      <Project>{a351bf4e-e872-4f68-99a9-58f7cf72ea18}</Project>
       <Name>Fulbert.Presentation.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Presentation\Fulbert.Presentation.Localization\Fulbert.Presentation.Localization.csproj">

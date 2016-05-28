@@ -11,7 +11,7 @@ namespace Fulbert.Presentation.Controls.Extended
             set { SetValue(HeaderProperty, value); }
         }
 
-        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", 
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header",
             typeof(string), typeof(HeaderTextBox), new PropertyMetadata(string.Empty));
     }
 }
