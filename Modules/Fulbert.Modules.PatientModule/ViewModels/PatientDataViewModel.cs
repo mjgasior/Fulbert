@@ -80,11 +80,12 @@ namespace Fulbert.Modules.PatientModule.ViewModels
                 Guid patietnId = Guid.Parse((string)navigationContext.Parameters[NavigationParams.PATIENT_ID_PARAM]);
                 SetPatientModel(_patientService.GetPatientById(patietnId));
             }
-            else
+            else 
             {
                 SetPatientModel(new Patient());
             }
             OnPropertyChanged(() => IsEditMode);
+            PatientModel.ForceValidation();
             AddAppointmentCommand.RaiseCanExecuteChanged();
             SavePatientDataCommand.RaiseCanExecuteChanged();
         }

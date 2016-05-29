@@ -36,7 +36,6 @@ namespace Fulbert.Infrastructure.Concrete.Validation
             _validationTarget = validationTarget;
             _validationTarget.PropertyChanged += OnPropertyChanged;
             _errorEventInvoke = errorEventInvoke;
-            Validate();
         }
 
         #region Methods

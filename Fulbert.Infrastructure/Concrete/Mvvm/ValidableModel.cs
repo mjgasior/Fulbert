@@ -28,6 +28,11 @@ namespace Fulbert.Infrastructure.Concrete.Mvvm
 
         #region Methods
 
+        public void ForceValidation()
+        {
+            OnPropertyChanged(null);
+        }
+
         public IEnumerable GetErrors(string propertyName)
         {
             return _validator.GetErrors(propertyName);
