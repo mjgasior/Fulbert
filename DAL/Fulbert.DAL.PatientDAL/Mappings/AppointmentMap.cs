@@ -9,6 +9,7 @@ namespace Fulbert.DAL.PatientDAL.Mappings
         {
             Id(x => x.Id).Column("Id").GeneratedBy.Guid();
             Map(x => x.Date);
+            Map(x => x.Interview);
             References(x => x.Patient);
         }
     }

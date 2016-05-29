@@ -21,5 +21,10 @@ namespace Fulbert.Infrastructure.Concrete.Mvvm
         {
             ViewModel = viewModel;
         }
+
+        public BaseView()
+        {
+
+        }
     }
 }

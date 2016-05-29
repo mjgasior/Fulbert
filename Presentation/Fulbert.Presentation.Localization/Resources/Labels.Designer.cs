@@ -88,6 +88,60 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Numer telefonu/komórkowy.
+        /// </summary>
+        public static string ContactCellPhone {
+            get {
+                return ResourceManager.GetString("ContactCellPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miasto.
+        /// </summary>
+        public static string ContactCity {
+            get {
+                return ResourceManager.GetString("ContactCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adres mailowy.
+        /// </summary>
+        public static string ContactEmail {
+            get {
+                return ResourceManager.GetString("ContactEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Województwo/Region.
+        /// </summary>
+        public static string ContactState {
+            get {
+                return ResourceManager.GetString("ContactState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ulica.
+        /// </summary>
+        public static string ContactStreet {
+            get {
+                return ResourceManager.GetString("ContactStreet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kod pocztowy.
+        /// </summary>
+        public static string ContactZipCode {
+            get {
+                return ResourceManager.GetString("ContactZipCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edytuj.
         /// </summary>
         public static string Edit {
@@ -174,6 +228,24 @@ namespace Fulbert.Presentation.Localization.Resources {
         public static string LastName {
             get {
                 return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wizyty pacjenta.
+        /// </summary>
+        public static string PatientAppointments {
+            get {
+                return ResourceManager.GetString("PatientAppointments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dane teleadresowe pacjenta.
+        /// </summary>
+        public static string PatientContactDetails {
+            get {
+                return ResourceManager.GetString("PatientContactDetails", resourceCulture);
             }
         }
         

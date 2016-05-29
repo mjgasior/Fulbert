@@ -1,5 +1,4 @@
-﻿using Fulbert.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Fulbert.DAL.RepositoryModels.Models

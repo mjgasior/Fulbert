@@ -15,7 +15,7 @@
     xmlns:behavior="clr-namespace:Fulbert.Infrastructure.Concrete.Behaviors;assembly=Fulbert.Infrastructure"
     xmlns:control="clr-namespace:Fulbert.Presentation.Controls.Extended;assembly=Fulbert.Presentation.Controls"
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"           
-    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" x:Name="containerOfView">
     
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest, Mode=OneWay}">
@@ -26,43 +26,79 @@
             </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
-    
-    <StackPanel Width="300">
-        <Label Content="{lex:Loc PatientData}" Style="{StaticResource labelHeaderStyle}"/>
 
-        <StackPanel DataContext="{Binding PatientModel}" Margin="0,0,0,10">
-            <control:HeaderTextBox Text="{Binding Path=FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                                    MaxLength="20" Header="{lex:Loc FirstName}"/>
+    <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Height="500">
+        <WrapPanel>
+            <StackPanel Width="300" Margin="10">
+                <Label Content="{lex:Loc PatientData}" Style="{StaticResource labelHeaderStyle}"/>
 
-            <control:HeaderTextBox Text="{Binding Path=LastName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                                    MaxLength="20" Header="{lex:Loc LastName}"/>
+                <StackPanel DataContext="{Binding PatientModel}" Margin="0,0,0,10">
+                    <control:HeaderTextBox Text="{Binding Path=FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
+                                       MaxLength="20" Header="{lex:Loc FirstName}"/>
 
-            <control:HeaderTextBox Text="{Binding Path=Pesel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                                    MaxLength="11" Header="{lex:Loc PeselNumber}">
-                <i:Interaction.Behaviors>
-                    <behavior:OnlyNumericInputBehavior/>
-                </i:Interaction.Behaviors>
-            </control:HeaderTextBox>
-        </StackPanel>
+                    <control:HeaderTextBox Text="{Binding Path=LastName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
+                                       MaxLength="20" Header="{lex:Loc LastName}"/>
 
-        <StackPanel DataContext="{Binding PatientModel}" Margin="0,0,0,10">
-            <StackPanel.Style>
-                <Style TargetType="{x:Type StackPanel}">
-                    <Setter Property="Background" Value="{StaticResource APP_BRUSH_ALMOST_WHITE}"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Age}" Value="0">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </StackPanel.Style>
-            <Label Content="{Binding Age}" ContentStringFormat="{lex:Loc FormatAge}" />
-            <Label Content="{Binding Birthday}" ContentStringFormat="{lex:Loc FormatBirthday}" />
-            <Label Content="{Binding IsAWoman}" ContentStringFormat="{lex:Loc FormatGender}" />
-        </StackPanel>
+                    <control:HeaderTextBox Text="{Binding Path=Pesel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
+                                       MaxLength="11" Header="{lex:Loc PeselNumber}">
+                        <i:Interaction.Behaviors>
+                            <behavior:OnlyNumericInputBehavior/>
+                        </i:Interaction.Behaviors>
+                    </control:HeaderTextBox>
+                </StackPanel>
 
-        <Button Command="{Binding SavePatientDataCommand}" Margin="10" Content="{lex:Loc SavePatientData}"/>
-        <Button Command="{Binding AddAppointmentCommand}" Margin="10" Content="{lex:Loc AddAppointment}" 
-                Visibility="{Binding IsEditMode, Converter={StaticResource BoolToVisibleConverter}}"/>
-    </StackPanel>
+                <StackPanel DataContext="{Binding PatientModel}" Margin="0,0,0,10">
+                    <StackPanel.Style>
+                        <Style TargetType="{x:Type StackPanel}">
+                            <Setter Property="Background" Value="{StaticResource APP_BRUSH_ALMOST_WHITE}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Age}" Value="0">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Label Content="{Binding Age}" ContentStringFormat="{lex:Loc FormatAge}" />
+                    <Label Content="{Binding Birthday}" ContentStringFormat="{lex:Loc FormatBirthday}" />
+                    <Label Content="{Binding IsAWoman}" ContentStringFormat="{lex:Loc FormatGender}" />
+                </StackPanel>
+
+                <Button Command="{Binding SavePatientDataCommand}" Margin="10" Content="{lex:Loc SavePatientData}"/>
+            </StackPanel>
+
+            <StackPanel Width="300" Margin="10" Visibility="{Binding IsEditMode, Converter={StaticResource BoolToVisibleConverter}}">
+                <Label Content="{lex:Loc PatientContactDetails}" Style="{StaticResource labelHeaderStyle}"/>
+
+                <control:HeaderTextBox MaxLength="20" Header="{lex:Loc ContactCellPhone}"/>
+
+                <control:HeaderTextBox MaxLength="20" Header="{lex:Loc ContactEmail}"/>
+
+                <StackPanel DataContext="{Binding PatientModel}" Margin="0,0,0,10">
+                    <StackPanel.Style>
+                        <Style TargetType="{x:Type StackPanel}">
+                            <Setter Property="Background" Value="{StaticResource APP_BRUSH_ALMOST_WHITE}"/>
+                        </Style>
+                    </StackPanel.Style>
+                    <control:HeaderTextBox MaxLength="20" Header="{lex:Loc ContactStreet}"/>
+                    <control:HeaderTextBox MaxLength="20" Header="{lex:Loc ContactZipCode}"/>
+                    <control:HeaderTextBox MaxLength="20" Header="{lex:Loc ContactCity}"/>
+                    <control:HeaderTextBox MaxLength="20" Header="{lex:Loc ContactState}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Width="300" Margin="10" Visibility="{Binding IsEditMode, Converter={StaticResource BoolToVisibleConverter}}">
+                <Label Content="{lex:Loc PatientAppointments}" Style="{StaticResource labelHeaderStyle}"/>
+
+                <ItemsControl ItemsSource="{Binding PatientModel.Appointments}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Margin="10" Content="{Binding Date}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Button Command="{Binding AddAppointmentCommand}" Margin="10" Content="{lex:Loc AddAppointment}"/>
+            </StackPanel>
+        </WrapPanel>
+    </ScrollViewer>
 </mvvm:BaseView>

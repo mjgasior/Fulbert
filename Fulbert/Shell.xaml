@@ -11,7 +11,7 @@
                      
     xmlns:inf="clr-namespace:Fulbert.Infrastructure;assembly=Fulbert.Infrastructure"
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"
-    mc:Ignorable="d" Title="{loc:Loc FullAppName}" Height="600" Width="966" WindowState="Maximized">
+    mc:Ignorable="d" Title="{loc:Loc FullAppName}" MinHeight="500" MinWidth="960" WindowState="Maximized">
     
     <StackPanel>
         <Label Content="{loc:Loc AppName}" Style="{StaticResource labelAppHeader}"/>

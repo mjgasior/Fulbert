@@ -7,7 +7,7 @@
     <BooleanToVisibilityConverter x:Key="BoolToVisibleConverter"/>
 
     <Color x:Key="APP_COLOR_WHITE">#fff</Color>
-    <Color x:Key="APP_COLOR_ALMOST_WHITE">#efefef</Color>
+    <Color x:Key="APP_COLOR_ALMOST_WHITE">#f5f5f5</Color>
     <Color x:Key="APP_COLOR_ALMOST_BLACK">#191919</Color>
     <Color x:Key="APP_COLOR_GRAY">#909090</Color>
     <Color x:Key="APP_COLOR_BRIGHT_GRAY">#e0e0e0</Color>

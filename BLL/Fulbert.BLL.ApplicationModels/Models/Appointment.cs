@@ -7,6 +7,7 @@ namespace Fulbert.BLL.ApplicationModels.Models
     {
         public Guid Id { get; private set; }
         public DateTime Date { get; set; }
+        public string Interview { get; set; }
         public Patient Patient { get; set; }
 
         public Appointment(Guid id)

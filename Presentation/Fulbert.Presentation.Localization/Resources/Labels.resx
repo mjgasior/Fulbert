@@ -192,4 +192,28 @@
   <data name="SearchPhrase" xml:space="preserve">
     <value>Wpisz frazę do wyszukania</value>
   </data>
+  <data name="ContactCellPhone" xml:space="preserve">
+    <value>Numer telefonu/komórkowy</value>
+  </data>
+  <data name="ContactCity" xml:space="preserve">
+    <value>Miasto</value>
+  </data>
+  <data name="ContactEmail" xml:space="preserve">
+    <value>Adres mailowy</value>
+  </data>
+  <data name="ContactState" xml:space="preserve">
+    <value>Województwo/Region</value>
+  </data>
+  <data name="ContactStreet" xml:space="preserve">
+    <value>Ulica</value>
+  </data>
+  <data name="ContactZipCode" xml:space="preserve">
+    <value>Kod pocztowy</value>
+  </data>
+  <data name="PatientAppointments" xml:space="preserve">
+    <value>Wizyty pacjenta</value>
+  </data>
+  <data name="PatientContactDetails" xml:space="preserve">
+    <value>Dane teleadresowe pacjenta</value>
+  </data>
 </root>

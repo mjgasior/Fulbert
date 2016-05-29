@@ -60,9 +60,11 @@ namespace Fulbert.BLL.Services.Tests.Services
         {
             // Arrange
             DateTime appointmentDate = DateTime.Now;
+            string interview = "The patient is as fit as it can be!";
             var appointment = new Appointment
             {
-                Date = appointmentDate
+                Date = appointmentDate,
+                Interview = interview
             };
 
             string firstName = "Foo";
@@ -80,6 +82,7 @@ namespace Fulbert.BLL.Services.Tests.Services
             Assert.AreEqual(updatedPatientEntity.Appointments.Count, 2);
             Assert.AreEqual(updatedPatientEntity.Appointments.First().Date.Date, appointmentDate.Date);
             Assert.AreEqual(updatedPatientEntity.Appointments.Last().Date.Date, appointmentDate.Date);
+            StringAssert.Contains(updatedPatientEntity.Appointments.First().Interview, interview);
         }
 
         [Test]

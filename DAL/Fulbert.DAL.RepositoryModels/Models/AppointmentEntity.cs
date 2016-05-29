@@ -6,6 +6,7 @@ namespace Fulbert.DAL.RepositoryModels.Models
     public class AppointmentEntity : BaseEntity
     {
         public virtual DateTime Date { get; set; }
+        public virtual string Interview { get; set; }
         public virtual PatientEntity Patient { get; set; }
 
         internal AppointmentEntity(Guid id)

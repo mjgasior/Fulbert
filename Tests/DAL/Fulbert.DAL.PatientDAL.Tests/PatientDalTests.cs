@@ -1,7 +1,9 @@
 ﻿using Fulbert.DAL.RepositoryModels.Abstract;
 using Fulbert.DAL.RepositoryModels.Models;
 using Fulbert.Tests.Common;
+using NHibernate.Exceptions;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +56,39 @@ namespace Fulbert.DAL.PatientDAL.Tests
             Assert.IsTrue(appointments.Count == 1);
 
             Assert.That(result.Pesel, Is.EqualTo(pesel));
+        }
+
+        [Test]
+        public void Try_add_patient_with_the_same_PESEL_twice()
+        {
+            // Arrange
+            string firstName1 = "Peter";
+            string lastName1 = "Steele";
+
+            string firstName2 = "Claire Elise";
+            string lastName2 = "Boucher";
+
+            string pesel = "62010417694";
+
+            var patient1 = new PatientEntity
+            {
+                FirstName = firstName1,
+                LastName = lastName1,
+                Pesel = pesel
+            };
+            _patientDal.SaveOrUpdatePatient(patient1);
+
+            // Act
+            var patient2 = new PatientEntity
+            {
+                FirstName = firstName2,
+                LastName = lastName2,
+                Pesel = pesel
+            };
+            TestDelegate testDelegate = () => _patientDal.SaveOrUpdatePatient(patient2);
+
+            // Assert
+            Assert.That(testDelegate, Throws.TypeOf<GenericADOException>());
         }
 
         [Test]
@@ -155,6 +190,34 @@ namespace Fulbert.DAL.PatientDAL.Tests
         }
 
         [Test]
+        public void Add_appointment_to_a_patient()
+        {
+            // Arrange
+            string firstName = "Type O Negative";
+            string lastName = "Carnivore";
+            DateTime appointmentDate = DateTime.Now;
+            string interview = "The patient is quite ill right now";
+
+            DatabaseTools.AddPatientToDatabase(firstName, lastName);
+
+            IEnumerable<PatientEntity> patients = _patientDal.GetAllPatients();
+            PatientEntity patient = patients.First(x => x.FirstName == firstName);
+
+            // Act
+            patient.AddAppointment(new AppointmentEntity { Date = appointmentDate, Interview = interview });
+            _patientDal.SaveOrUpdatePatient(patient);
+
+            // Assert
+            IList<AppointmentEntity> appointments = DatabaseTools.GetAllAppointments();
+            
+            Assert.That(appointments.Count, Is.EqualTo(1));
+            AppointmentEntity resultAppointment = appointments.First();
+            Assert.AreEqual(resultAppointment.Date.Date, appointmentDate.Date);
+            StringAssert.Contains(interview, resultAppointment.Interview);
+            Assert.AreEqual(resultAppointment.Patient.Id, appointments.Last().Patient.Id);
+        }
+
+        [Test]
         public void Add_additional_appointment_to_a_patient()
         {
             // Arrange
@@ -181,6 +244,7 @@ namespace Fulbert.DAL.PatientDAL.Tests
 
             Assert.AreEqual(appointments.First().Patient.Id, appointments.Last().Patient.Id);
         }
+        
         #endregion Tests
     }
 }

@@ -48,7 +48,8 @@ namespace Fulbert.BLL.Services.Tests.Services
             // Arrange
             Guid patientId = Guid.NewGuid();
             DateTime appointmentDate = DateTime.Now;
-            Appointment appointment = MakeAppointment(appointmentDate);
+            string interview = "Patient is quite fit!";
+            Appointment appointment = MakeAppointment(appointmentDate, interview);
 
             var patient = new PatientEntity();
             _patientDalMock.Stub(x => x.GetPatientById(patientId)).Return(patient).Repeat.Once();
@@ -111,14 +112,15 @@ namespace Fulbert.BLL.Services.Tests.Services
             DateTime appointmentDate2 = DateTime.Now;
 
             Guid patientId = Guid.NewGuid();
+            string interview = "Patient is quite fit!";
             Patient patient = new Patient(patientId)
             {
                 FirstName = "Dave",
                 LastName = "Grohl",
                 Appointments = new List<Appointment>
                 {
-                    MakeAppointment(appointmentDate1),
-                    MakeAppointment(appointmentDate2)
+                    MakeAppointment(appointmentDate1, interview),
+                    MakeAppointment(appointmentDate2, interview)
                 }
             };
 
@@ -136,6 +138,7 @@ namespace Fulbert.BLL.Services.Tests.Services
             Assert.AreEqual(patientEntity.Appointments.Count, patient.Appointments.Count);
             Assert.AreEqual(patientEntity.Appointments.First().Date.Date, patient.Appointments.First().Date.Date);
             Assert.AreEqual(patientEntity.Appointments.Last().Date.Date, patient.Appointments.Last().Date.Date);
+            StringAssert.Contains(patientEntity.Appointments.First().Interview, interview);
 
             Assert.AreNotEqual(patientEntity.Id, patient.Id);
         }
@@ -181,11 +184,12 @@ namespace Fulbert.BLL.Services.Tests.Services
         #endregion Tests
 
         #region Methods
-        private Appointment MakeAppointment(DateTime appointmentDate)
+        private Appointment MakeAppointment(DateTime appointmentDate, string interview)
         {
             return new Appointment
             {
-                Date = appointmentDate
+                Date = appointmentDate,
+                Interview = interview
             };
         }
 
