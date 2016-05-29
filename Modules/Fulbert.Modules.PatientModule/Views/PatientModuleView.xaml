@@ -16,14 +16,19 @@
 
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 
-    <StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <UniformGrid Columns="5" Background="{StaticResource APP_BRUSH_ALMOST_WHITE}">
             <Button Command="{Binding NavigateCommand}" CommandParameter="{x:Type local:PatientDataView}" Content="{lex:Loc AddNewPatient}"/>
             <Button Command="{Binding NavigateCommand}" CommandParameter="{x:Type local:PatientsListView}" Content="{lex:Loc PatientList}"/>
             <Button Command="{Binding EditPatientCommand}" Content="{Binding SelectedPatientName}"/>
         </UniformGrid>
-        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PATIENTMODULECONTENT}"
-                        prism:RegionManager.RegionContext="{Binding ModuleRegionContext}" />
-    </StackPanel>
 
+        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PATIENTMODULECONTENT}"
+                        prism:RegionManager.RegionContext="{Binding ModuleRegionContext}" 
+                        Grid.Row="1"/>
+    </Grid>
 </mvvm:BaseView>

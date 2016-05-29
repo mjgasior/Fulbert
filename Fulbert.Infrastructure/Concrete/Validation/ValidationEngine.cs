@@ -65,13 +65,13 @@ namespace Fulbert.Infrastructure.Concrete.Validation
                 var validationResults = new List<ValidationResult>();
                 Validator.TryValidateObject(_validationTarget, validationContext, validationResults, true);
 
-                foreach (KeyValuePair<string, List<string>> kv in _errors.ToList())
+                foreach (KeyValuePair<string, List<string>> keyValue in _errors.ToList())
                 {
-                    if (validationResults.All(result => result.MemberNames.All(m => m != kv.Key)))
+                    if (validationResults.All(result => result.MemberNames.All(m => m != keyValue.Key)))
                     {
-                        List<string> outLi;
-                        _errors.TryRemove(kv.Key, out outLi);
-                        errorsChangedKeysList.Add(kv.Key);
+                        List<string> outputList;
+                        _errors.TryRemove(keyValue.Key, out outputList);
+                        errorsChangedKeysList.Add(keyValue.Key);
                     }
                 }
 
@@ -86,8 +86,8 @@ namespace Fulbert.Infrastructure.Concrete.Validation
 
                     if (_errors.ContainsKey(prop.Key))
                     {
-                        List<string> outLi;
-                        _errors.TryRemove(prop.Key, out outLi);
+                        List<string> outputList;
+                        _errors.TryRemove(prop.Key, out outputList);
                     }
                     _errors.TryAdd(prop.Key, messages);
                     errorsChangedKeysList.Add(prop.Key);

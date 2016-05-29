@@ -81,9 +81,15 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             else
             {
                 var usersList = new List<Patient>();
-                Patients = _allPatientsList.WhereAtLeastOneProperty((string s) => s != null && s.Contains(_searchPhrase)).ToList();
+                Patients = _allPatientsList.WhereAtLeastOneProperty((string s) => CompareWithSearchPhrase(s)).ToList();
             }
             OnPropertyChanged(() => Patients);
+        }
+
+        private bool CompareWithSearchPhrase(string s)
+        {
+            //s != null && s.ToLower().Contains(_searchPhrase)
+            return s != null && (s.IndexOf(_searchPhrase, StringComparison.OrdinalIgnoreCase) >= 0);
         }
     }
 }
