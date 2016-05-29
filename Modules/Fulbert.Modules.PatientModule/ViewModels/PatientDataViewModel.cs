@@ -1,17 +1,17 @@
-﻿using Fulbert.BLL.ApplicationModels.Abstract;
-using Fulbert.BLL.ApplicationModels.Models;
-using Fulbert.Infrastructure.Concrete.Mvvm;
-using Fulbert.Modules.PatientModule.Abstract.ViewModels;
-using Fulbert.Modules.PatientModule.Models;
-using Fulbert.Presentation.Localization.Resources;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Regions;
 using System;
 using System.Linq;
 using System.ComponentModel;
-using Fulbert.Modules.PatientModule.Views;
 using Fulbert.Infrastructure;
+using Fulbert.Infrastructure.Concrete.Mvvm;
+using Fulbert.BLL.ApplicationModels.Abstract;
+using Fulbert.BLL.ApplicationModels.Models;
+using Fulbert.Modules.PatientModule.Views;
+using Fulbert.Modules.PatientModule.Abstract.ViewModels;
+using Fulbert.Modules.PatientModule.Models;
+using Fulbert.Presentation.Localization.Resources;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
@@ -68,7 +68,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         private bool CanAddAppointment() => IsEditMode;
         private void OnAddAppointment()
         {
-            
+            _patientService.AddAppointmentToPatient(PatientModel.Id, new Appointment { Date = DateTime.Now, Interview = "Ill guy!" });
         }
         #endregion Commands
 

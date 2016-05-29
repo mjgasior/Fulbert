@@ -27,20 +27,20 @@
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
-    <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Height="500">
-        <WrapPanel>
-            <StackPanel Width="300" Margin="10">
+    <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+        <WrapPanel HorizontalAlignment="Center">
+            <StackPanel Width="300" Margin="20,10,20,10">
                 <Label Content="{lex:Loc PatientData}" Style="{StaticResource labelHeaderStyle}"/>
 
                 <StackPanel DataContext="{Binding PatientModel}" Margin="0,0,0,10">
                     <control:HeaderTextBox Text="{Binding Path=FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                                       MaxLength="20" Header="{lex:Loc FirstName}"/>
+                                           MaxLength="20" Header="{lex:Loc FirstName}"/>
 
                     <control:HeaderTextBox Text="{Binding Path=LastName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                                       MaxLength="20" Header="{lex:Loc LastName}"/>
+                                           MaxLength="20" Header="{lex:Loc LastName}"/>
 
                     <control:HeaderTextBox Text="{Binding Path=Pesel, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
-                                       MaxLength="11" Header="{lex:Loc PeselNumber}">
+                                           MaxLength="11" Header="{lex:Loc PeselNumber}">
                         <i:Interaction.Behaviors>
                             <behavior:OnlyNumericInputBehavior/>
                         </i:Interaction.Behaviors>
@@ -66,7 +66,7 @@
                 <Button Command="{Binding SavePatientDataCommand}" Margin="10" Content="{lex:Loc SavePatientData}"/>
             </StackPanel>
 
-            <StackPanel Width="300" Margin="10" Visibility="{Binding IsEditMode, Converter={StaticResource BoolToVisibleConverter}}">
+            <StackPanel Width="300" Margin="20,10,20,10" Visibility="{Binding IsEditMode, Converter={StaticResource BoolToVisibleConverter}}">
                 <Label Content="{lex:Loc PatientContactDetails}" Style="{StaticResource labelHeaderStyle}"/>
 
                 <control:HeaderTextBox MaxLength="20" Header="{lex:Loc ContactCellPhone}"/>
@@ -86,8 +86,12 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Width="300" Margin="10" Visibility="{Binding IsEditMode, Converter={StaticResource BoolToVisibleConverter}}">
+            <StackPanel Width="300" Margin="20,10,20,10" Visibility="{Binding IsEditMode, Converter={StaticResource BoolToVisibleConverter}}">
                 <Label Content="{lex:Loc PatientAppointments}" Style="{StaticResource labelHeaderStyle}"/>
+
+                <TextBlock Visibility="{Binding PatientModel.Appointments.Count, Converter={StaticResource BoolToVisibleConverter}, Mode=OneWay}"
+                           Text="You have no devices added, please press the Add Device button on the application bar"
+                           TextWrapping="Wrap"/> <!--NOT WORKING!-->
 
                 <ItemsControl ItemsSource="{Binding PatientModel.Appointments}">
                     <ItemsControl.ItemTemplate>
@@ -101,4 +105,5 @@
             </StackPanel>
         </WrapPanel>
     </ScrollViewer>
+
 </mvvm:BaseView>

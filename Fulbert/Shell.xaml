@@ -12,9 +12,13 @@
     xmlns:inf="clr-namespace:Fulbert.Infrastructure;assembly=Fulbert.Infrastructure"
     xmlns:mvvm="clr-namespace:Fulbert.Infrastructure.Concrete.Mvvm;assembly=Fulbert.Infrastructure"
     mc:Ignorable="d" Title="{loc:Loc FullAppName}" MinHeight="500" MinWidth="960" WindowState="Maximized">
-    
-    <StackPanel>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Label Content="{loc:Loc AppName}" Style="{StaticResource labelAppHeader}"/>
-        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.MAINCONTENT}"/>
-    </StackPanel>
+        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.MAINCONTENT}" Grid.Row="1"/>
+    </Grid>
 </mvvm:BaseWindowView>

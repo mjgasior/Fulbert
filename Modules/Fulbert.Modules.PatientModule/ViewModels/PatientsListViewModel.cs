@@ -1,16 +1,16 @@
-﻿using Fulbert.BLL.ApplicationModels.Abstract;
-using Fulbert.BLL.ApplicationModels.Models;
-using Fulbert.Modules.PatientModule.Abstract.ViewModels;
-using System.Collections.Generic;
-using Fulbert.Modules.PatientModule.Models;
+﻿using System.Collections.Generic;
 using System;
+using System.Linq;
 using Prism.Regions;
-using Fulbert.Infrastructure.Concrete.Mvvm;
 using Prism.Commands;
 using Fulbert.Modules.PatientModule.Views;
 using Fulbert.Infrastructure;
-using System.Linq;
 using Fulbert.Infrastructure.Concrete.Extensions;
+using Fulbert.Infrastructure.Concrete.Mvvm;
+using Fulbert.BLL.ApplicationModels.Abstract;
+using Fulbert.BLL.ApplicationModels.Models;
+using Fulbert.Modules.PatientModule.Abstract.ViewModels;
+using Fulbert.Modules.PatientModule.Models;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
