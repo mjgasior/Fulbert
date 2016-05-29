@@ -1,13 +1,21 @@
 ﻿using Fulbert.Utils;
+using Prism.Mvvm;
 using System;
 
 namespace Fulbert.BLL.ApplicationModels.Models
 {
-    public class Appointment
+    public class Appointment : BindableBase
     {
         public Guid Id { get; private set; }
         public DateTime Date { get; set; }
-        public string Interview { get; set; }
+
+        private string _interview;
+        public string Interview
+        {
+            get { return _interview; }
+            set { SetProperty(ref _interview, value); }
+        }
+
         public Patient Patient { get; set; }
 
         public Appointment(Guid id)

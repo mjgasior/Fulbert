@@ -34,6 +34,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         public DelegateCommand AddAppointmentCommand { get; private set; }
 
         public InteractionRequest<INotification> NotificationRequest { get; private set; }
+        public InteractionRequest<INotification> PatientAppointmentRequest { get; private set; }
         #endregion Fields & Properties
 
         public PatientDataViewModel(IRegionManager regionManager, IPatientService patientService)
@@ -46,6 +47,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             SavePatientDataCommand = new DelegateCommand(OnSavePatientData, CanSavePatientData);
             AddAppointmentCommand = new DelegateCommand(OnAddAppointment, CanAddAppointment);
             NotificationRequest = new InteractionRequest<INotification>();
+            PatientAppointmentRequest = new InteractionRequest<INotification>();
         }
 
         #region Commands
@@ -68,7 +70,9 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         private bool CanAddAppointment() => IsEditMode;
         private void OnAddAppointment()
         {
-            _patientService.AddAppointmentToPatient(PatientModel.Id, new Appointment { Date = DateTime.Now, Interview = "Ill guy!" });
+            var appointmentModel = new Appointment { Date = DateTime.Now };
+            PatientAppointmentRequest.Raise(new Notification { Content = appointmentModel, Title = Labels.PatientNewAppointment });
+            _patientService.AddAppointmentToPatient(PatientModel.Id, appointmentModel);
         }
         #endregion Commands
 

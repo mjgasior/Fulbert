@@ -277,6 +277,15 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nowa wizyta pacjenta.
+        /// </summary>
+        public static string PatientNewAppointment {
+            get {
+                return ResourceManager.GetString("PatientNewAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PESEL.
         /// </summary>
         public static string Pesel {

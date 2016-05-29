@@ -25,6 +25,13 @@
                 </prism:PopupWindowAction.WindowContent>
             </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding PatientAppointmentRequest, Mode=OneWay}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" WindowStyle="{StaticResource windowInteractive}">
+                <prism:PopupWindowAction.WindowContent>
+                    <interaction:NotificationContent Style="{StaticResource patientAppointmentInteraction}"/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
     <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">

@@ -326,8 +326,29 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Label x:Name="PART_Title" Style="{StaticResource labelAppHeader}"/>
-                            <Label x:Name="PART_Content" Grid.Row="1"/>
+                            <Label Content="{Binding Title}" Style="{StaticResource labelAppHeader}"/>
+                            <Label Content="{Binding Content}" Grid.Row="1"/>
+                            <Button x:Name="PART_OkButton" Content="OK" Grid.Row="2"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type interaction:NotificationContent}" x:Key="patientAppointmentInteraction">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type interaction:NotificationContent}">
+                    <Border BorderThickness="2" BorderBrush="{StaticResource APP_BRUSH_ALMOST_BLACK}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="{Binding Title}" Style="{StaticResource labelAppHeader}"/>
+                            <TextBox Text="{Binding Content.Interview}" Grid.Row="1"/>
                             <Button x:Name="PART_OkButton" Content="OK" Grid.Row="2"/>
                         </Grid>
                     </Border>

@@ -216,4 +216,7 @@
   <data name="PatientContactDetails" xml:space="preserve">
     <value>Dane teleadresowe pacjenta</value>
   </data>
+  <data name="PatientNewAppointment" xml:space="preserve">
+    <value>Nowa wizyta pacjenta</value>
+  </data>
 </root>
