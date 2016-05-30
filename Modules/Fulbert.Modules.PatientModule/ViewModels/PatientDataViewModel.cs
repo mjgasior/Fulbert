@@ -12,6 +12,8 @@ using Fulbert.Modules.PatientModule.Views;
 using Fulbert.Modules.PatientModule.Abstract.ViewModels;
 using Fulbert.Modules.PatientModule.Models;
 using Fulbert.Presentation.Localization.Resources;
+using Fulbert.Infrastructure.Abstract.Interactions;
+using Fulbert.Infrastructure.Concrete.Interactions;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
@@ -34,7 +36,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         public DelegateCommand AddAppointmentCommand { get; private set; }
 
         public InteractionRequest<INotification> NotificationRequest { get; private set; }
-        public InteractionRequest<INotification> PatientAppointmentRequest { get; private set; }
+        public InteractionRequest<ILocalizedConfirmation> PatientAppointmentRequest { get; private set; }
         #endregion Fields & Properties
 
         public PatientDataViewModel(IRegionManager regionManager, IPatientService patientService)
@@ -47,7 +49,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             SavePatientDataCommand = new DelegateCommand(OnSavePatientData, CanSavePatientData);
             AddAppointmentCommand = new DelegateCommand(OnAddAppointment, CanAddAppointment);
             NotificationRequest = new InteractionRequest<INotification>();
-            PatientAppointmentRequest = new InteractionRequest<INotification>();
+            PatientAppointmentRequest = new InteractionRequest<ILocalizedConfirmation>();
         }
 
         #region Commands
@@ -71,8 +73,10 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         private void OnAddAppointment()
         {
             var appointmentModel = new Appointment { Date = DateTime.Now };
-            PatientAppointmentRequest.Raise(new Notification { Content = appointmentModel, Title = Labels.PatientNewAppointment });
-            _patientService.AddAppointmentToPatient(PatientModel.Id, appointmentModel);
+            if (RaiseAppointmentInteraction(appointmentModel))
+            {
+                _patientService.AddAppointmentToPatient(PatientModel.Id, appointmentModel);
+            }
         }
         #endregion Commands
 
@@ -113,6 +117,17 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         private void RaiseSaveNotification(string message)
         {
             NotificationRequest.Raise(new Notification { Content = message, Title = Labels.Saved });
+        }
+
+        private bool RaiseAppointmentInteraction(Appointment appointmentModel)
+        {
+            bool isConfirmedAddAppointment = false;
+            PatientAppointmentRequest.Raise(new LocalizedConfirmation(Labels.Cancel, Labels.AddAppointment)
+            {
+                Content = appointmentModel,
+                Title = Labels.PatientNewAppointment
+            }, c => isConfirmedAddAppointment = c.Confirmed);
+            return isConfirmedAddAppointment;
         }
         #endregion Methods
     }

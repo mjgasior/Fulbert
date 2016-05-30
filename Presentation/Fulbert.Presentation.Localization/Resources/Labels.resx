@@ -219,4 +219,7 @@
   <data name="PatientNewAppointment" xml:space="preserve">
     <value>Nowa wizyta pacjenta</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
 </root>

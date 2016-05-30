@@ -336,20 +336,22 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type interaction:NotificationContent}" x:Key="patientAppointmentInteraction">
+    <Style TargetType="{x:Type interaction:ConfirmationContent}" x:Key="patientAppointmentInteraction">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type interaction:NotificationContent}">
+                <ControlTemplate TargetType="{x:Type interaction:ConfirmationContent}">
                     <Border BorderThickness="2" BorderBrush="{StaticResource APP_BRUSH_ALMOST_BLACK}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Label Content="{Binding Title}" Style="{StaticResource labelAppHeader}"/>
                             <TextBox Text="{Binding Content.Interview}" Grid.Row="1"/>
-                            <Button x:Name="PART_OkButton" Content="OK" Grid.Row="2"/>
+                            <Button x:Name="PART_OkButton" Content="{Binding ConfirmationMessage}" Grid.Row="2"/>
+                            <Button x:Name="PART_CancelButton" Content="{Binding CancellationMessage}" Grid.Row="3"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>
