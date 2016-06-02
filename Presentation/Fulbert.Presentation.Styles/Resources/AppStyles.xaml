@@ -150,7 +150,7 @@
 
                         <Label x:Name="labelContent" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" 
                                Style="{StaticResource labelButtonStyle}" Background="Transparent"/>
-                        
+
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal"/>
@@ -351,7 +351,9 @@
                             <Label Content="{Binding Title}" Style="{StaticResource labelAppHeader}"/>
                             <TextBox Text="{Binding Content.Interview}" Grid.Row="1"/>
                             <Button x:Name="PART_OkButton" Content="{Binding ConfirmationMessage}" Grid.Row="2"/>
-                            <Button x:Name="PART_CancelButton" Content="{Binding CancellationMessage}" Grid.Row="3"/>
+                            <Button x:Name="PART_CancelButton" Background="{StaticResource APP_BRUSH_ALMOST_WHITE}"
+                                    Foreground="{StaticResource APP_BRUSH_ALMOST_BLACK}"
+                                    Content="{Binding CancellationMessage}" Grid.Row="3"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>
