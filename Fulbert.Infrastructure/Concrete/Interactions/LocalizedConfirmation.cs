@@ -8,10 +8,10 @@ namespace Fulbert.Infrastructure.Concrete.Interactions
         public string CancellationMessage { get; private set; }
         public string ConfirmationMessage { get; private set; }
 
-        public LocalizedConfirmation(string cancelString, string confrimString)
+        public LocalizedConfirmation(string cancelString, string confrimationString)
         {
             CancellationMessage = cancelString;
-            ConfirmationMessage = confrimString;
+            ConfirmationMessage = confrimationString;
         }
     }
 }
