@@ -69,6 +69,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             if (RaiseAppointmentInteraction(editedAppointmentModel, Labels.SaveChanges))
             {
                 _patientService.UpdateAppointment(editedAppointmentModel);
+                RaiseSaveNotification(Labels.PatientAppointmentEdited);
             }
         }
 

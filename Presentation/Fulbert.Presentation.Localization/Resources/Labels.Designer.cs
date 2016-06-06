@@ -241,6 +241,15 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zaktualizowano informacje dotyczące wizyty!.
+        /// </summary>
+        public static string PatientAppointmentEdited {
+            get {
+                return ResourceManager.GetString("PatientAppointmentEdited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wizyty pacjenta.
         /// </summary>
         public static string PatientAppointments {

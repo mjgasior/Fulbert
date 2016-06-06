@@ -327,7 +327,7 @@
         <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
     </Style>
-    
+
     <Style TargetType="{x:Type interaction:NotificationContent}">
         <Setter Property="Template">
             <Setter.Value>
@@ -362,7 +362,8 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Label Content="{Binding Title}" Style="{StaticResource labelAppHeader}"/>
-                            <TextBox Text="{Binding Content.Interview}" Grid.Row="1"/>
+                            <TextBox Text="{Binding Content.Interview}" Grid.Row="1" VerticalContentAlignment="Top" 
+                                     TextWrapping="WrapWithOverflow" Width="460"/>
                             <Button x:Name="PART_OkButton" Content="{Binding ConfirmationMessage}" Grid.Row="2"/>
                             <Button x:Name="PART_CancelButton" Background="{StaticResource APP_BRUSH_ALMOST_WHITE}"
                                     Foreground="{StaticResource APP_BRUSH_ALMOST_BLACK}"

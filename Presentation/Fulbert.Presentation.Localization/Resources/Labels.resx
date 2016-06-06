@@ -228,4 +228,7 @@
   <data name="SaveChanges" xml:space="preserve">
     <value>Zapisz zmiany</value>
   </data>
+  <data name="PatientAppointmentEdited" xml:space="preserve">
+    <value>Zaktualizowano informacje dotyczące wizyty!</value>
+  </data>
 </root>

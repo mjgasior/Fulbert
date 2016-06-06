@@ -65,7 +65,16 @@ namespace Fulbert.BLL.Services.Services
 
         public void UpdateAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            PatientEntity patientEntity = _patientDal.GetPatientById(appointment.Patient.Id);
+            Mapper.Map(appointment, patientEntity.Appointments.First(x => x.Id == appointment.Id));
+            IEnumerable<AppointmentEntity> elements = patientEntity.Appointments.Where(x => x.Patient == null);
+            foreach (AppointmentEntity item in elements)
+            {
+                item.Patient = patientEntity;
+            }
+            _patientDal.SaveOrUpdatePatient(patientEntity);
+
+            throw new NotImplementedException("No tests provided!");
         }
     }
 }
