@@ -68,7 +68,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         {
             if (RaiseAppointmentInteraction(editedAppointmentModel, Labels.SaveChanges))
             {
-                _patientService.AddAppointmentToPatient(PatientModel.Id, editedAppointmentModel);
+                _patientService.UpdateAppointment(editedAppointmentModel);
             }
         }
 

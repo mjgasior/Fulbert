@@ -62,5 +62,10 @@ namespace Fulbert.BLL.Services.Services
             }
             _patientDal.SaveOrUpdatePatient(patientEntity);
         }
+
+        public void UpdateAppointment(Appointment appointment)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

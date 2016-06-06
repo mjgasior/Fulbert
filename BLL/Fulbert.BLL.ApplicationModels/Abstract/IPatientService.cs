@@ -9,6 +9,7 @@ namespace Fulbert.BLL.ApplicationModels.Abstract
         void AddNewPatient(Patient patient);
         void AddAppointmentToPatient(Guid patientId, Appointment appointment);
         void UpdatePatient(Patient patient);
+        void UpdateAppointment(Appointment appointment);
         Patient GetPatientById(Guid guid);
         ICollection<Patient> GetAllPatients();
     }
