@@ -222,4 +222,10 @@
   <data name="Cancel" xml:space="preserve">
     <value>Anuluj</value>
   </data>
+  <data name="PatientNoAppointments" xml:space="preserve">
+    <value>Ten pacjent nie posiada jeszcze żadnej wizyty. Użyj przycisku "Dodaj wizytę" aby utworzyć nową.</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Zapisz zmiany</value>
+  </data>
 </root>

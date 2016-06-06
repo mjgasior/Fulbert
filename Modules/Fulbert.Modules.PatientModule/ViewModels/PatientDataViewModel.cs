@@ -34,6 +34,7 @@ namespace Fulbert.Modules.PatientModule.ViewModels
 
         public DelegateCommand SavePatientDataCommand { get; private set; }
         public DelegateCommand AddAppointmentCommand { get; private set; }
+        public DelegateCommand<Appointment> EditAppointmentCommand { get; private set; }
 
         public InteractionRequest<INotification> NotificationRequest { get; private set; }
         public InteractionRequest<ILocalizedConfirmation> PatientAppointmentRequest { get; private set; }
@@ -45,14 +46,32 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             _regionManager = regionManager;
 
             SetPatientModel(new Patient());
+            InitializeCommands();
+            InitializeInteractions();
+        }
 
-            SavePatientDataCommand = new DelegateCommand(OnSavePatientData, CanSavePatientData);
-            AddAppointmentCommand = new DelegateCommand(OnAddAppointment, CanAddAppointment);
+        private void InitializeInteractions()
+        {
             NotificationRequest = new InteractionRequest<INotification>();
             PatientAppointmentRequest = new InteractionRequest<ILocalizedConfirmation>();
         }
 
+        private void InitializeCommands()
+        {
+            SavePatientDataCommand = new DelegateCommand(OnSavePatientData, CanSavePatientData);
+            AddAppointmentCommand = new DelegateCommand(OnAddAppointment, CanAddAppointment);
+            EditAppointmentCommand = new DelegateCommand<Appointment>(OnEditAppointment);
+        }
+
         #region Commands
+        private void OnEditAppointment(Appointment editedAppointmentModel)
+        {
+            if (RaiseAppointmentInteraction(editedAppointmentModel, Labels.SaveChanges))
+            {
+                _patientService.AddAppointmentToPatient(PatientModel.Id, editedAppointmentModel);
+            }
+        }
+
         private bool CanSavePatientData() => !PatientModel.HasErrors;
         private void OnSavePatientData()
         {
@@ -72,10 +91,10 @@ namespace Fulbert.Modules.PatientModule.ViewModels
         private bool CanAddAppointment() => IsEditMode;
         private void OnAddAppointment()
         {
-            var appointmentModel = new Appointment { Date = DateTime.Now };
-            if (RaiseAppointmentInteraction(appointmentModel))
+            var newAppointmentModel = new Appointment { Date = DateTime.Now };
+            if (RaiseAppointmentInteraction(newAppointmentModel, Labels.AddAppointment))
             {
-                _patientService.AddAppointmentToPatient(PatientModel.Id, appointmentModel);
+                _patientService.AddAppointmentToPatient(PatientModel.Id, newAppointmentModel);
             }
         }
         #endregion Commands
@@ -119,10 +138,10 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             NotificationRequest.Raise(new Notification { Content = message, Title = Labels.Saved });
         }
 
-        private bool RaiseAppointmentInteraction(Appointment appointmentModel)
+        private bool RaiseAppointmentInteraction(Appointment appointmentModel, string saveMessage)
         {
             bool isConfirmedAddAppointment = false;
-            PatientAppointmentRequest.Raise(new LocalizedConfirmation(Labels.Cancel, Labels.AddAppointment)
+            PatientAppointmentRequest.Raise(new LocalizedConfirmation(Labels.Cancel, saveMessage)
             {
                 Content = appointmentModel,
                 Title = Labels.PatientNewAppointment

@@ -96,14 +96,13 @@
             <StackPanel Width="300" Margin="20,10,20,10" Visibility="{Binding IsEditMode, Converter={StaticResource BoolToVisibleConverter}}">
                 <Label Content="{lex:Loc PatientAppointments}" Style="{StaticResource labelHeaderStyle}"/>
 
-                <TextBlock Visibility="{Binding PatientModel.Appointments.Count, Converter={StaticResource BoolToVisibleConverter}, Mode=OneWay}"
-                           Text="You have no devices added, please press the Add Device button on the application bar"
-                           TextWrapping="Wrap"/> <!--NOT WORKING!-->
+                <TextBlock Visibility="{Binding PatientModel.Appointments.Count, Converter={StaticResource IntToVisibleConverter}, Mode=OneWay}" 
+                           Style="{StaticResource textBlockMessage}" Text="{lex:Loc PatientNoAppointments}" Margin="0,10,0,10"/>
 
                 <ItemsControl ItemsSource="{Binding PatientModel.Appointments}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Margin="10" Content="{Binding Date}"/>
+                            <Button Margin="10" Content="{Binding Date}" CommandParameter="{Binding}" Command="{Binding DataContext.EditAppointmentCommand, ElementName=containerOfView}"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

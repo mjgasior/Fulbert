@@ -295,6 +295,15 @@ namespace Fulbert.Presentation.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ten pacjent nie posiada jeszcze żadnej wizyty. Użyj przycisku &quot;Dodaj wizytę&quot; aby utworzyć nową..
+        /// </summary>
+        public static string PatientNoAppointments {
+            get {
+                return ResourceManager.GetString("PatientNoAppointments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PESEL.
         /// </summary>
         public static string Pesel {
@@ -327,6 +336,15 @@ namespace Fulbert.Presentation.Localization.Resources {
         public static string PeselTooShort {
             get {
                 return ResourceManager.GetString("PeselTooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapisz zmiany.
+        /// </summary>
+        public static string SaveChanges {
+            get {
+                return ResourceManager.GetString("SaveChanges", resourceCulture);
             }
         }
         

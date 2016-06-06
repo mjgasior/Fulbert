@@ -12,6 +12,7 @@ namespace Fulbert.Modules.PatientModule.Abstract.ViewModels
         Patient PatientModel { get; }
         DelegateCommand SavePatientDataCommand { get; }
         DelegateCommand AddAppointmentCommand { get; }
+        DelegateCommand<Appointment> EditAppointmentCommand { get; }
 
         InteractionRequest<INotification> NotificationRequest { get; }
         InteractionRequest<ILocalizedConfirmation> PatientAppointmentRequest { get; }

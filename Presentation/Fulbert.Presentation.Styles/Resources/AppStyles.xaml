@@ -2,9 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:interaction="clr-namespace:Fulbert.Infrastructure.Concrete.Interactions;assembly=Fulbert.Infrastructure"
-                    xmlns:control="clr-namespace:Fulbert.Presentation.Controls.Extended;assembly=Fulbert.Presentation.Controls">
+                    xmlns:control="clr-namespace:Fulbert.Presentation.Controls.Extended;assembly=Fulbert.Presentation.Controls"
+                    xmlns:converters="clr-namespace:Fulbert.Presentation.Styles.Converters">
 
     <BooleanToVisibilityConverter x:Key="BoolToVisibleConverter"/>
+    <converters:IntToVisibilityConverter x:Key="IntToVisibleConverter"/>
 
     <Color x:Key="APP_COLOR_WHITE">#fff</Color>
     <Color x:Key="APP_COLOR_ALMOST_WHITE">#f5f5f5</Color>
@@ -138,6 +140,17 @@
     </Style>
     <!--#endregion Labels-->
 
+    <!--#region TextBlocks-->
+    <Style TargetType="{x:Type TextBlock}" x:Key="textBlockMessage">
+        <Setter Property="FontFamily" Value="{StaticResource APP_FONT_FAMILY}"/>
+        <Setter Property="FontSize" Value="{StaticResource APP_FONT_SIZE}"/>
+        <Setter Property="Foreground" Value="{StaticResource APP_BRUSH_ALMOST_BLACK}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+        <Setter Property="LineHeight" Value="30"/>
+    </Style>
+    <!--#endregion TextBlocks-->
+    
     <!--#region Buttons-->
     <Style TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{StaticResource APP_BRUSH_THEME_BLUE}"/>
@@ -363,3 +376,5 @@
     <!--#endregion InteractionRequests-->
     
 </ResourceDictionary> 
+    
+    
