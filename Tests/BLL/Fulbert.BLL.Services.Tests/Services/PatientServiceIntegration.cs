@@ -207,6 +207,34 @@ namespace Fulbert.BLL.Services.Tests.Services
             Assert.That(patients.Any(x => x.FirstName == "Daron"));
             Assert.That(patients.Any(x => x.FirstName == "John"));
         }
+
+        [Test]
+        public void Integrated_update_appointment()
+        {
+            // Arrange
+            string firstName = "Shavo";
+            string lastName = "Odadjian";
+            DateTime appointmentDate = DateTime.Now;
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate);
+
+            Patient patient = _patientService.GetAllPatients().First();
+            Appointment appointment = patient.Appointments.First();
+
+            string newInterview = "Quentin Tarantino";
+            appointment.Interview = newInterview;
+
+            // Act
+            _patientService.UpdateAppointment(appointment);
+
+            // Assert
+            ICollection<Appointment> appointments = _patientService.GetPatientById(patient.Id).Appointments;
+            Assert.That(appointments.Count, Is.EqualTo(1));
+
+            Appointment appointmentResult = appointments.First();
+            Assert.That(appointmentResult.Interview, Is.EqualTo(newInterview));
+            Assert.That(appointmentResult.Date.Date, Is.EqualTo(appointmentDate.Date));
+        }
         #endregion Tests
     }
 }
+
