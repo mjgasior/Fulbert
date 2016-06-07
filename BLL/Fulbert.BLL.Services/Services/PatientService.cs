@@ -55,26 +55,24 @@ namespace Fulbert.BLL.Services.Services
         {
             PatientEntity patientEntity = _patientDal.GetPatientById(patient.Id);
             Mapper.Map(patient, patientEntity);
-            IEnumerable<AppointmentEntity> elements = patientEntity.Appointments.Where(x => x.Patient == null);
-            foreach (AppointmentEntity item in elements)
-            {
-                item.Patient = patientEntity;
-            }
-            _patientDal.SaveOrUpdatePatient(patientEntity);
+            SaveOrUpdatePatientEntity(patientEntity);
         }
 
         public void UpdateAppointment(Appointment appointment)
         {
             PatientEntity patientEntity = _patientDal.GetPatientById(appointment.Patient.Id);
             Mapper.Map(appointment, patientEntity.Appointments.First(x => x.Id == appointment.Id));
+            SaveOrUpdatePatientEntity(patientEntity);
+        }
+
+        private void SaveOrUpdatePatientEntity(PatientEntity patientEntity)
+        {
             IEnumerable<AppointmentEntity> elements = patientEntity.Appointments.Where(x => x.Patient == null);
             foreach (AppointmentEntity item in elements)
             {
                 item.Patient = patientEntity;
             }
             _patientDal.SaveOrUpdatePatient(patientEntity);
-
-            throw new NotImplementedException("No tests provided!");
         }
     }
 }

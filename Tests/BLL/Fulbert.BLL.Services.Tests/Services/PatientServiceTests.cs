@@ -181,6 +181,35 @@ namespace Fulbert.BLL.Services.Tests.Services
                 Assert.That(resultPatient.Appointments.First().Id, Is.EqualTo(appointmentId));
             });
         }
+
+        [Test]
+        public void Update_appointment_data()
+        {
+            // Arrange
+            Guid appointmentId = Guid.NewGuid();
+            Guid userId = Guid.NewGuid();
+            var appointment = new Appointment(appointmentId)
+            {
+                Patient = new Patient(userId)
+            };
+
+            var appointmentEntity = new PatientEntity
+            {
+                Appointments = new List<AppointmentEntity>
+                {
+                    new AppointmentEntity(appointmentId)
+                }
+            };
+
+            _patientDalMock.Stub(x => x.GetPatientById(userId)).Return(appointmentEntity).Repeat.Once();
+            _patientDalMock.Stub(x => x.SaveOrUpdatePatient(appointmentEntity)).Repeat.Once();
+
+            // Act
+            _patientService.UpdateAppointment(appointment);
+
+            // Assert
+            _patientDalMock.VerifyAllExpectations();
+        }
         #endregion Tests
 
         #region Methods
