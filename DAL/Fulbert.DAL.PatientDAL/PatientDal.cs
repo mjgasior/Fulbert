@@ -9,10 +9,6 @@ namespace Fulbert.DAL.PatientDAL
 {
     public class PatientDal : IPatientDal
     {
-        // readme:
-        // http://www.codeproject.com/Articles/13390/NHibernate-Best-Practices-with-ASP-NET-nd-Ed
-        // http://nhibernate.info/blog/2008/08/31/data-access-with-nhibernate.html
-        //
         private readonly ISessionFactory _sessionFactory;
 
         public PatientDal()

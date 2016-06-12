@@ -6,9 +6,6 @@ namespace Fulbert.Infrastructure.Concrete.Extensions
 {
     public static class IEnumerableExtensions
     {
-        /// <summary>
-        /// Code from: http://stackoverflow.com/questions/14266753/search-a-list-of-objects-for-any-and-all-matches
-        /// </summary>
         public static IEnumerable<T> WhereAtLeastOneProperty<T, PropertyType>(this IEnumerable<T> source, Predicate<PropertyType> predicate)
         {
             var properties = typeof(T).GetProperties().Where(prop => prop.CanRead && prop.PropertyType == typeof(PropertyType)).ToArray();
