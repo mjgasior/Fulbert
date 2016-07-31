@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="Helpers\EventCapture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCategories.cs" />
   </ItemGroup>

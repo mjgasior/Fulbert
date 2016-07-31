@@ -6,12 +6,15 @@ using Fulbert.DAL.RepositoryModels.Abstract;
 using Fulbert.DAL.RepositoryModels.Models;
 using Fulbert.BLL.ApplicationModels.Models;
 using Fulbert.BLL.ApplicationModels.Abstract;
+using Fulbert.BLL.ApplicationModels.Events;
 
 namespace Fulbert.BLL.Services.Services
 {
     public class PatientService : IPatientService
     {
         private readonly IPatientDal _patientDal;
+
+        public event EventHandler<ModelChangedArgs> PatientChanged;
 
         public PatientService(IPatientDal patientDal)
         {
@@ -56,6 +59,7 @@ namespace Fulbert.BLL.Services.Services
             PatientEntity patientEntity = _patientDal.GetPatientById(patient.Id);
             Mapper.Map(patient, patientEntity);
             SaveOrUpdatePatientEntity(patientEntity);
+            InvokePatientChanged(patient.Id);
         }
 
         public void UpdateAppointment(Appointment appointment)
@@ -73,6 +77,11 @@ namespace Fulbert.BLL.Services.Services
                 item.Patient = patientEntity;
             }
             _patientDal.SaveOrUpdatePatient(patientEntity);
+        }
+
+        private void InvokePatientChanged(Guid patientId)
+        {
+            PatientChanged?.Invoke(this, new ModelChangedArgs(patientId));
         }
     }
 }

@@ -8,6 +8,8 @@ using Fulbert.BLL.ApplicationModels.Abstract;
 using Fulbert.DAL.RepositoryModels.Abstract;
 using Fulbert.DAL.RepositoryModels.Models;
 using Fulbert.BLL.ApplicationModels.Models;
+using Fulbert.Tests.Common.Helpers;
+using Fulbert.BLL.ApplicationModels.Events;
 
 namespace Fulbert.BLL.Services.Tests.Services
 {
@@ -209,6 +211,28 @@ namespace Fulbert.BLL.Services.Tests.Services
 
             // Assert
             _patientDalMock.VerifyAllExpectations();
+        }
+
+        [Test]
+        public void Should_invoke_patient_data_changed_when_updated()
+        {
+            // Arrange
+            Guid guid = Guid.NewGuid();
+            var patient = new Patient(guid);
+            var patientEntity = new PatientEntity(guid);
+
+            var eventCapture = new EventCapture<ModelChangedArgs>();
+            _patientService.PatientChanged += eventCapture.Handler;
+
+            _patientDalMock.Stub(x => x.GetPatientById(guid)).Return(patientEntity);
+
+            // Act
+            _patientService.UpdatePatient(patient);
+
+            // Assert
+            Assert.IsTrue(eventCapture.IsCalled);
+            Assert.That(eventCapture.CallCount, Is.EqualTo(1));
+            Assert.That(eventCapture.LastCallArguments.Id, Is.EqualTo(guid));
         }
         #endregion Tests
 

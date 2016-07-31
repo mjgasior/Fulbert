@@ -88,7 +88,6 @@ namespace Fulbert.BLL.Services.Tests.Services
         [Test]
         public void Integrated_verify_if_AutoMapper_works_properly()
         {
-
             // Arrange
             DateTime appointmentDate = DateTime.Now;
             var appointment = new Appointment
@@ -233,6 +232,38 @@ namespace Fulbert.BLL.Services.Tests.Services
             Appointment appointmentResult = appointments.First();
             Assert.That(appointmentResult.Interview, Is.EqualTo(newInterview));
             Assert.That(appointmentResult.Date.Date, Is.EqualTo(appointmentDate.Date));
+        }
+
+        [Test]
+        public void Integrated_update_patient()
+        {
+            // Arrange
+            string firstName = "Rob";
+            string lastName = "Dougan";
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, DateTime.Now);
+
+            Patient patient = _patientService.GetAllPatients().First();
+
+            // Act
+            string newLastName = "Little Big";
+            patient.LastName = newLastName;
+            _patientService.UpdatePatient(patient);
+
+            // Assert
+            Patient patientResult = _patientService.GetPatientById(patient.Id);
+            StringAssert.AreEqualIgnoringCase(patientResult.FirstName, firstName);
+            StringAssert.AreEqualIgnoringCase(patientResult.LastName, newLastName);
+        }
+
+        [Test]
+        public void Integrated_raise_event_when_patient_updated()
+        {
+            // Arrange
+            Assert.Fail("musisz jeszcze dorzucic test w ktorym przy aktualizacji badan event jest publikowany!");
+
+            // Act
+            
+            // Assert
         }
         #endregion Tests
     }
