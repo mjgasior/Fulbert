@@ -33,6 +33,7 @@ namespace Fulbert.BLL.Services.Services
             var appointmentEntity = Mapper.Map<AppointmentEntity>(appointment);
             patientEntity.AddAppointment(appointmentEntity);
             _patientDal.SaveOrUpdatePatient(patientEntity);
+            InvokePatientChanged(patientId);
         }
 
         public void AddNewPatient(Patient patient)
@@ -59,7 +60,6 @@ namespace Fulbert.BLL.Services.Services
             PatientEntity patientEntity = _patientDal.GetPatientById(patient.Id);
             Mapper.Map(patient, patientEntity);
             SaveOrUpdatePatientEntity(patientEntity);
-            InvokePatientChanged(patient.Id);
         }
 
         public void UpdateAppointment(Appointment appointment)
@@ -77,6 +77,7 @@ namespace Fulbert.BLL.Services.Services
                 item.Patient = patientEntity;
             }
             _patientDal.SaveOrUpdatePatient(patientEntity);
+            InvokePatientChanged(patientEntity.Id);
         }
 
         private void InvokePatientChanged(Guid patientId)

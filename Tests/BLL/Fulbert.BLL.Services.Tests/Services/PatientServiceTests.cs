@@ -1,15 +1,15 @@
 ﻿using NUnit.Framework;
 using Rhino.Mocks;
-using Fulbert.BLL.Services.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Fulbert.BLL.ApplicationModels.Abstract;
 using Fulbert.DAL.RepositoryModels.Abstract;
 using Fulbert.DAL.RepositoryModels.Models;
+using Fulbert.BLL.Services.Services;
+using Fulbert.BLL.ApplicationModels.Abstract;
 using Fulbert.BLL.ApplicationModels.Models;
-using Fulbert.Tests.Common.Helpers;
 using Fulbert.BLL.ApplicationModels.Events;
+using Fulbert.Tests.Common.Helpers;
 
 namespace Fulbert.BLL.Services.Tests.Services
 {
@@ -188,23 +188,7 @@ namespace Fulbert.BLL.Services.Tests.Services
         public void Update_appointment_data()
         {
             // Arrange
-            Guid appointmentId = Guid.NewGuid();
-            Guid userId = Guid.NewGuid();
-            var appointment = new Appointment(appointmentId)
-            {
-                Patient = new Patient(userId)
-            };
-
-            var appointmentEntity = new PatientEntity
-            {
-                Appointments = new List<AppointmentEntity>
-                {
-                    new AppointmentEntity(appointmentId)
-                }
-            };
-
-            _patientDalMock.Stub(x => x.GetPatientById(userId)).Return(appointmentEntity).Repeat.Once();
-            _patientDalMock.Stub(x => x.SaveOrUpdatePatient(appointmentEntity)).Repeat.Once();
+            Appointment appointment = AddAppointmentToPatient(Guid.NewGuid());
 
             // Act
             _patientService.UpdateAppointment(appointment);
@@ -217,26 +201,79 @@ namespace Fulbert.BLL.Services.Tests.Services
         public void Should_invoke_patient_data_changed_when_updated()
         {
             // Arrange
-            Guid guid = Guid.NewGuid();
-            var patient = new Patient(guid);
-            var patientEntity = new PatientEntity(guid);
+            Guid patientId = Guid.NewGuid();
+            var patient = new Patient(patientId);
+            var patientEntity = new PatientEntity(patientId);
 
-            var eventCapture = new EventCapture<ModelChangedArgs>();
-            _patientService.PatientChanged += eventCapture.Handler;
+            EventCapture<ModelChangedArgs> eventCapture = AttachEventCapture();
 
-            _patientDalMock.Stub(x => x.GetPatientById(guid)).Return(patientEntity);
+            _patientDalMock.Stub(x => x.GetPatientById(patientId)).Return(patientEntity);
 
             // Act
             _patientService.UpdatePatient(patient);
 
             // Assert
-            Assert.IsTrue(eventCapture.IsCalled);
-            Assert.That(eventCapture.CallCount, Is.EqualTo(1));
-            Assert.That(eventCapture.LastCallArguments.Id, Is.EqualTo(guid));
+            AssertEventCall(eventCapture, patientId);
+        }
+
+        [Test]
+        public void Should_invoke_update_event_on_add_appointment()
+        {
+            // Arrange
+            Guid patientId = Guid.NewGuid();
+            Appointment appointment = AddAppointmentToPatient(patientId);
+
+            EventCapture<ModelChangedArgs> eventCapture = AttachEventCapture();
+
+            // Act
+            _patientService.AddAppointmentToPatient(patientId, appointment);
+
+            // Assert
+            _patientDalMock.VerifyAllExpectations();
+            AssertEventCall(eventCapture, patientId);
+        }
+
+        [Test]
+        public void Should_invoke_update_event_on_update_appointment()
+        {
+            // Arrange
+            Guid patientId = Guid.NewGuid();
+            Appointment appointment = AddAppointmentToPatient(patientId);
+
+            EventCapture<ModelChangedArgs> eventCapture = AttachEventCapture();
+
+            // Act
+            _patientService.UpdateAppointment(appointment);
+
+            // Assert
+            _patientDalMock.VerifyAllExpectations();
+            AssertEventCall(eventCapture, patientId);
         }
         #endregion Tests
 
         #region Methods
+        private Appointment AddAppointmentToPatient(Guid patientId)
+        {
+            Guid appointmentId = Guid.NewGuid();
+            var appointment = new Appointment(appointmentId)
+            {
+                Patient = new Patient(patientId)
+            };
+
+            var patientEntity = new PatientEntity(patientId)
+            {
+                Appointments = new List<AppointmentEntity>
+                {
+                    new AppointmentEntity(appointmentId)
+                }
+            };
+
+            _patientDalMock.Stub(x => x.GetPatientById(patientId)).Return(patientEntity).Repeat.Once();
+            _patientDalMock.Stub(x => x.SaveOrUpdatePatient(patientEntity)).Repeat.Once();
+
+            return appointment;
+        }
+
         private Appointment MakeAppointment(DateTime appointmentDate, string interview)
         {
             return new Appointment
@@ -255,6 +292,20 @@ namespace Fulbert.BLL.Services.Tests.Services
                     Date = date
                 };
             }
+        }
+
+        private void AssertEventCall(EventCapture<ModelChangedArgs> eventCapture, Guid patientId)
+        {
+            Assert.IsTrue(eventCapture.IsCalled);
+            Assert.That(eventCapture.CallCount, Is.EqualTo(1));
+            Assert.That(eventCapture.LastCallArguments.Id, Is.EqualTo(patientId));
+        }
+
+        private EventCapture<ModelChangedArgs> AttachEventCapture()
+        {
+            var eventCapture = new EventCapture<ModelChangedArgs>();
+            _patientService.PatientChanged += eventCapture.Handler;
+            return eventCapture;
         }
         #endregion Methods
     }

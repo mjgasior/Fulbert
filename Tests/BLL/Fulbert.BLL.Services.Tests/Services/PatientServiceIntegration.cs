@@ -1,14 +1,16 @@
-﻿using Fulbert.BLL.Services.Services;
-using Fulbert.DAL.PatientDAL;
-using Fulbert.Tests.Common;
-using NHibernate;
+﻿using NHibernate;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System;
 using Fulbert.DAL.PatientDAL.Tests;
-using Fulbert.BLL.ApplicationModels.Models;
 using Fulbert.DAL.RepositoryModels.Models;
+using Fulbert.DAL.PatientDAL;
+using Fulbert.BLL.Services.Services;
+using Fulbert.BLL.ApplicationModels.Models;
+using Fulbert.BLL.ApplicationModels.Events;
+using Fulbert.Tests.Common.Helpers;
+using Fulbert.Tests.Common;
 
 namespace Fulbert.BLL.Services.Tests.Services
 {
@@ -259,11 +261,70 @@ namespace Fulbert.BLL.Services.Tests.Services
         public void Integrated_raise_event_when_patient_updated()
         {
             // Arrange
-            Assert.Fail("musisz jeszcze dorzucic test w ktorym przy aktualizacji badan event jest publikowany!");
+            string firstName = "Rob";
+            string lastName = "Dougan";
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, DateTime.Now);
+
+            Patient patient = _patientService.GetAllPatients().First();
 
             // Act
-            
+            var eventCapture = new EventCapture<ModelChangedArgs>();
+            _patientService.PatientChanged += eventCapture.Handler;
+
+            string newLastName = "Little Big";
+            patient.LastName = newLastName;
+            _patientService.UpdatePatient(patient);
+
             // Assert
+            Patient patientResult = _patientService.GetPatientById(patient.Id);
+            StringAssert.AreEqualIgnoringCase(patientResult.FirstName, firstName);
+            StringAssert.AreEqualIgnoringCase(patientResult.LastName, newLastName);
+
+            Assert.IsTrue(eventCapture.IsCalled);
+            Assert.That(eventCapture.CallCount, Is.EqualTo(1));
+            Assert.That(eventCapture.LastCallArguments.Id, Is.EqualTo(patient.Id));
+        }
+
+        [Test]
+        public void Integrated_raise_update_event_on_update_appointment()
+        {
+            // Arrange
+            string firstName = "Shavo";
+            string lastName = "Odadjian";
+            DateTime appointmentDate = DateTime.Now;
+            DatabaseTools.AddPatientToDatabase(firstName, lastName, appointmentDate);
+
+            Patient patient = _patientService.GetAllPatients().First();
+            Appointment appointment = patient.Appointments.First();
+
+            string newInterview = "Quentin Tarantino";
+            appointment.Interview = newInterview;
+
+            var eventCapture = new EventCapture<ModelChangedArgs>();
+            _patientService.PatientChanged += eventCapture.Handler;
+
+            // Act
+            _patientService.UpdateAppointment(appointment);
+
+            // Assert
+            ICollection<Appointment> appointments = _patientService.GetPatientById(patient.Id).Appointments;
+            Assert.That(appointments.Count, Is.EqualTo(1));
+
+            Appointment appointmentResult = appointments.First();
+            Assert.That(appointmentResult.Interview, Is.EqualTo(newInterview));
+            Assert.That(appointmentResult.Date.Date, Is.EqualTo(appointmentDate.Date));
+
+            Assert.IsTrue(eventCapture.IsCalled);
+            Assert.That(eventCapture.CallCount, Is.EqualTo(1));
+            Assert.That(eventCapture.LastCallArguments.Id, Is.EqualTo(patient.Id));
+        }
+
+        public void Integrated_raise_update_event_on_add_appointment()
+        {
+            // Arrange
+            throw new NotImplementedException();
+            // TODO: Clean the tests, add new tests from mock PatientService tests
+            // ex. update event on add and update appointment
         }
         #endregion Tests
     }

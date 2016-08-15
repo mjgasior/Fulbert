@@ -6,14 +6,15 @@ using System.Linq;
 using System.ComponentModel;
 using Fulbert.Infrastructure;
 using Fulbert.Infrastructure.Concrete.Mvvm;
-using Fulbert.BLL.ApplicationModels.Abstract;
-using Fulbert.BLL.ApplicationModels.Models;
+using Fulbert.Infrastructure.Abstract.Interactions;
+using Fulbert.Infrastructure.Concrete.Interactions;
 using Fulbert.Modules.PatientModule.Views;
 using Fulbert.Modules.PatientModule.Abstract.ViewModels;
 using Fulbert.Modules.PatientModule.Models;
 using Fulbert.Presentation.Localization.Resources;
-using Fulbert.Infrastructure.Abstract.Interactions;
-using Fulbert.Infrastructure.Concrete.Interactions;
+using Fulbert.BLL.ApplicationModels.Events;
+using Fulbert.BLL.ApplicationModels.Abstract;
+using Fulbert.BLL.ApplicationModels.Models;
 
 namespace Fulbert.Modules.PatientModule.ViewModels
 {
@@ -116,9 +117,39 @@ namespace Fulbert.Modules.PatientModule.ViewModels
             PatientModel.ForceValidation();
             AddAppointmentCommand.RaiseCanExecuteChanged();
             SavePatientDataCommand.RaiseCanExecuteChanged();
+
+            AttachEvents();
+        }
+
+        public override void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            DeattachEvents();
         }
 
         #region Methods
+        private void OnPatientChanged(object sender, ModelChangedArgs e)
+        {
+            RefreshPatientDataIfWasChanged(e.Id);
+        }
+
+        private void RefreshPatientDataIfWasChanged(Guid changedPatientId)
+        {
+            if (changedPatientId == PatientModel.Id)
+            {
+                PatientModel = _patientService.GetPatientById(changedPatientId);
+            }
+        }
+
+        private void AttachEvents()
+        {
+            _patientService.PatientChanged += OnPatientChanged;
+        }
+
+        private void DeattachEvents()
+        {
+            _patientService.PatientChanged -= OnPatientChanged;
+        }
+
         private void SetPatientModel(Patient patient)
         {
             if (PatientModel != null)
